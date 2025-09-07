@@ -1,10 +1,6 @@
-import Link from 'next/link';
-import { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: '离线模式 - Devin\'s Blog',
-  description: '网络连接不可用时的离线页面',
-};
+import Link from 'next/link';
 
 export default function OfflinePage() {
   return (

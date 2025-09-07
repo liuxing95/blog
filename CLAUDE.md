@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
+**IMPORTANT: This project uses Yarn, not NPM**
+
 ```bash
 # Development server with Turbopack
 yarn run dev
@@ -16,6 +18,18 @@ yarn run start
 
 # Lint code
 yarn run lint
+
+# Type check
+yarn run type-check
+
+# Install dependencies
+yarn install
+
+# Add dependencies
+yarn add <package>
+
+# Add dev dependencies
+yarn add --dev <package>
 ```
 
 ## Architecture
