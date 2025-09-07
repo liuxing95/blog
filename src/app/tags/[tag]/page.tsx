@@ -37,7 +37,6 @@ export default async function TagPage({ params }: TagPageProps) {
   const { tag } = await params;
   const decodedTag = decodeURIComponent(tag);
   const posts = getPostsByTag(decodedTag);
-  const allTags = getAllTags();
 
   if (posts.length === 0) {
     notFound();
