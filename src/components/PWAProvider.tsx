@@ -25,7 +25,7 @@ export default function PWAProvider({ children }: PWAProviderProps) {
         .register('/sw.js')
         .then((registration) => {
           console.log('Service Worker 注册成功:', registration);
-          
+
           // 检查更新
           registration.addEventListener('updatefound', () => {
             const newWorker = registration.installing;
@@ -50,13 +50,16 @@ export default function PWAProvider({ children }: PWAProviderProps) {
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
-      
+
       // 检查是否应该显示安装横幅
       const installDismissed = localStorage.getItem('pwa-install-dismissed');
       const lastShown = localStorage.getItem('pwa-install-last-shown');
       const now = Date.now();
-      
-      if (!installDismissed && (!lastShown || now - parseInt(lastShown) > 7 * 24 * 60 * 60 * 1000)) {
+
+      if (
+        !installDismissed &&
+        (!lastShown || now - parseInt(lastShown) > 7 * 24 * 60 * 60 * 1000)
+      ) {
         setShowInstallBanner(true);
         localStorage.setItem('pwa-install-last-shown', now.toString());
       }
@@ -82,14 +85,14 @@ export default function PWAProvider({ children }: PWAProviderProps) {
 
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    
+
     if (outcome === 'accepted') {
       console.log('用户接受安装');
     } else {
       console.log('用户拒绝安装');
       localStorage.setItem('pwa-install-dismissed', 'true');
     }
-    
+
     setDeferredPrompt(null);
     setShowInstallBanner(false);
   };
@@ -102,7 +105,7 @@ export default function PWAProvider({ children }: PWAProviderProps) {
   return (
     <>
       {children}
-      
+
       {/* 安装提示横幅 */}
       {showInstallBanner && (
         <div className="fixed bottom-0 left-0 right-0 bg-blue-600 text-white p-4 shadow-lg z-50">
@@ -115,10 +118,10 @@ export default function PWAProvider({ children }: PWAProviderProps) {
               </div>
               <div>
                 <h3 className="font-semibold">安装应用到主屏幕</h3>
-                <p className="text-sm text-blue-100">快速访问 Devin's Blog</p>
+                <p className="text-sm text-blue-100">快速访问 Devin&apos;s Blog</p>
               </div>
             </div>
-            
+
             <div className="flex space-x-2">
               <button
                 onClick={handleInstallClick}
