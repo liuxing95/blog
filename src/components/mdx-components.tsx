@@ -1,6 +1,8 @@
 import { MDXComponents } from 'mdx/types';
 import Image from 'next/image';
 import Link from 'next/link';
+// import Mermaid from './Mermaid';
+import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
 
 export const mdxComponents: MDXComponents = {
   // 自定义标题组件
@@ -139,4 +141,18 @@ export const mdxComponents: MDXComponents = {
   ),
 
   em: ({ children }) => <em className="italic text-gray-700 dark:text-gray-300">{children}</em>,
+
+  // Mermaid 图表支持
+  Mermaid: ({
+    children,
+    ...props
+  }: { children: string } & React.ComponentProps<typeof Mermaid>) => (
+    <Mermaid {...props}>{children}</Mermaid>
+  ),
+  mermaid: ({
+    children,
+    ...props
+  }: { children: string } & React.ComponentProps<typeof Mermaid>) => (
+    <Mermaid {...props}>{children}</Mermaid>
+  ),
 };

@@ -3,6 +3,10 @@ import createMDX from '@next/mdx';
 
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
+  options: {
+    remarkPlugins: [['mdx-mermaid', { output: 'svg' }]],
+    rehypePlugins: [],
+  },
 });
 
 const nextConfig: NextConfig = {

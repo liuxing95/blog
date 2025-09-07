@@ -6,16 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Development server with Turbopack
-npm run dev
+yarn run dev
 
 # Build for production with Turbopack
-npm run build
+yarn run build
 
 # Start production server
-npm run start
+yarn run start
 
 # Lint code
-npm run lint
+yarn run lint
 ```
 
 ## Architecture
@@ -23,6 +23,7 @@ npm run lint
 This is a Next.js 15.5 blog application using the App Router architecture with MDX support for content creation.
 
 ### Core Technologies
+
 - **Next.js 15.5** with App Router
 - **React 19.1** with TypeScript
 - **MDX** for markdown content with React components
@@ -30,6 +31,7 @@ This is a Next.js 15.5 blog application using the App Router architecture with M
 - **Turbopack** for fast development builds
 
 ### Project Structure
+
 ```
 src/
   app/                    # Next.js App Router pages
@@ -39,15 +41,18 @@ src/
 ```
 
 ### Key Configuration
+
 - **MDX Integration**: Next.js configured to handle `.md` and `.mdx` files as pages via `@next/mdx`
 - **Styling**: Tailwind CSS v4 with custom CSS variables for theming
 - **Fonts**: Geist Sans and Geist Mono loaded via `next/font/google`
 - **TypeScript**: Strict mode enabled with path aliases (`@/*` -> `./src/*`)
 
 ### Styling System
+
 - Uses CSS custom properties for theming with automatic dark mode support
 - Tailwind CSS configured through PostCSS with `@tailwindcss/postcss`
 - Color scheme: `--background` and `--foreground` variables with media query dark mode
 
 ### Content Strategy
+
 The application is set up to handle MDX content, suggesting this will be a content-focused blog where markdown files can contain React components.
