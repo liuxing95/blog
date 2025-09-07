@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getSeriesWithCounts } from '@/service/posts';
 
 export const metadata: Metadata = {
-  title: '系列 - Liu Xing\'s Blog',
+  title: '系列 - Devin\'s Blog',
   description: '浏览所有文章系列，按系列分类查看相关内容',
 };
 

@@ -15,12 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Liu Xing's Blog",
+  title: "Devin's Blog",
   description: "分享前端开发经验、技术思考和项目实践的个人博客",
   keywords: ["前端开发", "React", "Next.js", "JavaScript", "TypeScript", "博客"],
-  authors: [{ name: "Liu Xing" }],
+  authors: [{ name: "Devin" }],
   openGraph: {
-    title: "Liu Xing's Blog",
+    title: "Devin's Blog",
     description: "分享前端开发经验、技术思考和项目实践的个人博客",
     type: "website",
     locale: "zh_CN",

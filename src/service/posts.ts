@@ -36,7 +36,7 @@ function createDefaultMatter(filePath: string): PostMatter {
     date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
     excerpt: `${title} - 暂无摘要`,
     tags: ['未分类'],
-    author: 'Liu Xing',
+    author: 'Devin',
     series
   };
 }

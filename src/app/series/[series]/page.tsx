@@ -27,9 +27,9 @@ export async function generateMetadata({ params }: SeriesPageProps): Promise<Met
   }
 
   return {
-    title: `${decodedSeries} - Liu Xing's Blog`,
+    title: `${decodedSeries} - Devin's Blog`,
     description: `查看 "${decodedSeries}" 系列的所有文章，共 ${posts.length} 篇`,
-    keywords: [decodedSeries, '系列', '文章分类', 'Liu Xing', '博客'],
+    keywords: [decodedSeries, '系列', '文章分类', 'Devin', '博客'],
   };
 }
 

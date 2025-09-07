@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "关于我 - Liu Xing's Blog",
-  description: '了解更多关于Liu Xing的信息，包括技术背景、经验和联系方式',
+  title: "关于我 - Devin's Blog",
+  description: '了解更多关于Devin的信息，包括技术背景、经验和联系方式',
 };
 
 export default function AboutPage() {
@@ -16,7 +16,7 @@ export default function AboutPage() {
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <div className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                你好，我是 Liu Xing
+                你好，我是 Devin
               </h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                 欢迎来到我的博客！我是一名前端开发工程师，对现代 Web 技术充满热情。

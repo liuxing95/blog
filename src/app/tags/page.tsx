@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getTagsWithCounts } from '@/service/posts';
 
 export const metadata: Metadata = {
-  title: "标签 - Liu Xing's Blog",
+  title: "标签 - Devin's Blog",
   description: '浏览所有文章标签，按标签分类查看相关内容',
 };
 

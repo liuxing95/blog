@@ -27,9 +27,9 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
   }
 
   return {
-    title: `${decodedTag} - Liu Xing's Blog`,
+    title: `${decodedTag} - Devin's Blog`,
     description: `查看所有关于 "${decodedTag}" 的文章，共 ${posts.length} 篇`,
-    keywords: [decodedTag, '标签', '文章分类', 'Liu Xing', '博客'],
+    keywords: [decodedTag, '标签', '文章分类', 'Devin', '博客'],
   };
 }
 
