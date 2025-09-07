@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 // import Mermaid from './Mermaid';
 import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
+import Admonition, { Note, Tip, Info, Warning, Danger } from '@/extensions/admonitions/Admonitions';
 
 export const mdxComponents: MDXComponents = {
   // 自定义标题组件
@@ -155,4 +156,12 @@ export const mdxComponents: MDXComponents = {
   }: { children: string } & React.ComponentProps<typeof Mermaid>) => (
     <Mermaid {...props}>{children}</Mermaid>
   ),
+
+  // Admonition 组件支持
+  Admonition,
+  Note,
+  Tip,
+  Info,
+  Warning,
+  Danger,
 };

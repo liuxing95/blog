@@ -1,0 +1,122 @@
+---
+title: "Admonition 功能测试"
+publishDate: "2025-01-15"
+description: "测试博客中的 admonition 功能，包括 note、tip、info、warning、danger 五种类型"
+tags: ["测试", "MDX", "Admonition"]
+author: "Devin"
+---
+
+# Admonition 功能测试
+
+这篇文章用于测试博客中新增的 admonition 功能。Admonition 是一种特殊的内容块，用于突出显示重要信息。
+
+## 支持的 Admonition 类型
+
+### Note (笔记)
+
+:::note
+这是一个笔记类型的 admonition。用于提供补充信息或说明。
+:::
+
+### Tip (提示)
+
+:::tip
+这是一个提示类型的 admonition。用于分享有用的技巧或建议。
+:::
+
+### Info (信息)
+
+:::info
+这是一个信息类型的 admonition。用于提供额外的背景信息。
+:::
+
+### Warning (警告)
+
+:::warning
+这是一个警告类型的 admonition。用于提醒用户注意潜在问题。
+:::
+
+### Danger (危险)
+
+:::danger
+这是一个危险类型的 admonition。用于警告用户避免危险操作。
+:::
+
+## 自定义标题
+
+你也可以为 admonition 指定自定义标题：
+
+:::note
+这个 note 使用了自定义标题。
+:::
+
+:::tip
+使用自定义标题可以让内容更加清晰明了。
+:::
+
+## 复杂内容
+
+Admonition 中可以包含复杂的内容：
+
+:::info
+在 admonition 中可以使用：
+
+- **粗体文本**
+- *斜体文本*
+- `代码片段`
+- [链接](https://example.com)
+
+```javascript
+console.log("甚至可以包含代码块！");
+```
+:::
+
+:::warning
+1. Admonition 支持 Markdown 语法
+2. 可以嵌套列表和其他元素  
+3. 样式会根据类型自动调整颜色
+:::
+
+## 使用方法
+
+要使用 admonition，使用以下语法：
+
+```markdown
+:::type
+内容...
+:::
+
+:::type
+内容...
+:::
+```
+
+支持的类型：`note`、`tip`、`info`、`warning`、`danger`
+
+:::tip
+- 适度使用 admonition，避免过度使用
+- 选择合适的类型来匹配内容的重要性
+- 使用清晰的标题来概括内容
+:::
+
+## 样式效果展示
+
+:::note
+📝 这是默认的笔记样式，使用蓝色主题。
+:::
+
+:::tip
+💡 这是提示样式，使用绿色主题。
+:::
+
+:::info
+ℹ️ 这是信息样式，使用青色主题。
+:::
+
+:::warning
+⚠️ 这是警告样式，使用黄色主题。
+:::
+
+:::danger
+🚨 这是危险样式，使用红色主题。
+:::

@@ -70,3 +70,33 @@ src/
 ### Content Strategy
 
 The application is set up to handle MDX content, suggesting this will be a content-focused blog where markdown files can contain React components.
+
+## Custom Extensions & Plugins
+
+### Admonition Plugin
+
+- **Primary Location**: `src/extensions/admonitions/index.ts` (TypeScript source)
+- **Working Configuration**: Uses `./remark-admonitions.mjs` in `next.config.ts`
+- **Issue**: Next.js MDX cannot directly load TypeScript files for remark plugins
+- **Current Solution**: Use the `.mjs` file which mirrors the TypeScript implementation
+- **IMPORTANT**: TypeScript extensions work for components but not for remark/rehype plugins in Next.js MDX configuration
+
+The admonition plugin supports the following syntax in MDX files:
+
+```markdown
+:::note
+Content here
+:::
+
+:::tip{title="Custom Title"}
+Content with custom title
+:::
+```
+
+Supported types: `note`, `tip`, `info`, `warning`, `danger`
+
+### MDX Plugin Integration
+
+- Custom plugins should be referenced directly by their TypeScript file paths
+- Next.js handles TypeScript compilation automatically
+- No need to create separate JavaScript versions for custom extensions

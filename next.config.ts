@@ -5,8 +5,12 @@ import withPWA from 'next-pwa';
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
   options: {
-    remarkPlugins: [['mdx-mermaid', { output: 'svg' }]],
-    rehypePlugins: [],
+    remarkPlugins: [
+      'remark-directive',
+      './src/extensions/admonitions/index.ts',
+      ['mdx-mermaid', { output: 'svg' }],
+    ],
+    rehypePlugins: ['rehype-raw'],
   },
 });
 
