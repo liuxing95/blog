@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Post } from '@/lib/posts';
+import { Post } from '@/service/posts';
 
 interface PostCardProps {
   post: Post;
@@ -7,7 +7,7 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   const { slug, matter } = post;
-  
+
   return (
     <article className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
       <div className="p-6">
@@ -16,34 +16,33 @@ export default function PostCard({ post }: PostCardProps) {
             {matter.title}
           </h2>
         </Link>
-        
+
         <div className="flex items-center text-sm text-gray-600 dark:text-gray-400 mb-3">
           <time dateTime={matter.date}>
             {new Date(matter.date).toLocaleDateString('zh-CN', {
               year: 'numeric',
               month: 'long',
-              day: 'numeric'
+              day: 'numeric',
             })}
           </time>
           <span className="mx-2">•</span>
           <span>{matter.author}</span>
         </div>
-        
-        <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
-          {matter.excerpt}
-        </p>
-        
+
+        <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{matter.excerpt}</p>
+
         <div className="flex flex-wrap gap-2 mb-4">
           {matter.tags.map((tag) => (
-            <span
+            <Link
               key={tag}
-              className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
+              href={`/tags/${encodeURIComponent(tag)}`}
+              className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors duration-200"
             >
               {tag}
-            </span>
+            </Link>
           ))}
         </div>
-        
+
         <Link
           href={`/posts/${slug}`}
           className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
@@ -55,12 +54,7 @@ export default function PostCard({ post }: PostCardProps) {
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </Link>
       </div>

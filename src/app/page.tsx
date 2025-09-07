@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts } from '@/service/posts';
 import PostCard from '@/components/PostCard';
 
 export default function Home() {
@@ -31,16 +31,14 @@ export default function Home() {
 
       {/* Latest Posts */}
       <section className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
-          最新文章
-        </h2>
-        
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">最新文章</h2>
+
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-1 lg:gap-8">
           {posts.slice(0, 3).map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
         </div>
-        
+
         {posts.length > 3 && (
           <div className="mt-12 text-center">
             <Link
@@ -48,12 +46,7 @@ export default function Home() {
               className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
             >
               查看更多文章
-              <svg
-                className="ml-2 w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

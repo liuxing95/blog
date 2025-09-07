@@ -36,6 +36,12 @@ export default function Header() {
                 文章
               </Link>
               <Link
+                href="/tags"
+                className="text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              >
+                标签
+              </Link>
+              <Link
                 href="/about"
                 className="text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
               >
@@ -106,6 +112,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 文章
+              </Link>
+              <Link
+                href="/tags"
+                className="text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                标签
               </Link>
               <Link
                 href="/about"

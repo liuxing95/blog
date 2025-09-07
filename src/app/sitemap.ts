@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts } from '@/service/posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();

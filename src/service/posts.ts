@@ -66,3 +66,30 @@ export function getAllTags(): string[] {
   
   return Array.from(tags).sort();
 }
+
+export function getPostsByTag(tag: string): Post[] {
+  const posts = getAllPosts();
+  return posts.filter(post => 
+    post.matter.tags.includes(tag)
+  );
+}
+
+export interface TagWithCount {
+  name: string;
+  count: number;
+}
+
+export function getTagsWithCounts(): TagWithCount[] {
+  const posts = getAllPosts();
+  const tagCounts = new Map<string, number>();
+  
+  posts.forEach(post => {
+    post.matter.tags.forEach(tag => {
+      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+    });
+  });
+  
+  return Array.from(tagCounts.entries())
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
+}
