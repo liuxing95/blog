@@ -13,7 +13,7 @@ export default function Footer() {
               href="/"
               className="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
             >
-              Liu Xing's Blog
+              Liu Xing&apos;s Blog
             </Link>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               分享前端开发经验与技术思考
@@ -95,7 +95,7 @@ export default function Footer() {
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              © {currentYear} Liu Xing's Blog. 保留所有权利.
+              © {currentYear} Liu Xing&apos;s Blog. 保留所有权利.
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 md:mt-0">
               使用 Next.js 和 MDX 构建
