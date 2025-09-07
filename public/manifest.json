@@ -1,0 +1,117 @@
+{
+  "name": "Devin's Blog",
+  "short_name": "Devin's Blog",
+  "description": "分享前端开发经验、技术思考和项目实践的个人博客",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "zh-CN",
+  "categories": ["education", "productivity", "technology"],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.svg",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-96x96.svg",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-128x128.svg",
+      "sizes": "128x128",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-144x144.svg",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-152x152.svg",
+      "sizes": "152x152",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-384x384.svg",
+      "sizes": "384x384",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "桌面版截图"
+    },
+    {
+      "src": "/screenshots/mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "移动版截图"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "查看最新文章",
+      "short_name": "最新文章",
+      "description": "查看最新发布的博客文章",
+      "url": "/posts",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "浏览标签",
+      "short_name": "标签",
+      "description": "按标签浏览文章",
+      "url": "/tags",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "关于我",
+      "short_name": "关于",
+      "description": "了解更多关于作者的信息",
+      "url": "/about",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

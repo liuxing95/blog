@@ -3,7 +3,7 @@ import { getAllPosts } from '@/service/posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
-  const baseUrl = 'https://your-domain.com'; // 替换为你的域名
+  const baseUrl = 'https://www.devin-smith.dev';
 
   const postUrls = posts.map((post) => ({
     url: `${baseUrl}/posts/${post.slug}`,

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PWA 图标生成器</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        canvas { border: 1px solid #ccc; margin: 10px; }
+        .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+        .icon-item { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>PWA 图标生成器</h1>
+    <p>这将生成 Devin's Blog 的 PWA 图标</p>
+    
+    <div class="icon-grid" id="iconGrid"></div>
+    
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const iconGrid = document.getElementById('iconGrid');
+        
+        sizes.forEach(size => {
+            // 创建画布
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // 绘制背景
+            ctx.fillStyle = '#2563eb';
+            ctx.fillRect(0, 0, size, size);
+            
+            // 添加圆角
+            ctx.beginPath();
+            const radius = size * 0.1;
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.clip();
+            
+            // 绘制背景
+            ctx.fillStyle = '#2563eb';
+            ctx.fillRect(0, 0, size, size);
+            
+            // 绘制文字
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.3}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('D', size / 2, size / 2);
+            
+            // 创建容器
+            const iconItem = document.createElement('div');
+            iconItem.className = 'icon-item';
+            
+            // 添加画布
+            iconItem.appendChild(canvas);
+            
+            // 添加下载链接
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL();
+            link.download = `icon-${size}x${size}.png`;
+            link.textContent = `下载 ${size}x${size}`;
+            link.style.display = 'block';
+            link.style.marginTop = '10px';
+            iconItem.appendChild(link);
+            
+            // 添加到网格
+            iconGrid.appendChild(iconItem);
+        });
+        
+        // 自动下载所有图标
+        setTimeout(() => {
+            const links = document.querySelectorAll('a[download]');
+            links.forEach((link, index) => {
+                setTimeout(() => {
+                    link.click();
+                }, index * 200);
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
