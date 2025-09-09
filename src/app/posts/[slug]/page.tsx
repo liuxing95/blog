@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPosts, getPostBySlug } from '@/service/posts';
 import { mdxComponents } from '@/components/mdx-components';
+import remarkDirective from 'remark-directive';
+import remarkMermaid from 'mdx-mermaid';
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -108,7 +110,16 @@ export default async function PostPage({ params }: PostPageProps) {
         {/* Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
           <div className="prose prose-lg dark:prose-invert max-w-none">
-            <MDXRemote source={post.content} components={mdxComponents} />
+            <MDXRemote
+              source={post.content}
+              components={mdxComponents}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkDirective, [remarkMermaid, { output: 'svg' }]],
+                  rehypePlugins: [],
+                },
+              }}
+            />
           </div>
         </div>
 

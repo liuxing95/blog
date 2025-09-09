@@ -24,3 +24,56 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Mermaid 样式 */
+.mermaid {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mermaid 缩放容器样式 */
+.mermaid-zoom-wrapper {
+  transition: all 0.3s ease;
+}
+
+.mermaid-zoom-wrapper:hover .mermaid-toolbar {
+  opacity: 1;
+}
+
+.mermaid-toolbar {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.mermaid-toolbar button {
+  transition: all 0.2s ease;
+}
+
+.mermaid-toolbar button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.mermaid-toolbar button:active {
+  transform: translateY(0);
+}
+
+/* 全屏模式下的样式 */
+.mermaid-zoom-wrapper:fullscreen {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mermaid-zoom-wrapper:fullscreen .mermaid-toolbar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
