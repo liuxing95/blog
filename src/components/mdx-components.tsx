@@ -2,7 +2,7 @@ import { MDXComponents } from 'mdx/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import Admonition, { Note, Tip, Info, Warning, Danger } from '@/extensions/admonitions/Admonitions';
-import { Mermaid } from 'mdx-mermaid/lib/Mermaid';
+import Mermaid from './mdx/Mermaid';
 
 export const mdxComponents: MDXComponents = {
   // 自定义标题组件
