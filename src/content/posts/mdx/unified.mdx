@@ -137,7 +137,50 @@ graph TD
 ## 工作流程
 
 1. parser
+  - 将输入的文本转成对对应的AST树 比如markdown转成mdast  html转成hast 自然语言转成nlcst
 2. transform
+  - 对AST树进行转换 比如将mdast转换成hast 将hast转换成mdast 将自然语言转换成nlcst 将nlcst转换成自然语言
+  - 在这个过程中 你可以使用插件来对AST树进行转换 比如使用remark-highlight来对mdast进行语法高亮 使用remark-wiki-link来对mdast进行链接处理 使用remark-math来对mdast进行数学公式处理 使用remark-gfm来对mdast进行表格处理 使用retext-spell来对nlcst进行语法检查 使用rehype-sanitize来对hast进行HTML清理
 3. stringify
+  - 将转换后的AST树转成对应的文本 比如将mdast转换成markdown 将hast转换成html 将自然语言转换成自然语言
+  - 在这个过程中 你可以使用插件来对文本进行转换比如使用remark-stringify来对mdast进行markdown转换 使用rehype-stringify来对hast进行html转换 使用retext-stringify来对nlcst进行自然语言转换
+
+
+
+## 插件
+
+### 基础插件
+
+- [remark-highlight](https://github.com/remarkjs/remark-highlight) -- 语法高亮
+- [remark-wiki-link](https://github.com/remarkjs/remark-wiki-link) -- 链接处理
+- [remark-math](https://github.com/remarkjs/remark-math) -- 数学公式处理
+- [remark-gfm](https://github.com/remarkjs/remark-gfm) -- 表格处理
+- [retext-spell](https://github.com/retextjs/retext-spell) -- 语法检查
+- [rehype-sanitize](https://github.com/rehypejs/rehype-sanitize) -- HTML清理
+
+### 转换插件
+
+- [remark-rehype](https://github.com/remarkjs/remark-rehype) -- markdown转html
+- [rehype-remark](https://github.com/rehypejs/rehype-remark) -- html转markdown
+- [remark-retext](https://github.com/remarkjs/remark-retext) -- markdown转自然语言
+- [rehype-retext](https://github.com/rehypejs/rehype-retext) -- html转自然语言
+
+## 使用用例
+因为 unified 整个流程可以转换不用的内容格式 因此除了在 markdown 到html 的转化外 还有完成一些较为复杂的集成用例。
+这些都被做成了整个复杂的插件体系。
+
+- [rehype-minify](https://github.com/rehypejs/rehype-minify) -- html压缩
+- [rehype-react](https://github.com/rehypejs/rehype-react) -- html转react组件
+- [rehype-starry-night](https://github.com/rehypejs/rehype-starry-night) -- html转starry-night组件 代码高亮展示
+- [remark-gfm](https://github.com/remarkjs/remark-gfm) -- gfm支持
+- [remark-directive](https://github.com/remarkjs/remark-directive) -- 指令支持
+- [remark-lint](https://github.com/remarkjs/remark-gfm) 检查markdown 代码格式
+- [remark-toc](https://github.com/remarkjs/remark-toc) -- 生成目录
+
+
+其实还有一些关于 retext 格式的插件 后面如果有机会的话 我们继续讲解。 这期主要是关于 remark 插件体系 以及 rehype 插件系统
+
+
+
 ## 参考
 - [官方文档](https://unifiedjs.com/learn/guide/introduction-to-unified/)
