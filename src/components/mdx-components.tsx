@@ -6,19 +6,41 @@ import Mermaid from './mdx/Mermaid';
 
 export const mdxComponents: MDXComponents = {
   // 自定义标题组件
-  h1: ({ children }) => (
-    <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 mt-8 first:mt-0">
+  h1: ({ children, id, ...props }) => (
+    <h1
+      id={id}
+      className="text-4xl font-bold text-gray-900 dark:text-white mb-6 mt-8 first:mt-0 scroll-mt-20"
+      {...props}
+    >
       {children}
     </h1>
   ),
-  h2: ({ children }) => (
-    <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4 mt-8">{children}</h2>
+  h2: ({ children, id, ...props }) => (
+    <h2
+      id={id}
+      className="text-3xl font-semibold text-gray-900 dark:text-white mb-4 mt-8 scroll-mt-20"
+      {...props}
+    >
+      {children}
+    </h2>
   ),
-  h3: ({ children }) => (
-    <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 mt-6">{children}</h3>
+  h3: ({ children, id, ...props }) => (
+    <h3
+      id={id}
+      className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 mt-6 scroll-mt-20"
+      {...props}
+    >
+      {children}
+    </h3>
   ),
-  h4: ({ children }) => (
-    <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 mt-6">{children}</h4>
+  h4: ({ children, id, ...props }) => (
+    <h4
+      id={id}
+      className="text-xl font-semibold text-gray-900 dark:text-white mb-3 mt-6 scroll-mt-20"
+      {...props}
+    >
+      {children}
+    </h4>
   ),
 
   // 自定义段落

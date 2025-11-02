@@ -77,3 +77,45 @@ body {
   right: 20px;
   z-index: 1000;
 }
+
+/* 标题锚点链接样式 */
+.anchor-link {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  display: block;
+  scroll-margin-top: 5rem;
+}
+
+.anchor-link:hover {
+  color: inherit;
+}
+
+/* 为标题添加悬停时的锚点图标效果 */
+h1:hover,
+h2:hover,
+h3:hover,
+h4:hover,
+h5:hover,
+h6:hover {
+  position: relative;
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 高亮目标标题 */
+:target {
+  animation: highlight 2s ease-out;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: rgba(59, 130, 246, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}

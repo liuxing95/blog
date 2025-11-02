@@ -5,6 +5,9 @@ import { getAllPosts, getPostBySlug } from '@/service/posts';
 import { mdxComponents } from '@/components/mdx-components';
 import remarkDirective from 'remark-directive';
 import remarkMermaid from 'mdx-mermaid';
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -115,8 +118,19 @@ export default async function PostPage({ params }: PostPageProps) {
               components={mdxComponents}
               options={{
                 mdxOptions: {
-                  remarkPlugins: [remarkDirective, [remarkMermaid, { output: 'svg' }]],
-                  rehypePlugins: [],
+                  remarkPlugins: [remarkGfm, remarkDirective, [remarkMermaid, { output: 'svg' }]],
+                  rehypePlugins: [
+                    rehypeSlug,
+                    [
+                      rehypeAutolinkHeadings,
+                      {
+                        behavior: 'wrap',
+                        properties: {
+                          className: ['anchor-link'],
+                        },
+                      },
+                    ],
+                  ],
                 },
               }}
             />
