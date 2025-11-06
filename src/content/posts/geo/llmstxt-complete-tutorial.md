@@ -1,6 +1,6 @@
 ---
 title: 'llms.txt 标准完整教程'
-date: '2025-11-03'
+date: '2025-11-01'
 excerpt: '为大语言模型提供网站信息的标准化文件格式'
 tags: ['AI', 'GEO']
 series: 'GEO学习'

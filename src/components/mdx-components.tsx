@@ -92,6 +92,11 @@ export const mdxComponents: MDXComponents = {
   code: ({ children, className }) => {
     const isInline = !className;
 
+    // Check if this is a mermaid code block
+    if (className === 'language-mermaid') {
+      return <Mermaid>{String(children).trim()}</Mermaid>;
+    }
+
     if (isInline) {
       return (
         <code className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 rounded text-sm font-mono">

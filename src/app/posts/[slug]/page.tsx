@@ -1,13 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPosts, getPostBySlug } from '@/service/posts';
-import { mdxComponents } from '@/components/mdx-components';
-import remarkDirective from 'remark-directive';
-import remarkMermaid from 'mdx-mermaid';
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import { MDXContent } from '@/components/mdx/MDXContent';
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -113,27 +107,7 @@ export default async function PostPage({ params }: PostPageProps) {
         {/* Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
           <div className="prose prose-lg dark:prose-invert max-w-none">
-            <MDXRemote
-              source={post.content}
-              components={mdxComponents}
-              options={{
-                mdxOptions: {
-                  remarkPlugins: [remarkGfm, remarkDirective, [remarkMermaid, { output: 'svg' }]],
-                  rehypePlugins: [
-                    rehypeSlug,
-                    [
-                      rehypeAutolinkHeadings,
-                      {
-                        behavior: 'wrap',
-                        properties: {
-                          className: ['anchor-link'],
-                        },
-                      },
-                    ],
-                  ],
-                },
-              }}
-            />
+            <MDXContent source={post.content} />
           </div>
         </div>
 
