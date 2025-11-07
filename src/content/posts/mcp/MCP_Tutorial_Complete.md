@@ -1,3 +1,11 @@
+---
+title: 'Model Context Protocol (MCP) 完整教程'
+date: '2025-11-04'
+excerpt: 'Model Context Protocol (MCP) 完整教程'
+tags: ['AI', 'MCP']
+series: 'AI学习'
+---
+
 # Model Context Protocol (MCP) 完整教程
 
 > 本教程基于 MCP 官方规范，涵盖核心概念、架构设计、实现指南和最佳实践

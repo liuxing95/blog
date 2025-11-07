@@ -1,3 +1,11 @@
+---
+title: 'Agent2Agent (A2A) Protocol'
+date: '2025-11-05'
+excerpt: '本教程基于 A2A 官方规范，详细介绍 Agent2Agent 协议的核心概念、技术架构和实现指南，并与 MCP (Model Context Protocol) 进行深入对比'
+tags: ['AI', 'A2A']
+series: 'AI学习'
+---
+
 # Agent2Agent (A2A) Protocol 完整教程
 
 > 本教程基于 A2A 官方规范，详细介绍 Agent2Agent 协议的核心概念、技术架构和实现指南，并与 MCP (Model Context Protocol) 进行深入对比

@@ -114,13 +114,38 @@ export const mdxComponents: MDXComponents = {
     );
   },
 
-  pre: ({ children }) => (
-    <div className="relative mb-6">
-      <pre className="bg-gray-900 dark:bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
-        {children}
-      </pre>
-    </div>
-  ),
+  pre: ({ children }) => {
+    // Check if children is a Mermaid component
+    // When code component returns <Mermaid>, the pre receives it as children
+    const isMermaid =
+      children &&
+      typeof children === 'object' &&
+      'props' in children &&
+      typeof children.props === 'object' &&
+      children.props !== null &&
+      'className' in children.props &&
+      typeof children.props.className === 'string' &&
+      children.props.className.includes('language-mermaid');
+
+    // If it's a Mermaid diagram, just render the children without the pre wrapper
+    if (isMermaid) {
+      return (
+        <div className="relative mb-6">
+          <pre className="bg-white dark:bg-white text-gray-100 p-4 rounded-lg overflow-x-auto">
+            {children}
+          </pre>
+        </div>
+      );
+    }
+
+    return (
+      <div className="relative mb-6">
+        <pre className="bg-gray-900 dark:bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
+          {children}
+        </pre>
+      </div>
+    );
+  },
 
   // 自定义引用块
   blockquote: ({ children }) => (
