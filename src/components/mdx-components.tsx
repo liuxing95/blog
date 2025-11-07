@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Admonition, { Note, Tip, Info, Warning, Danger } from '@/extensions/admonitions/Admonitions';
 import Mermaid from './mdx/Mermaid';
+import CodeBlock from './mdx/CodeBlock';
 
 export const mdxComponents: MDXComponents = {
   // 自定义标题组件
@@ -105,13 +106,8 @@ export const mdxComponents: MDXComponents = {
       );
     }
 
-    return (
-      <div className="relative mb-6">
-        <pre className="bg-gray-900 dark:bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
-          <code className={className}>{children}</code>
-        </pre>
-      </div>
-    );
+    // Use CodeBlock for syntax highlighting
+    return <CodeBlock className={className}>{String(children)}</CodeBlock>;
   },
 
   pre: ({ children }) => {
@@ -140,7 +136,7 @@ export const mdxComponents: MDXComponents = {
 
     return (
       <div className="relative mb-6">
-        <pre className="bg-gray-900 dark:bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
+        <pre className="bg-gray-900 dark:bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto border border-gray-200 dark:border-gray-700">
           {children}
         </pre>
       </div>

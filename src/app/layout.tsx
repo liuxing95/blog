@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PWAProvider from '@/components/PWAProvider';
+import ThemeProvider from '@/components/ThemeProvider';
+import SidebarProvider from '@/components/SidebarProvider';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
@@ -58,15 +60,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-        <PWAProvider>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </PWAProvider>
+        <ThemeProvider>
+          <PWAProvider>
+            <Header />
+            <div className="flex flex-1">
+              <SidebarProvider />
+              <main className="flex-1 min-w-0">{children}</main>
+            </div>
+            <Footer />
+          </PWAProvider>
+        </ThemeProvider>
         <SpeedInsights />
       </body>
     </html>
