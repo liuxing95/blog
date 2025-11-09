@@ -33,17 +33,17 @@ series: 'Web3学习'
 timeline
     title Web技术演进史
 
-    1990-2000 : Web 1.0<br/>只读网络
+    1990-2000 : Web 1.0只读网络
               : 静态网页
               : 单向信息传递
               : Yahoo, AOL
 
-    2000-2020 : Web 2.0<br/>读写网络
+    2000-2020 : Web 2.0读写网络
               : 动态网页
               : 用户生成内容
               : Facebook, Google, Amazon
 
-    2020+ : Web 3.0<br/>读写拥有网络
+    2020+ : Web 3.0读写拥有网络
           : 去中心化
           : 用户拥有数据
           : Ethereum, IPFS, DeFi
@@ -53,7 +53,7 @@ timeline
 
 ```mermaid
 graph LR
-    subgraph "Web 1.0<br/>只读"
+    subgraph "Web 1.0只读"
         W1_1[静态HTML]
         W1_2[单向传播]
         W1_3[门户网站]
@@ -61,7 +61,7 @@ graph LR
         W1_1 --- W1_2 --- W1_3
     end
 
-    subgraph "Web 2.0<br/>读写"
+    subgraph "Web 2.0读写"
         W2_1[动态内容]
         W2_2[用户互动]
         W2_3[社交平台]
@@ -70,7 +70,7 @@ graph LR
         W2_1 --- W2_2 --- W2_3 --- W2_4
     end
 
-    subgraph "Web 3.0<br/>读写拥有"
+    subgraph "Web 3.0读写拥有"
         W3_1[区块链]
         W3_2[去中心化]
         W3_3[数字资产]
@@ -191,7 +191,7 @@ graph TB
         end
 
         subgraph "基础设施"
-            Cloud[云服务提供商<br/>AWS/Azure/GCP]
+            Cloud[云服务提供商AWS/Azure/GCP]
         end
     end
 
@@ -242,8 +242,8 @@ graph TB
         Users[用户群体]
 
         subgraph "前端层"
-            DApp[DApp前端<br/>React/Vue]
-            Wallet[钱包<br/>MetaMask]
+            DApp[DApp前端React/Vue]
+            Wallet[钱包MetaMask]
         end
 
         subgraph "中间层"
@@ -252,19 +252,19 @@ graph TB
         end
 
         subgraph "区块链层"
-            SmartContract[智能合约<br/>Solidity]
-            Node[区块链节点<br/>Ethereum]
+            SmartContract[智能合约Solidity]
+            Node[区块链节点Ethereum]
         end
 
         subgraph "存储层"
-            IPFS[IPFS<br/>分布式存储]
-            Arweave[Arweave<br/>永久存储]
-            Filecoin[Filecoin<br/>去中心化存储]
+            IPFS[IPFS分布式存储]
+            Arweave[Arweave永久存储]
+            Filecoin[Filecoin去中心化存储]
         end
 
         subgraph "数据层"
-            TheGraph[The Graph<br/>索引服务]
-            Oracle[预言机<br/>Chainlink]
+            TheGraph[The Graph索引服务]
+            Oracle[预言机Chainlink]
         end
     end
 
@@ -317,25 +317,23 @@ sequenceDiagram
     participant A as 广告商
     participant G as 政府/第三方
 
-    U->>P: 1. 创建内容<br/>上传照片/视频
+    U->>P: 1. 创建内容上传照片视频
     U->>P: 2. 提供个人信息
 
     Note over P: 平台存储和拥有数据
 
-    P->>P: 3. 分析用户数据<br/>构建用户画像
+    P->>P: 3. 分析用户数据构建用户画像
 
-    P->>A: 4. 出售用户数据<br/>精准广告投放
+    P->>A: 4. 出售用户数据精准广告投放
     A->>P: 5. 支付广告费
 
-    P->>G: 6. 应要求提供<br/>用户数据
+    P->>G: 6. 应要求提供用户数据
 
     U->>P: 7. 想删除数据?
-    P-->>U: 8. 数据可能已<br/>被复制/分享
+    P-->>U: 8. 数据可能已被复制/分享
 
     Note over U: 用户失去控制权
 
-    style P fill:#ffcdd2
-    style U fill:#e3f2fd
 ```
 
 **Web2 数据问题：**
@@ -364,20 +362,18 @@ sequenceDiagram
     W->>IPFS: 3. 加密上传内容
     IPFS-->>W: 4. 返回内容哈希
 
-    W->>BC: 5. 记录所有权<br/>到区块链
-    Note over BC: 不可篡改的<br/>所有权证明
+    W->>BC: 5. 记录所有权到区块链
+    Note over BC: 不可篡改的所有权证明
 
     DApp->>U: 6. 请求访问数据
-    U->>DApp: 7. 授权访问<br/>（可撤销）
+    U->>DApp: 7. 授权访问（可撤销）
 
-    DApp->>IPFS: 8. 使用授权<br/>获取内容
+    DApp->>IPFS: 8. 使用授权获取内容
 
-    U->>BC: 9. 可以随时<br/>撤销授权
+    U->>BC: 9. 可以随时撤销授权
 
     Note over U: 用户始终拥有控制权
 
-    style U fill:#c8e6c9
-    style BC fill:#81c784
 ```
 
 **Web3 数据优势：**
@@ -429,7 +425,7 @@ sequenceDiagram
     participant DB as 用户数据库
 
     Note over U: 首次注册
-    U->>App: 1. 填写注册信息<br/>用户名+密码+邮箱
+    U->>App: 1. 填写注册信息用户名+密码+邮箱
     App->>Auth: 2. 发送注册请求
     Auth->>Auth: 3. 密码哈希处理
     Auth->>DB: 4. 存储用户信息
@@ -445,10 +441,8 @@ sequenceDiagram
     Auth-->>App: 12. 返回Token
     App-->>U: 13. 登录成功
 
-    Note over U: 每个平台都需要<br/>单独注册
+    Note over U: 每个平台都需要单独注册
 
-    style Auth fill:#fff9c4
-    style DB fill:#ffcdd2
 ```
 
 **Web2 身份问题：**
@@ -467,13 +461,13 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant U as 用户
-    participant W as 钱包<br/>MetaMask
+    participant W as 钱包MetaMask
     participant DApp as DApp
     participant BC as 区块链
 
     Note over U: 首次使用
-    U->>W: 1. 创建钱包<br/>生成私钥
-    W-->>U: 2. 显示助记词<br/>备份保管
+    U->>W: 1. 创建钱包生成私钥
+    W-->>U: 2. 显示助记词备份保管
 
     Note over U: 连接DApp
     U->>DApp: 3. 访问DApp
@@ -483,17 +477,15 @@ sequenceDiagram
     W-->>DApp: 7. 返回钱包地址
 
     Note over DApp: 身份验证
-    DApp->>W: 8. 请求签名消息<br/>"Sign to login"
+    DApp->>W: 8. 请求签名消息"Sign to login"
     W->>U: 9. 显示签名请求
     U->>W: 10. 用私钥签名
     W-->>DApp: 11. 返回签名
     DApp->>DApp: 12. 验证签名
     DApp-->>U: 13. 登录成功
 
-    Note over U: 一个钱包<br/>通行所有DApp
+    Note over U: 一个钱包通行所有DApp
 
-    style W fill:#c8e6c9
-    style DApp fill:#81c784
 ```
 
 **Web3 身份优势：**
@@ -514,23 +506,23 @@ graph TB
     subgraph "Web2 多账号系统"
         User1[用户]
 
-        FB[(Facebook<br/>账号)]
-        Google[(Google<br/>账号)]
-        Twitter[(Twitter<br/>账号)]
-        Amazon[(Amazon<br/>账号)]
+        FB[(Facebook账号)]
+        Google[(Google账号)]
+        Twitter[(Twitter账号)]
+        Amazon[(Amazon账号)]
 
         User1 -->|注册1| FB
         User1 -->|注册2| Google
         User1 -->|注册3| Twitter
         User1 -->|注册4| Amazon
 
-        Note1[需要记住<br/>多个密码]
-        Note2[数据分散<br/>无法互通]
+        Note1[需要记住多个密码]
+        Note2[数据分散无法互通]
     end
 
     subgraph "Web3 统一身份"
         User2[用户]
-        Wallet[钱包<br/>0x742d...]
+        Wallet[钱包0x742d...]
 
         DApp1[Uniswap]
         DApp2[OpenSea]
@@ -543,8 +535,8 @@ graph TB
         Wallet -.DApp.-> DApp3
         Wallet -.-> DApp4
 
-        Note3[一个钱包<br/>一个私钥]
-        Note4[数据可移植<br/>跨平台互通]
+        Note3[一个钱包一个私钥]
+        Note4[数据可移植跨平台互通]
     end
 
     style FB fill:#ffcdd2
@@ -564,7 +556,7 @@ graph TB
 graph TB
     subgraph "Web2 平台经济"
         Creator[内容创作者]
-        Platform[平台<br/>Facebook/YouTube]
+        Platform[平台Facebook/YouTube]
         User[用户/观众]
         Advertiser[广告商]
 
@@ -575,10 +567,10 @@ graph TB
         Platform -->|用户数据| Advertiser
         Advertiser -->|广告费| Platform
 
-        Platform -->|小部分分成<br/>30-55%| Creator
-        Platform -->|保留大部分<br/>45-70%| Platform
+        Platform -->|小部分分成30-55%| Creator
+        Platform -->|保留大部分45-70%| Platform
 
-        Note1[平台抽成<br/>内容审核<br/>推荐算法控制]
+        Note1[平台抽成内容审核推荐算法控制]
     end
 
     style Platform fill:#ffcdd2
@@ -614,7 +606,7 @@ graph TB
 graph TB
     subgraph "Web3 代币经济"
         Creator[内容创作者]
-        Protocol[协议<br/>智能合约]
+        Protocol[协议智能合约]
         User[用户/收藏者]
 
         Creator -->|铸造NFT| Protocol
@@ -633,7 +625,7 @@ graph TB
         DAO -->|分配| Token
         Token -->|治理权| Community[社区]
 
-        Note1[去中心化<br/>创作者主导<br/>社区治理]
+        Note1[去中心化创作者主导社区治理]
     end
 
     style Protocol fill:#c8e6c9
@@ -667,23 +659,6 @@ graph TB
 ✅ 社区治理
 ```
 
-### 收益分配对比
-
-```mermaid
-pie title Web2平台收益分配（YouTube为例）
-    "平台（Google）" : 45
-    "内容创作者" : 55
-
-pie title Web3协议收益分配（OpenSea为例）
-    "创作者首次销售" : 97.5
-    "协议费用" : 2.5
-
-pie title Web3二次销售分配
-    "原创作者版税" : 10
-    "卖家收益" : 87.5
-    "协议费用" : 2.5
-```
-
 ---
 
 ## 技术栈对比
@@ -696,7 +671,7 @@ graph TB
         subgraph "前端"
             FE1[React/Vue/Angular]
             FE2[HTML/CSS/JavaScript]
-            FE3[移动端<br/>iOS/Android]
+            FE3[移动端iOS/Android]
         end
 
         subgraph "后端"
@@ -742,7 +717,7 @@ graph TB
         subgraph "前端层"
             DApp1[React/Next.js]
             DApp2[Web3.js/Ethers.js]
-            DApp3[钱包集成<br/>MetaMask/WalletConnect]
+            DApp3[钱包集成MetaMask/WalletConnect]
         end
 
         subgraph "智能合约层"
@@ -753,7 +728,7 @@ graph TB
 
         subgraph "区块链层"
             BC1[Ethereum/Polygon]
-            BC2[Layer 2<br/>Arbitrum/Optimism]
+            BC2[Layer 2Arbitrum/Optimism]
             BC3[侧链/其他链]
         end
 
@@ -811,11 +786,11 @@ graph TB
 ```mermaid
 graph LR
     subgraph "Web2 应用"
-        Social[社交媒体<br/>Facebook/Twitter]
-        Video[视频平台<br/>YouTube/TikTok]
-        Ecommerce[电商<br/>Amazon/淘宝]
-        Cloud[云服务<br/>Google Drive/Dropbox]
-        Streaming[流媒体<br/>Netflix/Spotify]
+        Social[社交媒体Facebook/Twitter]
+        Video[视频平台YouTube/TikTok]
+        Ecommerce[电商Amazon/淘宝]
+        Cloud[云服务Google Drive/Dropbox]
+        Streaming[流媒体Netflix/Spotify]
     end
 
     subgraph "共同特点"
@@ -841,12 +816,12 @@ graph LR
 ```mermaid
 graph LR
     subgraph "Web3 应用"
-        DeFi[去中心化金融<br/>Uniswap/Aave]
-        NFT[NFT市场<br/>OpenSea/Blur]
-        Social3[社交网络<br/>Lens/Farcaster]
-        Storage[存储<br/>IPFS/Filecoin]
-        Gaming[链游<br/>Axie/StepN]
-        DAO[DAO<br/>治理组织]
+        DeFi[去中心化金融Uniswap/Aave]
+        NFT[NFT市场OpenSea/Blur]
+        Social3[社交网络Lens/Farcaster]
+        Storage[存储IPFS/Filecoin]
+        Gaming[链游Axie/StepN]
+        DAO[DAO治理组织]
     end
 
     subgraph "共同特点"
@@ -901,7 +876,7 @@ sequenceDiagram
     LC->>BC: 记录到区块链
     U->>U: 用户拥有内容NFT
 
-    Note over U: 可以在任何<br/>Lens应用中查看
+    Note over U: 可以在任何Lens应用中查看
 ```
 
 #### 音乐流媒体
@@ -946,19 +921,19 @@ sequenceDiagram
 ```mermaid
 graph TB
     subgraph "Web2优势"
-        W2_P1[成熟稳定<br/>经过验证]
-        W2_P2[用户体验好<br/>易于使用]
-        W2_P3[性能高<br/>响应快]
-        W2_P4[可扩展性强<br/>支持海量用户]
-        W2_P5[开发工具完善<br/>生态成熟]
+        W2_P1[成熟稳定经过验证]
+        W2_P2[用户体验好易于使用]
+        W2_P3[性能高响应快]
+        W2_P4[可扩展性强支持海量用户]
+        W2_P5[开发工具完善生态成熟]
     end
 
     subgraph "Web2劣势"
-        W2_N1[中心化控制<br/>单点故障]
-        W2_N2[隐私泄露<br/>数据被商业化]
-        W2_N3[平台垄断<br/>创作者收益少]
-        W2_N4[可被审查<br/>账号可被封禁]
-        W2_N5[数据孤岛<br/>难以互通]
+        W2_N1[中心化控制单点故障]
+        W2_N2[隐私泄露数据被商业化]
+        W2_N3[平台垄断创作者收益少]
+        W2_N4[可被审查账号可被封禁]
+        W2_N5[数据孤岛难以互通]
     end
 
     style W2_P1 fill:#c8e6c9
@@ -978,21 +953,21 @@ graph TB
 ```mermaid
 graph TB
     subgraph "Web3优势"
-        W3_P1[去中心化<br/>抗审查]
-        W3_P2[用户拥有数据<br/>隐私保护]
-        W3_P3[透明公开<br/>可验证]
-        W3_P4[代币激励<br/>公平分配]
-        W3_P5[互操作性<br/>开放协议]
-        W3_P6[社区治理<br/>民主决策]
+        W3_P1[去中心化抗审查]
+        W3_P2[用户拥有数据隐私保护]
+        W3_P3[透明公开可验证]
+        W3_P4[代币激励公平分配]
+        W3_P5[互操作性开放协议]
+        W3_P6[社区治理民主决策]
     end
 
     subgraph "Web3劣势"
-        W3_N1[性能较低<br/>TPS限制]
-        W3_N2[用户体验差<br/>学习门槛高]
-        W3_N3[Gas费高<br/>使用成本]
-        W3_N4[扩展性挑战<br/>网络拥堵]
-        W3_N5[监管不确定<br/>法律风险]
-        W3_N6[私钥管理<br/>丢失无法恢复]
+        W3_N1[性能较低TPS限制]
+        W3_N2[用户体验差学习门槛高]
+        W3_N3[Gas费高使用成本]
+        W3_N4[扩展性挑战网络拥堵]
+        W3_N5[监管不确定法律风险]
+        W3_N6[私钥管理丢失无法恢复]
     end
 
     style W3_P1 fill:#c8e6c9
@@ -1031,10 +1006,10 @@ graph TB
 ```mermaid
 graph LR
     subgraph "渐进式迁移策略"
-        Phase1[阶段1<br/>学习探索]
-        Phase2[阶段2<br/>混合架构]
-        Phase3[阶段3<br/>部分迁移]
-        Phase4[阶段4<br/>全面Web3]
+        Phase1[阶段1学习探索]
+        Phase2[阶段2混合架构]
+        Phase3[阶段3部分迁移]
+        Phase4[阶段4全面Web3]
 
         Phase1 --> Phase2 --> Phase3 --> Phase4
     end
@@ -1094,7 +1069,7 @@ graph TB
         end
 
         subgraph "桥接层"
-            Bridge[适配器<br/>Web2↔Web3]
+            Bridge[适配器Web2↔Web3]
         end
     end
 
@@ -1306,11 +1281,11 @@ graph TB
 
 ```mermaid
 graph LR
-    Start[开始] --> Step1[创建钱包<br/>MetaMask]
-    Step1 --> Step2[获取测试币<br/>水龙头]
-    Step2 --> Step3[体验DApp<br/>Uniswap/OpenSea]
-    Step3 --> Step4[加入社区<br/>Discord/Twitter]
-    Step4 --> Step5[持续学习<br/>跟上趋势]
+    Start[开始] --> Step1[创建钱包MetaMask]
+    Step1 --> Step2[获取测试币水龙头]
+    Step2 --> Step3[体验DAppUniswap/OpenSea]
+    Step3 --> Step4[加入社区Discord/Twitter]
+    Step4 --> Step5[持续学习跟上趋势]
 
     style Start fill:#4caf50
     style Step5 fill:#81c784
@@ -1380,10 +1355,10 @@ graph TB
 graph TB
     Evaluate[企业评估Web3]
 
-    Q1{业务需要<br/>去中心化?}
-    Q2{用户需要<br/>资产所有权?}
-    Q3{能承受<br/>技术风险?}
-    Q4{有技术<br/>团队?}
+    Q1{业务需要去中心化?}
+    Q2{用户需要资产所有权?}
+    Q3{能承受技术风险?}
+    Q4{有技术团队?}
 
     Evaluate --> Q1
     Q1 -->|是| Q2
@@ -1583,10 +1558,10 @@ graph TB
 graph TB
     Insight[Web3的本质]
 
-    I1[从平台垄断<br/>到用户主权]
-    I2[从数据商品<br/>到数据资产]
-    I3[从租赁经济<br/>到所有权经济]
-    I4[从中心化信任<br/>到去中心化验证]
+    I1[从平台垄断到用户主权]
+    I2[从数据商品到数据资产]
+    I3[从租赁经济到所有权经济]
+    I4[从中心化信任到去中心化验证]
 
     Insight --> I1
     Insight --> I2
