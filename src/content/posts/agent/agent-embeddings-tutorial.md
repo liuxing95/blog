@@ -1,6 +1,6 @@
 ---
 title: 'Embeddings'
-date: '2025-11-05'
+date: '2025-11-11'
 excerpt: 'Agent 开发中的 Embeddings 完整指南'
 tags: ['Agent', 'Embeddings']
 series: 'Agent'
