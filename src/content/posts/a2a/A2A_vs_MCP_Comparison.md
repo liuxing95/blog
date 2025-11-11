@@ -2,7 +2,7 @@
 title: 'A2A vs MCP：深度对比分析'
 date: '2025-11-05'
 excerpt: '详细对比 Agent2Agent (A2A) Protocol 和 Model Context Protocol (MCP) 的设计理念、技术架构、使用场景'
-tags: ['AI', 'A2A', 'MCP']
+tags: ['AI', 'A2A']
 series: 'AI学习'
 ---
 
