@@ -5,31 +5,139 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { Post } from '@/service/posts';
 
-interface TagWithPosts {
-  tag: string;
+interface TagNode {
+  name: string;
+  children: Map<string, TagNode>;
   posts: Post[];
+  level: number;
 }
 
 interface SidebarProps {
-  taggedPosts: TagWithPosts[];
+  tagTree: TagNode;
 }
 
-export default function Sidebar({ taggedPosts }: SidebarProps) {
+export default function Sidebar({ tagTree }: SidebarProps) {
   const pathname = usePathname();
-  const [expandedTags, setExpandedTags] = useState<Set<string>>(new Set());
+  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleTag = (tag: string) => {
-    const newExpanded = new Set(expandedTags);
-    if (newExpanded.has(tag)) {
-      newExpanded.delete(tag);
+  const toggleNode = (nodePath: string) => {
+    const newExpanded = new Set(expandedNodes);
+    if (newExpanded.has(nodePath)) {
+      newExpanded.delete(nodePath);
     } else {
-      newExpanded.add(tag);
+      newExpanded.add(nodePath);
     }
-    setExpandedTags(newExpanded);
+    setExpandedNodes(newExpanded);
   };
 
   const isActive = (path: string) => pathname === path;
+
+  // Recursive function to render tag tree
+  const renderTagNode = (node: TagNode, parentPath: string = '') => {
+    const nodePath = parentPath ? `${parentPath}/${node.name}` : node.name;
+    const isExpanded = expandedNodes.has(nodePath);
+    const hasChildren = node.children.size > 0;
+    const hasPosts = node.posts.length > 0;
+    const totalCount = node.posts.length + Array.from(node.children.values()).reduce((sum, child) => sum + child.posts.length, 0);
+
+    // Calculate indentation based on level
+    const indentClass = node.level === 0 ? '' : `ml-${Math.min(node.level * 4, 12)}`;
+
+    return (
+      <div key={nodePath} className={indentClass}>
+        {/* Tag Node Header */}
+        {node.name && (
+          <button
+            onClick={() => toggleNode(nodePath)}
+            className={`w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
+              node.level === 0
+                ? 'text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-700/50'
+                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+            }`}
+          >
+            <span className="flex items-center">
+              <svg
+                className={`w-4 h-4 mr-2 transition-transform duration-200 ${
+                  isExpanded ? 'rotate-90' : ''
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+              <span className={node.level === 0 ? 'font-semibold' : ''}>
+                {node.name}
+              </span>
+              {totalCount > 0 && (
+                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
+                  ({totalCount})
+                </span>
+              )}
+            </span>
+          </button>
+        )}
+
+        {/* Expanded Content */}
+        {(isExpanded || node.level === 0) && (
+          <div className={node.level > 0 ? 'ml-6 mt-1 space-y-1' : 'space-y-1'}>
+            {/* Direct Posts */}
+            {hasPosts && isExpanded && (
+              <div className="space-y-1">
+                {node.posts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/posts/${post.slug}`}
+                    className={`block px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+                      isActive(`/posts/${post.slug}`)
+                        ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium'
+                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200'
+                    }`}
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    <div className="flex items-start">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 dark:bg-blue-500 mt-1.5 mr-2 flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <div className="line-clamp-2">{post.matter.title}</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                          {new Date(post.matter.date).toLocaleDateString('zh-CN', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {/* Child Nodes */}
+            {hasChildren && (
+              <div className="space-y-1">
+                {Array.from(node.children.entries())
+                  .sort(([nameA, nodeA], [nameB, nodeB]) => {
+                    // Sort by total post count (descending), then by name
+                    const countA = nodeA.posts.length + Array.from(nodeA.children.values()).reduce((sum, child) => sum + child.posts.length, 0);
+                    const countB = nodeB.posts.length + Array.from(nodeB.children.values()).reduce((sum, child) => sum + child.posts.length, 0);
+                    if (countB !== countA) return countB - countA;
+                    return nameA.localeCompare(nameB, 'zh-CN');
+                  })
+                  .map(([childName, childNode]) => renderTagNode(childNode, nodePath))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const sidebarContent = (
     <div className="h-full overflow-y-auto">
@@ -45,70 +153,22 @@ export default function Sidebar({ taggedPosts }: SidebarProps) {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+              d="M4 6h16M4 10h16M4 14h16M4 18h16"
             />
           </svg>
-          标签分类
+          文章目录
         </h2>
 
         <nav className="space-y-1">
-          {taggedPosts.map(({ tag, posts }) => (
-            <div key={tag} className="border-b border-gray-200 dark:border-gray-700 last:border-0">
-              <button
-                onClick={() => toggleTag(tag)}
-                className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors duration-200"
-              >
-                <span className="flex items-center">
-                  <span className="text-blue-600 dark:text-blue-400 mr-2">#</span>
-                  {tag}
-                  <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">
-                    ({posts.length})
-                  </span>
-                </span>
-                <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    expandedTags.has(tag) ? 'rotate-90' : ''
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-
-              {expandedTags.has(tag) && (
-                <div className="ml-4 mt-1 mb-2 space-y-1">
-                  {posts.map((post) => (
-                    <Link
-                      key={post.slug}
-                      href={`/posts/${post.slug}`}
-                      className={`block px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
-                        isActive(`/posts/${post.slug}`)
-                          ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium'
-                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200'
-                      }`}
-                      onClick={() => setIsSidebarOpen(false)}
-                    >
-                      <span className="line-clamp-2">{post.matter.title}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-500 block mt-1">
-                        {new Date(post.matter.date).toLocaleDateString('zh-CN', {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        })}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+          {Array.from(tagTree.children.entries())
+            .sort(([nameA, nodeA], [nameB, nodeB]) => {
+              // Sort root level by total post count (descending), then by name
+              const countA = nodeA.posts.length + Array.from(nodeA.children.values()).reduce((sum, child) => sum + child.posts.length, 0);
+              const countB = nodeB.posts.length + Array.from(nodeB.children.values()).reduce((sum, child) => sum + child.posts.length, 0);
+              if (countB !== countA) return countB - countA;
+              return nameA.localeCompare(nameB, 'zh-CN');
+            })
+            .map(([childName, childNode]) => renderTagNode(childNode))}
         </nav>
       </div>
     </div>

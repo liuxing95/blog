@@ -2,41 +2,64 @@ import { getAllPosts } from '@/service/posts';
 import Sidebar from './Sidebar';
 import type { Post } from '@/service/posts';
 
-interface TagWithPosts {
-  tag: string;
+interface TagNode {
+  name: string;
+  children: Map<string, TagNode>;
   posts: Post[];
+  level: number;
+}
+
+function createTagNode(name: string, level: number): TagNode {
+  return {
+    name,
+    children: new Map(),
+    posts: [],
+    level,
+  };
 }
 
 export default function SidebarProvider() {
   const posts = getAllPosts();
 
-  // Group posts by tags
-  const tagMap = new Map<string, Post[]>();
+  // Build hierarchical tag tree
+  const rootNode = createTagNode('', 0);
 
   posts.forEach((post) => {
-    post.matter.tags.forEach((tag) => {
-      if (!tagMap.has(tag)) {
-        tagMap.set(tag, []);
+    const tags = post.matter.tags;
+
+    if (tags.length === 0) {
+      // Posts without tags go to root level
+      rootNode.posts.push(post);
+      return;
+    }
+
+    // Navigate/create the tag hierarchy
+    let currentNode = rootNode;
+
+    tags.forEach((tag, index) => {
+      const normalizedTag = tag.trim();
+
+      if (!currentNode.children.has(normalizedTag)) {
+        currentNode.children.set(normalizedTag, createTagNode(normalizedTag, index + 1));
       }
-      tagMap.get(tag)!.push(post);
+
+      currentNode = currentNode.children.get(normalizedTag)!;
     });
+
+    // Add post to the deepest level
+    currentNode.posts.push(post);
   });
 
-  // Convert to array and sort by post count (descending) and tag name
-  const taggedPosts: TagWithPosts[] = Array.from(tagMap.entries())
-    .map(([tag, posts]) => ({
-      tag,
-      posts: posts.sort((a, b) =>
-        new Date(b.matter.date).getTime() - new Date(a.matter.date).getTime()
-      ),
-    }))
-    .sort((a, b) => {
-      // Sort by post count first (descending), then by tag name
-      if (b.posts.length !== a.posts.length) {
-        return b.posts.length - a.posts.length;
-      }
-      return a.tag.localeCompare(b.tag, 'zh-CN');
-    });
+  // Sort posts by date within each node (recursively)
+  function sortNodePosts(node: TagNode) {
+    node.posts.sort((a, b) =>
+      new Date(b.matter.date).getTime() - new Date(a.matter.date).getTime()
+    );
 
-  return <Sidebar taggedPosts={taggedPosts} />;
+    node.children.forEach((childNode) => sortNodePosts(childNode));
+  }
+
+  sortNodePosts(rootNode);
+
+  return <Sidebar tagTree={rootNode} />;
 }
