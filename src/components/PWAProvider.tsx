@@ -20,11 +20,16 @@ export default function PWAProvider({ children }: PWAProviderProps) {
 
   useEffect(() => {
     // 注册 Service Worker
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
       navigator.serviceWorker
         .register('/sw.js')
         .then((registration) => {
-          console.log('Service Worker 注册成功:', registration);
+          console.log('[PWA] Service Worker 注册成功');
+
+          // 定期检查更新（每小时）
+          setInterval(() => {
+            registration.update();
+          }, 60 * 60 * 1000);
 
           // 检查更新
           registration.addEventListener('updatefound', () => {
@@ -32,17 +37,32 @@ export default function PWAProvider({ children }: PWAProviderProps) {
             if (newWorker) {
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  // 新版本可用
-                  if (confirm('发现新版本，是否立即更新？')) {
+                  // 新版本可用，自动更新
+                  console.log('[PWA] 发现新版本，准备更新...');
+
+                  // 发送消息让新的 Service Worker 跳过等待
+                  newWorker.postMessage({ type: 'SKIP_WAITING' });
+
+                  // 自动刷新页面
+                  setTimeout(() => {
                     window.location.reload();
-                  }
+                  }, 1000);
                 }
               });
             }
           });
+
+          // 监听 Service Worker 控制器变化
+          let refreshing = false;
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (!refreshing) {
+              refreshing = true;
+              window.location.reload();
+            }
+          });
         })
         .catch((error) => {
-          console.log('Service Worker 注册失败:', error);
+          console.log('[PWA] Service Worker 注册失败:', error);
         });
     }
 
