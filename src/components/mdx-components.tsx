@@ -46,7 +46,7 @@ export const mdxComponents: MDXComponents = {
 
   // 自定义段落
   p: ({ children }) => (
-    <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{children}</p>
+    <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{children}</p>
   ),
 
   // 自定义链接
