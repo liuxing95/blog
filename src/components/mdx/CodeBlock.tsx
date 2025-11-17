@@ -13,8 +13,8 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
   const match = /language-(\w+)/.exec(className || '');
   const language = match ? match[1] : '';
 
-  // Only apply syntax highlighting for ts, js, tsx, jsx, json
-  const supportedLanguages = ['typescript', 'javascript', 'ts', 'js', 'tsx', 'jsx', 'json'];
+  // Only apply syntax highlighting for supported languages
+  const supportedLanguages = ['typescript', 'javascript', 'ts', 'js', 'tsx', 'jsx', 'json', 'python', 'py', 'go', 'golang'];
   const shouldHighlight = supportedLanguages.includes(language);
 
   if (!shouldHighlight) {
@@ -34,6 +34,8 @@ export default function CodeBlock({ children, className }: CodeBlockProps) {
     js: 'javascript',
     tsx: 'typescript',
     jsx: 'javascript',
+    python: 'python',
+    go: 'go',
   };
 
   const displayLanguage = languageMap[language] || language;
