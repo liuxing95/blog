@@ -1,6 +1,6 @@
 ---
 title: "VSCode Tab 自动补全完全指南：从原理到实战"
-description: "深入解析 VSCode Tab 补全机制、LSP 通信协议，以及如何基于 Monaco Editor 实现 Markdown 智能补全"
+excerpt: "深入解析 VSCode Tab 补全机制、LSP 通信协议，以及如何基于 Monaco Editor 实现 Markdown 智能补全"
 publishDate: "2025-11-17"
 tags: ["VSCode", "Monaco Editor", "Language Server"]
 ---
