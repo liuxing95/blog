@@ -1,7 +1,7 @@
 ---
 title: "TypeScript tsconfig.json 完全配置指南：所有编译选项详解"
 excerpt: "全面解析 TypeScript tsconfig.json 的所有编译器选项，包括每个配置的可选值、默认值及其影响，助你精通 TypeScript 项目配置"
-date: "2025-01-15"
+date: "2025-11-20"
 tags: ["TypeScript", "tsconfig"]
 ---
 
