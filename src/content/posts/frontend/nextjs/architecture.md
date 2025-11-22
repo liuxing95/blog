@@ -3,7 +3,7 @@ title: "Next.js 架构深度解析：设计理念、核心组件与渲染机制"
 excerpt: "深入探讨 Next.js 的架构设计，包括 App Router、Server Components、Turbopack、Fast Refresh 等核心技术，以及它们如何协同工作构建高性能 Web 应用"
 date: "2025-11-20"
 category: "frontend"
-tags: ["Node.js","Next.js", "架构设计"]
+tags: ["Node.js","Next.js"]
 ---
 
 # Next.js 架构深度解析：设计理念、核心组件与渲染机制
