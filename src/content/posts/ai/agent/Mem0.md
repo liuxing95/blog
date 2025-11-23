@@ -1,7 +1,7 @@
 ---
 title: "Mem0 完全指南：构建生产级 AI Agent 长期记忆系统"
 description: "深入解析 Mem0 架构设计、核心算法与 TypeScript 实现，基于 arXiv:2504.19413 论文的完整教程"
-publishDate: "2025-11-17"
+date: "2025-11-17"
 tags: ["AI Agent", "Memory System"]
 ---
 

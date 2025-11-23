@@ -1,7 +1,7 @@
 ---
 title: 'TypeScript-Go 深度解析：TypeScript 的原生 Go 实现'
 description: '深入探讨 Microsoft TypeScript-Go 项目的架构设计、核心理念、性能优化，以及如何用 Go 重写 TypeScript 编译器。包含详细的架构图和流程图。'
-pubDate: 2025-11-19
+date: 2025-11-19
 author: 'Devin'
 tags: ['Go', 'Typescript-Go']
 category: 'frontend'

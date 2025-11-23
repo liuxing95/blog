@@ -2,6 +2,7 @@
 title: 'Vitest 深度解析：下一代测试框架完全指南'
 tags: ['Testing','Vitest']
 excerpt: '全面解析 Vitest 测试框架的设计理念、架构实现、与 Jest 的区别，以及如何在现代前端项目中高效使用 Vitest 进行单元测试和集成测试。'
+date: "2025-11-21"
 ---
 
 # Vitest 深度解析：下一代测试框架完全指南
