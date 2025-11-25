@@ -1,7 +1,7 @@
 ---
 title: "Next.js 缓存与重新验证完全指南：架构设计、策略优化与最佳实践"
 excerpt: "深入解析 Next.js 的多层缓存架构、数据重新验证机制、ISR 实现原理，掌握请求记忆化、完整路由缓存、按需重新验证等高级特性"
-date: "2025-11-24"
+date: "2025-11-25"
 category: "frontend"
 tags: ["Node.js","Next.js"]
 ---
