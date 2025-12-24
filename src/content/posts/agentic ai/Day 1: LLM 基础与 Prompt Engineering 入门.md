@@ -14,15 +14,30 @@ series: 'Agentic AI'
 
 ---
 
-## 📅 学习计划概览
+## � 学习内容概览
 
-- **上午任务 (2小时)**: LLM 基础理论与配置参数
-- **下午任务 (1.5小时)**: 提示技术实践
-- **晚上任务 (0.5小时)**: 总结与场景映射
+本文档涵盖以下核心内容：
+
+**Part 1: LLM 基础理论**
+- Transformer 架构与工作原理
+- Token 机制与成本优化
+- 注意力机制详解
+- Prompt Engineering vs Context Engineering
+- 生成参数配置 (Temperature, Top-K, Top-P, Token Limits)
+
+**Part 2: 基础提示技术**
+- Zero-shot Prompting - 零样本提示
+- One-shot Prompting - 单样本提示
+- Few-shot Prompting - 少样本提示
+
+**Part 3: 工程实践**
+- 技术选型与场景映射
+- 常见故障模式与修正策略
+- Prompt 模板化与测试
 
 ---
 
-## 🌅 上午任务：LLM 基础理论
+## Part 1: LLM 基础理论
 
 ### 1. LLM 的基本工作原理
 
@@ -333,7 +348,7 @@ total_cost = (input_tokens * input_cost) + (output_tokens * output_cost)
 
 ---
 
-## 🌤️ 下午任务：提示技术实践
+## Part 2: 基础提示技术
 
 ### 4. Zero-shot Prompting (零样本)
 
@@ -481,7 +496,7 @@ def select_examples(user_query, example_pool, k=3):
 
 ---
 
-## 🌙 晚上任务：总结与场景映射
+## Part 3: 工程实践与技术选型
 
 ### 7. 提示技术适用场景总结
 
