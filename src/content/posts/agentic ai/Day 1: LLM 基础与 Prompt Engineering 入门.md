@@ -1,6 +1,6 @@
 ---
 title: 'Day 1: LLM 基础与 Prompt Engineering 入门'
-date: '2025-11-05'
+date: '2025-12-24'
 excerpt: '在一天内建立对 LLM 工作原理、Prompt Engineering 核心概念以及常见提示技术的工程级理解，并能够在实际任务中正确选择与应用。'
 tags: ['Agentic AI']
 series: 'Agentic AI'
