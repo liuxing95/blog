@@ -2,7 +2,7 @@
 title: 'Prompt 工程最佳实践：从设计到优化的系统化方法论'
 date: '2025-12-25'
 excerpt: '深入探讨 Prompt 工程的核心方法论，涵盖六步设计框架、结构化输出、上下文管理等关键技术，帮助构建生产级 Prompt 模板系统'
-tags: ['Agentic AI', 'Prompt Engineering', 'LLM']
+tags: ['Agentic AI']
 series: 'Agentic AI'
 ---
 
