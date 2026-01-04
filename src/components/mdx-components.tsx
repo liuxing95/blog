@@ -10,7 +10,7 @@ export const mdxComponents: MDXComponents = {
   h1: ({ children, id, ...props }) => (
     <h1
       id={id}
-      className="text-4xl font-bold text-gray-900 dark:text-white mb-6 mt-8 first:mt-0 scroll-mt-20"
+      className="text-3xl font-bold text-gray-900 dark:text-white mb-6 mt-8 first:mt-0 scroll-mt-20"
       {...props}
     >
       {children}
@@ -19,7 +19,7 @@ export const mdxComponents: MDXComponents = {
   h2: ({ children, id, ...props }) => (
     <h2
       id={id}
-      className="text-3xl font-semibold text-gray-900 dark:text-white mb-4 mt-8 scroll-mt-20"
+      className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 mt-8 scroll-mt-20"
       {...props}
     >
       {children}
@@ -28,7 +28,7 @@ export const mdxComponents: MDXComponents = {
   h3: ({ children, id, ...props }) => (
     <h3
       id={id}
-      className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 mt-6 scroll-mt-20"
+      className="text-xl font-semibold text-gray-900 dark:text-white mb-4 mt-6 scroll-mt-20"
       {...props}
     >
       {children}
@@ -37,7 +37,7 @@ export const mdxComponents: MDXComponents = {
   h4: ({ children, id, ...props }) => (
     <h4
       id={id}
-      className="text-xl font-semibold text-gray-900 dark:text-white mb-3 mt-6 scroll-mt-20"
+      className="text-lg font-semibold text-gray-900 dark:text-white mb-3 mt-6 scroll-mt-20"
       {...props}
     >
       {children}
@@ -46,7 +46,7 @@ export const mdxComponents: MDXComponents = {
 
   // 自定义段落
   p: ({ children }) => (
-    <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{children}</p>
+    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{children}</p>
   ),
 
   // 自定义链接

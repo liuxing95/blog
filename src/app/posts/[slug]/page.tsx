@@ -70,7 +70,7 @@ export default async function PostPage({ params }: PostPageProps) {
             </Link>
           </nav>
 
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             {post.matter.title}
           </h1>
 
@@ -106,7 +106,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
         {/* Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-          <div className="prose prose-lg dark:prose-invert max-w-none">
+          <div className="prose dark:prose-invert max-w-none">
             <MDXContent source={post.content} />
           </div>
         </div>
