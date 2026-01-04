@@ -1,6 +1,6 @@
 ---
 title: 'RAG 系统测试、评估与优化：从理论到工程实践的完整指南'
-date: '2025-12-26'
+date: '2025-12-27'
 excerpt: '深入探讨 RAG（Retrieval-Augmented Generation）系统的测试方法、评估指标和优化策略，涵盖 A/B 测试、上下文工程、检索优化等核心技术，帮助构建可靠的生产级 RAG 系统。'
 tags: ['Agentic AI']
 series: 'Agentic AI'
