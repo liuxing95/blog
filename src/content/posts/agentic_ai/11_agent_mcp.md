@@ -1,6 +1,6 @@
 ---
 title: 'MCP 集成与 Supabase：构建可扩展的 AI Agent 基础设施'
-date: '2026-01-22'
+date: '2026-01-20'
 excerpt: '深入学习 Model Context Protocol (MCP) 协议、Supabase 向量数据库集成、行级安全策略，以及如何在 n8n 中构建生产级 Agent 系统。'
 tags: ['Agentic AI']
 series: 'Agentic AI'
