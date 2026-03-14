@@ -1,6 +1,6 @@
 ---
 title: "Mem0 完全指南：构建生产级 AI Agent 长期记忆系统"
-description: "深入解析 Mem0 架构设计、核心算法与 TypeScript 实现，基于 arXiv:2504.19413 论文的完整教程"
+description: "深入解析 Mem0 架构设计、核心算法与 TypeScript 实现，融合社区洞察与最新生态发展，基于 arXiv:2504.19413 论文的完整教程"
 date: "2025-11-17"
 tags: ["AI Agent", "Memory System"]
 ---
@@ -8,24 +8,30 @@ tags: ["AI Agent", "Memory System"]
 # Mem0 完全指南：构建生产级 AI Agent 长期记忆系统
 
 :::tip{title="教程概览"}
-本教程基于论文 **arXiv:2504.19413**，提供 Mem0 系统的完整实现指南，包括：
+本教程基于论文 **arXiv:2504.19413**，融合 Twitter/X 社区分享与最新行业动态，提供 Mem0 系统的完整指南，包括：
 - 🎯 核心概念和设计理念
 - 🏗️ 系统架构和组件设计
 - 💡 核心算法和决策流程
 - 💻 完整的 TypeScript 实现
 - 📊 性能优化和部署实践
+- 🌍 社区热议与行业评价
+- 🔗 生态系统与框架集成
+- 💰 融资愿景与未来展望
 :::
 
 ## 目录
 
 - [背景介绍](#背景介绍)
+- [社区热议与行业评价](#社区热议与行业评价)
 - [核心概念](#核心概念)
 - [系统架构](#系统架构)
 - [核心算法](#核心算法)
 - [TypeScript 实现](#typescript-实现)
 - [性能评估](#性能评估)
 - [生产部署](#生产部署)
+- [生态系统与框架集成](#生态系统与框架集成)
 - [最佳实践](#最佳实践)
+- [融资与未来愿景](#融资与未来愿景)
 
 ---
 
@@ -107,6 +113,106 @@ graph LR
 
     style D fill:#4CAF50
     style A fill:#f44336
+```
+
+---
+
+## 社区热议与行业评价
+
+:::info{title="来源说明"}
+以下内容整理自 Twitter/X 平台上的社区分享和行业讨论，涵盖 Mem0 创始人、知名开发者和社区用户的观点。
+:::
+
+### Taranjeet Singh（Mem0 联合创始人兼 CEO）的分享
+
+Mem0 联合创始人 [Taranjeet Singh (@taranjeetio)](https://x.com/taranjeetio/status/1917240523427029147) 在 Twitter 上分享了 Mem0 的最新研究成果：
+
+> "Building production ready AI Agents with Scalable Long-Term Memory — 我们在 LOCOMO 基准测试上实现了 SOTA 性能，比 OpenAI Memory 准确率高 26%。"
+
+他在另一条 [推文](https://x.com/taranjeetio/status/1825561204414411041) 中详细解释了 Mem0 的内部工作原理：
+
+**Mem0 的混合数据库架构：**
+- 每条记忆关联唯一标识符（用户 ID 或 Agent ID）
+- 通过 `add()` 方法添加消息时，系统自动提取关键事实和偏好
+- 数据存储在三个层面：**向量数据库**、**键值数据库** 和 **图数据库**
+- 通过 `search()` 方法检索时，跨数据存储执行搜索
+- 检索结果经过**评分层**评估，综合考虑**相关性、重要性和时效性**
+
+```typescript
+// Mem0 的核心 API 极其简洁
+import { MemoryClient } from 'mem0ai';
+
+const client = new MemoryClient(\{ apiKey: 'your-api-key' \});
+
+// 添加记忆 - 自动提取关键信息
+await client.add(
+    '我是素食主义者，住在上海，喜欢跑步',
+    \{ user_id: 'user_123' \}
+);
+
+// 搜索记忆 - 跨数据存储智能检索
+const memories = await client.search(
+    '推荐餐厅',
+    \{ user_id: 'user_123' \}
+);
+// 返回: 用户是素食主义者、住在上海等相关记忆
+```
+
+### Santiago (@svpino) 的技术分析
+
+知名 AI 开发者 [Santiago](https://x.com/svpino/status/1917248279835972028) 在 Twitter 上对 Mem0 的性能数据进行了深入分析：
+
+> "Mem0 在准确率上以 26% 的巨大优势击败了 OpenAI 的记忆系统！这对行业来说意义重大，原因有二：Mem0 是开源的；记忆对于 AI Agent 的记忆、推理和响应至关重要。"
+
+Santiago 总结的核心性能指标：
+
+```
+🚀 响应速度: 91% 提升 (17s → 1.4s)
+💰 Token 消耗: 9 倍降低 (26K → 3K tokens)
+🎯 准确率: 比 OpenAI Memory 高 26%+
+```
+
+他还指出了一个普遍痛点：**随着对话增长，模型会忘记关键信息**。更大的上下文窗口只是延缓了问题，而非解决问题。Mem0 通过可扩展的记忆层从根本上解决了这个问题。
+
+### Leonie (@helloiamleonie) 的实测体验
+
+AI 工程师 [Leonie](https://x.com/helloiamleonie/status/1976270045534679106) 分享了她测试 Mem0 的实际体验：
+
+> "我正在测试不同的 AI Agent 记忆层工具，首先是 @mem0ai。Mem0 使用 LLM 从对话中提取记忆信息，然后允许你对存储在数据库（如 Weaviate）中的记忆进行 CRUD 操作。"
+
+她的关键发现：
+- Mem0 自动从对话中提取结构化记忆
+- 支持标准的 CRUD（增删改查）操作
+- 可与多种向量数据库（如 Weaviate）无缝集成
+- 集成过程简单，适合快速原型开发
+
+### Shlok Khemani 的开发者评价
+
+[Shlok Khemani](https://x.com/shloked_/status/1917253253525372951) 从开发者视角给出了简洁评价：
+
+> "如果你正在构建面向消费者的 AI 应用，Mem0 是添加记忆功能最简单的方式。"
+
+### 社区共识总结
+
+```mermaid
+mindmap
+  root((Mem0 社区评价))
+    性能优势
+      准确率 +26% vs OpenAI
+      延迟降低 91%
+      Token 节省 90%+
+    开发体验
+      3 行代码集成
+      API 设计简洁
+      支持多种框架
+    开源价值
+      45K+ GitHub Stars
+      14M+ 下载量
+      80K+ 云服务用户
+    生产就绪
+      SOC 2 合规
+      HIPAA 合规
+      BYOK 支持
 ```
 
 ---
@@ -2111,6 +2217,65 @@ await chatSystem.processMultimodalInput('user_456', 'conv_789', {
 - ✅ 关系探索
 - ✅ 开放域任务 (+4%)
 
+### 图记忆的核心优势
+
+:::tip{title="向量 vs 图：关键区别"}
+向量数据库可能返回"用户喜欢咖啡"，但图记忆知道用户**偏好某家特定咖啡店的咖啡**、**上周二下过单**、并且是**在讨论早晨习惯时提到的**。
+:::
+
+图记忆存储显式实体关系如 `(Alice)-[:ALLERGIC_TO]->(TreeNuts)`，让 Agent 可以遍历已验证的事实，而非依赖最近邻向量搜索去猜测。
+
+### 图记忆管道
+
+Mem0ᵍ 通过两阶段管道将非结构化文本转化为结构化图：
+
+**1. 提取阶段（Extraction Phase）：**
+
+```typescript
+// 实体提取器：识别实体及其类型
+interface ExtractedEntity \{
+    name: string;
+    type: 'person' | 'location' | 'object' | 'concept' | 'event' | 'attribute';
+    context: string;
+\}
+
+// 关系生成器：推断实体间的语义连接
+interface ExtractedRelation \{
+    source: string;
+    target: string;
+    label: string;  // 如 'lives_in', 'prefers', 'owns', 'happened_on'
+    confidence: number;
+\}
+```
+
+**2. 更新阶段（Update Phase）：**
+
+```typescript
+// 冲突检测器：标记重叠或矛盾的节点/边
+// 更新解析器（LLM 驱动）：决定如何处理冲突
+type UpdateAction = 'ADD' | 'MERGE' | 'INVALIDATE' | 'SKIP';
+
+// 关键：过时的关系被标记为无效而非物理删除
+// 这使得时间推理成为可能
+interface RelationUpdate \{
+    action: UpdateAction;
+    relation: ExtractedRelation;
+    reason: string;
+    previousVersion?: ExtractedRelation;  // 版本追踪
+\}
+```
+
+### 支持的图数据库后端
+
+嵌入存储在向量数据库中，节点和边流入 Bolt 兼容的图后端：
+
+| 图后端 | 特性 | 查询性能 |
+|--------|------|---------|
+| Neo4j | 最成熟，社区最大 | 中等 |
+| Memgraph | 高性能内存图 | 快速 |
+| Amazon Neptune | AWS 原生集成 | 企业级 |
+| FalkorDB | 每用户图隔离 | Sub-140ms |
+
 ### 图结构示例
 
 ```
@@ -2132,6 +2297,12 @@ await chatSystem.processMultimodalInput('user_456', 'conv_789', {
 MATCH (Alice)-[:FRIEND_OF]->(friend)-[:VISITED]->(Japan)
 RETURN friend.name
 ```
+
+### 实施建议
+
+:::note{title="渐进式采用"}
+从向量搜索开始用于语义检索，**仅在 Agent 需要理解记忆间显式关系时**才添加图结构。大多数实现初期不需要图的复杂性。过期规则自动移除过时事实，版本控制追踪记忆变化而非覆盖旧值。
+:::
 
 ---
 
@@ -2236,6 +2407,179 @@ Replicas: 3-10 (auto-scaling)
 
 ---
 
+## 🔗 生态系统与框架集成
+
+:::info{title="最新动态"}
+Mem0 已深度集成到主流 AI Agent 框架生态中，以下是来自社区实践和官方文档的集成指南。
+:::
+
+### 框架集成全景
+
+```mermaid
+graph TD
+    M[Mem0 记忆层] --> C[CrewAI]
+    M --> L[LangGraph]
+    M --> A[AutoGen]
+    M --> G[Google ADK]
+    M --> AS[AgentStack]
+    M --> F[Flowise]
+    M --> LF[Langflow]
+    M --> AW[AWS Agent SDK]
+
+    C --> P[生产级多 Agent 系统]
+    L --> P
+    A --> P
+    G --> P
+
+    style M fill:#4CAF50,color:#fff
+    style P fill:#2196F3,color:#fff
+```
+
+### CrewAI + Mem0：生产级记忆集成
+
+来自 [Mem0 官方博客](https://mem0.ai/blog/crewai-memory-production-setup-with-mem0) 的集成实践：
+
+**CrewAI 默认记忆的局限：**
+- 短期记忆使用 ChromaDB + RAG（机器绑定，无多用户隔离）
+- 长期记忆使用 SQLite（不支持跨会话持久化）
+- 实体记忆基于 RAG（并发访问时 ChromaDB 锁定错误）
+
+**Mem0 替代方案的优势：**
+- 用户维度的记忆隔离
+- 跨会话持久化
+- 智能噪声过滤（从对话中提取信号）
+
+```typescript
+// CrewAI + Mem0 Cloud 集成配置
+const crewConfig = \{
+    agents: agents,
+    tasks: tasks,
+    process: 'sequential',
+    memory: true,
+    memoryConfig: \{
+        provider: 'mem0',
+        config: \{
+            userId: 'crew_user_1',
+            apiKey: process.env.MEM0_API_KEY,
+        \},
+    \},
+\};
+
+// Mem0 处理用户级记忆（用户告诉了我什么、我了解用户什么）
+// CrewAI 内置组件处理操作级记忆（上次执行这个任务时什么有效）
+```
+
+**两种集成路径：**
+
+| 特性 | Mem0 Cloud（托管） | Mem0 OSS（自托管） |
+|------|-------------------|-------------------|
+| 设置时间 | ~15 分钟 | ~1 小时 |
+| 基础设施 | 无需管理 | 需自行维护向量存储、LLM |
+| 合规 | SOC 2、HIPAA | 完全自控 |
+| 成本 | API 调用计费 | 基础设施成本 |
+| 适用场景 | 快速验证、中小规模 | 企业级、数据敏感 |
+
+### Google ADK + Mem0：医疗助手案例
+
+Mem0 官方 [在 Twitter 上展示](https://x.com/mem0ai/status/1924850453432656195) 了与 Google ADK 集成的医疗助手案例：
+
+```typescript
+// 医疗助手 - 跨会话记住患者信息
+interface PatientMemory \{
+    medicalHistory: string[];    // 病史记录
+    symptoms: string[];          // 症状追踪
+    medications: string[];       // 用药记录
+    appointments: Date[];        // 预约提醒
+    preferences: string[];       // 个人偏好
+\}
+
+// 患者无需每次重复病史信息
+// Mem0 自动从对话中提取并关联患者记忆
+const healthAssistant = \{
+    memoryConfig: \{
+        provider: 'mem0',
+        config: \{ userId: patientId \},
+    \},
+    features: [
+        '记住病史和症状',
+        '提供通用健康建议',
+        '预约提醒管理',
+        '个性化持久体验',
+    ],
+\};
+```
+
+### AWS 集成：Amazon Neptune + ElastiCache
+
+[AWS 官方博客](https://aws.amazon.com/blogs/database/build-persistent-memory-for-agentic-ai-applications-with-mem0-open-source-amazon-elasticache-for-valkey-and-amazon-neptune-analytics/) 展示了企业级部署方案：
+
+```
+┌──────────────────────────────────────────────┐
+│              AWS 生产部署架构                   │
+├──────────────────────────────────────────────┤
+│                                              │
+│  ┌──────────┐    ┌──────────────────────┐    │
+│  │ Mem0 OSS │───▶│ Amazon ElastiCache   │    │
+│  │ Instances │    │ (Valkey - 向量存储)   │    │
+│  └────┬─────┘    └──────────────────────┘    │
+│       │                                      │
+│       │          ┌──────────────────────┐    │
+│       └─────────▶│ Amazon Neptune       │    │
+│                  │ Analytics (图存储)     │    │
+│                  └──────────────────────┘    │
+│                                              │
+│  特性:                                        │
+│  • 多跳推理：跨连接记忆的图遍历                  │
+│  • 混合检索：图遍历 + 向量相似度搜索             │
+│  • Sub-140ms 查询性能                         │
+└──────────────────────────────────────────────┘
+```
+
+**AWS 选择 Mem0 作为其 Agent SDK 的独家记忆提供者**，这验证了 Mem0 在企业级场景中的可靠性。
+
+### MCP + 知识图谱集成
+
+来自 [Mem0 博客](https://mem0.ai/blog/mcp-knowledge-graph-memory-enterprise-ai) 的 MCP（Model Context Protocol）集成：
+
+知识图谱记忆与 MCP 天然契合，使 AI 系统能够：
+- 存储和推理**显式实体关系**（而非仅向量嵌入）
+- 改善长期上下文理解
+- 支持跨对话的知识延续
+- 满足企业级知识管理需求
+
+### 记忆层级体系
+
+来自 [DataCamp 教程](https://www.datacamp.com/tutorial/mem0-tutorial) 的三层记忆架构：
+
+```typescript
+// 三个记忆作用域
+interface MemoryScopes \{
+    // 用户记忆：跨所有对话持久化
+    // 如果用户提到偏好早间学习，该信息在所有未来会话中可用
+    userMemory: \{
+        scope: 'user';
+        persistence: 'permanent';
+        example: '用户偏好素食、住在上海';
+    \};
+
+    // 会话记忆：单次对话内的上下文
+    sessionMemory: \{
+        scope: 'session';
+        persistence: 'session_lifetime';
+        example: '当前正在讨论晚餐计划';
+    \};
+
+    // Agent 记忆：特定 AI Agent 实例的信息
+    agentMemory: \{
+        scope: 'agent';
+        persistence: 'permanent';
+        example: '该 Agent 擅长处理中文客服场景';
+    \};
+\}
+```
+
+---
+
 ## 💡 最佳实践
 
 ### 提取质量
@@ -2309,20 +2653,137 @@ Replicas: 3-10 (auto-scaling)
 
 ---
 
+## 💰 融资与未来愿景
+
+### $24M 融资：从开源到商业化
+
+2025 年 10 月，[Mem0 宣布完成 $24M 融资](https://mem0.ai/series-a)，包含 Seed 轮和 Series A 轮：
+
+| 轮次 | 领投 | 跟投 |
+|------|------|------|
+| Seed | Kindred Ventures | Y Combinator |
+| Series A | Basis Set Ventures | Peak XV Partners、GitHub Fund |
+
+**战略投资人：** Scott Belsky、Dharmesh Shah，以及 Datadog、Supabase、PostHog、前 GitHub、Weights & Biases 等基础设施公司 CEO。
+
+来自 [TechCrunch 的报道](https://techcrunch.com/2025/10/28/mem0-raises-24m-from-yc-peak-xv-and-basis-set-to-build-the-memory-layer-for-ai-apps/)：
+
+> "每一个 Agentic 应用都需要记忆，就像每一个应用都需要数据库一样。我们正在用这笔资金成为 AI Agent 的默认记忆层。" — Taranjeet Singh, Mem0 CEO
+
+### 发展里程碑
+
+```
+2024.01 ──── Mem0 正式启动（前身为 EmbedChain）
+    │
+2024.07 ──── 开源发布，快速获得社区关注
+    │
+2025.04 ──── 发表论文 arXiv:2504.19413
+    │         LOCOMO 基准测试 SOTA
+    │
+2025.10 ──── 完成 $24M 融资
+    │         41K+ GitHub Stars
+    │         14M+ 下载量
+    │
+2025.Q3 ──── API 调用量：
+    │         Q1: 35M → Q3: 186M（5.3 倍增长）
+    │
+2026.01 ──── 图记忆 + AWS Neptune 集成
+              80K+ 云服务开发者
+```
+
+### "记忆护照"愿景
+
+Mem0 创始人提出了**可移植记忆（Memory Passport）** 的概念：
+
+:::warning{title="行业痛点"}
+今天的 AI 记忆被困在数据孤岛中。每个 Agentic 应用都构建自己的隔离上下文，彼此不互通。当用户在一个应用中积累了丰富的历史后，在另一个应用中又要从零开始。
+:::
+
+**Mem0 的愿景：**
+- 就像**联系人**可以在设备和服务间同步一样，**记忆也应该具有可移植性**
+- 用户应该有权要求自己的上下文随他们迁移
+- AI 大厂没有动力让记忆可移植或互操作
+- Mem0 作为独立的记忆基础设施层，天然具有中立性
+
+```mermaid
+graph LR
+    U[用户] --> MP[Memory Passport]
+    MP --> A1[AI 助手 A]
+    MP --> A2[AI 助手 B]
+    MP --> A3[AI 助手 C]
+    MP --> A4[自定义 Agent]
+
+    A1 -.->|记忆同步| MP
+    A2 -.->|记忆同步| MP
+
+    style MP fill:#FF9800,color:#fff
+    style U fill:#4CAF50,color:#fff
+```
+
+### 公司背景
+
+- **总部：** 旧金山
+- **创始人：** Taranjeet Singh（前 Paytm、Khatabook）& Deshraj Yadav（前 Tesla）
+- **背景：** Y Combinator 孵化
+- **定位：** AI Agent 的默认记忆基础设施
+
+---
+
 ## 📚 参考资源
 
 **论文:**
-- arXiv:2504.19413 - Mem0 主论文
-- LOCOMO Dataset - 评估基准
+- [arXiv:2504.19413 - Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory](https://arxiv.org/abs/2504.19413)
+- [arXiv:2504.19413 (HTML 版)](https://arxiv.org/html/2504.19413v1)
+- [LOCOMO Dataset - 评估基准](https://arxiv.org/abs/2504.19413)
 
-**代码:**
-- https://github.com/mem0ai/mem0
-- https://mem0.ai/research
+**官方资源:**
+- [Mem0 官网](https://mem0.ai/)
+- [Mem0 GitHub 仓库](https://github.com/mem0ai/mem0)
+- [Mem0 研究页面](https://mem0.ai/research)
+- [Mem0 官方文档](https://docs.mem0.ai/)
+- [Mem0 Series A 公告](https://mem0.ai/series-a)
+- [Mem0 on Y Combinator](https://www.ycombinator.com/companies/mem0)
 
-**工具:**
-- Pinecone (向量数据库)
-- Neo4j (图数据库)
-- OpenAI API (LLM + 嵌入)
+**官方博客:**
+- [AI Memory Layer Guide (Dec 2025)](https://mem0.ai/blog/ai-memory-layer-guide)
+- [Graph Memory for AI Agents (Jan 2026)](https://mem0.ai/blog/graph-memory-solutions-ai-agents)
+- [CrewAI + Mem0: Production-Ready Memory](https://mem0.ai/blog/crewai-memory-production-setup-with-mem0)
+- [MCP Knowledge Graph Memory for Enterprise AI](https://mem0.ai/blog/mcp-knowledge-graph-memory-enterprise-ai)
+- [Agentic Frameworks Guide (Dec 2025)](https://mem0.ai/blog/agentic-frameworks-ai-agents)
+- [AgentStack Tutorial: Build AI Agents Fast (Oct 2025)](https://mem0.ai/blog/agentstack-tutorial-build-ai-agents-fast)
+- [Mem0 + AWS ElastiCache + Neptune](https://mem0.ai/blog/build-persistent-memory-for-agentic-ai-applications-with-mem0-open-source-amazon-elasticache-for-valkey-and-amazon-neptune-analytics)
+
+**集成文档:**
+- [Mem0 + CrewAI 集成指南](https://docs.mem0.ai/integrations/crewai)
+- [Mem0 Graph Memory 功能文档](https://docs.mem0.ai/open-source/features/graph-memory)
+- [AutoGen + Mem0 集成 (Microsoft)](https://microsoft.github.io/autogen/0.2/docs/ecosystem/mem0/)
+- [AWS 博客 - Mem0 + Neptune + ElastiCache](https://aws.amazon.com/blogs/database/build-persistent-memory-for-agentic-ai-applications-with-mem0-open-source-amazon-elasticache-for-valkey-and-amazon-neptune-analytics/)
+- [FalkorDB - Graph Memory for LLM Agents with Mem0](https://www.falkordb.com/blog/graph-memory-llm-agents-mem0-falkordb/)
+
+**第三方教程与报道:**
+- [DataCamp - Mem0 Tutorial: Persistent Memory Layer](https://www.datacamp.com/tutorial/mem0-tutorial)
+- [Medium - Mem0: Building Production-Ready AI Agents](https://medium.com/@EleventhHourEnthusiast/mem0-building-production-ready-ai-agents-with-scalable-long-term-memory-9c534cd39264)
+- [DEV Community - AI Agent Memory: Manual to Mem0 to AWS AgentCore](https://dev.to/sudarshangouda/ai-agent-memory-from-manual-implementation-to-mem0-to-aws-agentcore-2d7c)
+- [TechCrunch - Mem0 raises $24M](https://techcrunch.com/2025/10/28/mem0-raises-24m-from-yc-peak-xv-and-basis-set-to-build-the-memory-layer-for-ai-apps/)
+- [PR Newswire - Mem0 Raises $24M Series A](https://www.prnewswire.com/news-releases/mem0-raises-24m-series-a-to-build-memory-layer-for-ai-agents-302597157.html)
+
+**工具与依赖:**
+- [Pinecone - 向量数据库](https://www.pinecone.io/)
+- [Neo4j - 图数据库](https://neo4j.com/)
+- [FalkorDB - 高性能图数据库](https://www.falkordb.com/)
+- [Weaviate - 向量数据库](https://weaviate.io/)
+- [OpenAI API - LLM + Embedding](https://platform.openai.com/)
+
+**社区分享 (Twitter/X):**
+- [@mem0ai - Mem0 官方账号](https://x.com/mem0ai)
+- [@taranjeetio - Mem0 研究发布](https://x.com/taranjeetio/status/1917240523427029147)
+- [@taranjeetio - Mem0 工作原理详解](https://x.com/taranjeetio/status/1825561204414411041)
+- [@taranjeetio - Mem0 介绍](https://x.com/taranjeetio/status/1812862793324077338)
+- [@svpino - Mem0 vs OpenAI Memory 深度分析](https://x.com/svpino/status/1917248279835972028)
+- [@helloiamleonie - Mem0 实测体验](https://x.com/helloiamleonie/status/1976270045534679106)
+- [@mem0ai - Google ADK 医疗助手案例](https://x.com/mem0ai/status/1924850453432656195)
+- [@mem0ai - LOCOMO 基准测试公告](https://x.com/mem0ai/status/1917240225409171912)
+- [@shloked\_ - 开发者评价](https://x.com/shloked_/status/1917253253525372951)
 
 ---
 
@@ -2384,8 +2845,8 @@ Replicas: 3-10 (auto-scaling)
 
 ---
 
-**文档版本**: 1.0  
-**基于论文**: arXiv:2504.19413  
-**更新日期**: 2025-11-17
+**文档版本**: 2.0
+**基于论文**: arXiv:2504.19413
+**更新日期**: 2026-03-14
 
-**致谢**: 本教程基于 Mem0 研究团队的优秀工作整理
+**致谢**: 本教程基于 Mem0 研究团队的优秀工作整理，社区洞察来自 Twitter/X 平台的公开分享
