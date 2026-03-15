@@ -119,3 +119,27 @@ html {
     background-color: transparent;
   }
 }
+
+/* 搜索对话框样式 */
+dialog.search-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+dialog.search-dialog {
+  opacity: 0;
+  transform: scale(0.95) translateY(-10px);
+  transition: opacity 0.15s ease, transform 0.15s ease, display 0.15s ease allow-discrete, overlay 0.15s ease allow-discrete;
+}
+
+dialog.search-dialog[open] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+@starting-style {
+  dialog.search-dialog[open] {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+}
