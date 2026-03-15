@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 15: Inter-Agent Communication (A2A)'
-date: '2025-12-25'
-excerpt: 'Agent-to-Agent (A2A) communication enables multiple agents to work together effectively.'
+date: '2026-03-15'
+excerpt: 'Agent-to-Agent (A2A) communication enables multiple agents to work together effectively. 融合社区洞察与行业实践，涵盖协议之争、企业落地案例、Linux Foundation治理演进与开发者社区反馈，深入解析A2A协议的生态发展与技术演进。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -2150,6 +2150,59 @@ async function demoA2AClient() {
 | 适用范围 | 多智能体系统 | 单智能体工具调用 | 分布式服务 |
 | 状态管理 | 分布式 | 集中式 | 无状态 |
 | 调用粒度 | 任务级 | 函数级 | 方法级 |
+
+### 总结
+
+## 社区热议与实践分享
+
+A2A 协议自 2025 年 4 月发布以来迅速成为 AI Agent 生态的焦点，社区围绕协议定位、与 MCP 的关系以及企业落地展开了热烈讨论。
+
+### A2A vs MCP：互补而非竞争
+
+社区达成的关键共识是：A2A 与 MCP **互补而非竞争**。[Google 开发者博客](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)明确表示 A2A 补充了 Anthropic 的 MCP。[IBM](https://www.ibm.com/think/topics/agent2agent-protocol) 总结为：MCP 装备单个 Agent 的能力和数据，A2A 则让 Agent 作为团队协作。[Koyeb](https://www.koyeb.com/blog/a2a-and-mcp-start-of-the-ai-agent-protocol-wars) 发文讨论这是否标志着"AI Agent 协议战争"的开始。
+
+### 生态爆发式增长
+
+A2A 从发布时 50+ 合作伙伴迅速扩展至 150+ 组织，涵盖每一个主要云服务商和领先技术提供商。协议已移交 [Linux Foundation](https://github.com/a2aproject/A2A) 治理，v0.3 版本引入了 gRPC 支持、签名安全卡和 Python SDK 扩展。
+
+据 [IDC 预测](https://research.aimultiple.com/agent2agent/)，Agentic AI 支出到 2029 年将超过 $1.3 万亿，年复合增长率 31.9%。
+
+### 企业落地案例
+
+来自 [Google Cloud 博客](https://cloud.google.com/blog/products/ai-machine-learning/agent2agent-protocol-is-getting-an-upgrade)的企业案例：
+- **Adobe**：利用 A2A 实现分布式 Agent 与 Google Cloud 生态的互操作
+- **Tyson Foods / Gordon Food Service**：供应链协作 A2A 系统
+- **Twilio**：延迟感知 Agent 选择（Latency Aware Agent Selection）
+- **ServiceNow、SAP、Salesforce**：企业工作流 Agent 互通
+
+### 协议技术亮点
+
+A2A 的核心能力包括：
+- **能力发现**：通过 JSON 格式的 "Agent Cards" 声明能力
+- **任务管理**：定义任务生命周期状态
+- **Agent 协作**：上下文和指令共享
+- **UX 协商**：适配不同 UI 能力
+- 基于 HTTP、SSE、JSON-RPC 构建，企业级认证和授权
+
+---
+
+## 参考资源
+
+### 官方资源
+
+- [Google 开发者博客 - A2A 协议公告](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)
+- [Google Cloud 博客 - A2A 协议升级](https://cloud.google.com/blog/products/ai-machine-learning/agent2agent-protocol-is-getting-an-upgrade)
+- [A2A GitHub 仓库](https://github.com/a2aproject/A2A)
+- [A2A Protocol 官网](https://a2aprotocol.ai/)
+
+### 行业分析
+
+- [IBM - What Is Agent2Agent Protocol?](https://www.ibm.com/think/topics/agent2agent-protocol)
+- [Koyeb - A2A and MCP: Start of the AI Agent Protocol Wars?](https://www.koyeb.com/blog/a2a-and-mcp-start-of-the-ai-agent-protocol-wars)
+- [Platform Engineering - Google Cloud Unveils A2A Protocol](https://platformengineering.com/editorial-calendar/best-of-2025/google-cloud-unveils-agent2agent-protocol-a-new-standard-for-ai-agent-interoperability-2/)
+- [Virtualization Review - Google A2A Joins Viral MCP](https://virtualizationreview.com/articles/2025/04/09/protocols-for-agentic-ai-googles-new-a2a-joins-viral-mcp.aspx)
+- [AIMultiple - Multi-Agent Communication with A2A in 2026](https://research.aimultiple.com/agent2agent/)
+- [OneReach - A2A Protocol Explained (2026)](https://onereach.ai/blog/what-is-a2a-agent-to-agent-protocol/)
 
 ### 总结
 

@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 12: Exception Handling and Recovery'
-date: '2025-12-25'
-excerpt: 'Robust agentic systems must be able to handle errors and unexpected situations gracefully.'
+date: '2026-03-15'
+excerpt: 'Robust agentic systems must be able to handle errors and unexpected situations gracefully. 融合社区洞察与最新实践，涵盖重试、回退、熔断器、优雅降级等生产级容错模式。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -1035,3 +1035,60 @@ demoCompleteSystem();
 ## Practical Applications & Use Cases
 
 ## 实际应用和用例
+
+---
+
+## 社区热议与实践分享
+
+异常处理与恢复模式在 2025-2026 年的 Agentic AI 生产部署中成为核心挑战，社区围绕重试策略、熔断器和优雅降级展开了深入讨论。
+
+### 为什么 AI Agent 需要不同的错误处理
+
+社区共识是：传统的微服务错误处理策略**不能直接照搬**到 Agent 系统。[Agents Arcade](https://agentsarcade.com/blog/error-handling-agentic-systems-retries-rollbacks-graceful-failure) 指出，LLM 是概率性的、有状态的、对输入措辞敏感的。当 Agent 失败时，它丢失的是对话历史、学习到的偏好和专业知识 — 这些无法通过简单重启恢复。
+
+### 重试策略的"滥用"问题
+
+[Portkey](https://portkey.ai/blog/retries-fallbacks-and-circuit-breakers-in-llm-apps/) 和 [Maxim](https://www.getmaxim.ai/articles/retries-fallbacks-and-circuit-breakers-in-llm-apps-a-production-guide/) 在 2026 年初发表的生产指南中警告：重试是 Agentic 系统中**最被滥用的可靠性机制**。重试无状态模型调用通常安全，但重试写数据库、发邮件或触发下游工作流的工具调用往往是"伪装成弹性的 Bug"。
+
+[SparkCo](https://sparkco.ai/blog/mastering-retry-logic-agents-a-deep-dive-into-2025-best-practices) 的 2025 最佳实践指出，Agent 需要与**意图对齐**的重试边界，而非与步骤对齐。推荐使用带抖动的指数退避（Exponential Backoff with Jitter）和自适应错误处理。
+
+### 熔断器：防止雪崩
+
+[DasRoot](https://dasroot.net/posts/2026/01/building-resilient-systems-circuit-breakers-retry-patterns/) 的 2026 年文章强调：没有熔断器，单个 Agent 就能通过疯狂重试拖垮关键业务工具。熔断器监控外部服务调用的失败率，当超过阈值时自动"打开"电路，在冷却期内阻止请求。
+
+生产工具方面，Resilience4j 2.2.0（Java）、Polly（C#）和 PyBreaker（Python）与 LLM 网关架构集成良好。
+
+### 回滚 vs 补偿动作
+
+社区重要洞察：在分布式 Agent 系统中，**几乎不可能真正回滚，只能执行补偿动作**。[Galileo](https://galileo.ai/blog/multi-agent-ai-system-failure-recovery) 推荐 Saga 编排模式，使用补偿动作自动回滚失败的多步工作流。
+
+### 超时的模糊性
+
+超时在 Agentic 系统中不等于失败 — 它是**不确定性**。工具可能仍在运行，消息可能仍在传输。将超时视为硬失败并立即重试是创造重复副作用的经典方式。成熟的 Agent 将超时视为模糊结果，通过查询状态而非猜测来解决。
+
+### Amazon 的大规模生产经验
+
+[AWS](https://aws.amazon.com/blogs/machine-learning/evaluating-ai-agents-real-world-lessons-from-building-agentic-systems-at-amazon/) 在 2026 年 2 月分享了在 Amazon 构建 Agentic 系统的经验：评估框架必须衡量 Agent 识别多种失败场景的能力，包括不当规划、无效工具调用、格式错误参数、认证失败和内存检索错误。生产级 Agent 必须展示一致的错误恢复模式。
+
+---
+
+## 参考资源
+
+### 生产实践指南
+
+- [Portkey - Retries, Fallbacks, and Circuit Breakers in LLM Apps (Jan 2026)](https://portkey.ai/blog/retries-fallbacks-and-circuit-breakers-in-llm-apps/)
+- [Maxim - Retries, Fallbacks, and Circuit Breakers: A Production Guide (Feb 2026)](https://www.getmaxim.ai/articles/retries-fallbacks-and-circuit-breakers-in-llm-apps-a-production-guide/)
+- [AWS - Evaluating AI Agents: Lessons from Amazon (Feb 2026)](https://aws.amazon.com/blogs/machine-learning/evaluating-ai-agents-real-world-lessons-from-building-agentic-systems-at-amazon/)
+- [DasRoot - Building Resilient Systems: Circuit Breakers and Retry Patterns (Feb 2026)](https://dasroot.net/posts/2026/01/building-resilient-systems-circuit-breakers-retry-patterns/)
+
+### 框架与模式
+
+- [Galileo - Multi-Agent AI Failure Recovery That Actually Works (Jul 2025)](https://galileo.ai/blog/multi-agent-ai-system-failure-recovery)
+- [GoCodeo - Error Recovery and Fallback Strategies in AI Agent Development](https://www.gocodeo.com/post/error-recovery-and-fallback-strategies-in-ai-agent-development)
+- [Datagrid - 5 Steps to Build Exception Handling for AI Agent Failures (Dec 2025)](https://datagrid.com/blog/exception-handling-frameworks-ai-agents)
+- [Agents Arcade - Error Handling in Agentic Systems (Jan 2026)](https://agentsarcade.com/blog/error-handling-agentic-systems-retries-rollbacks-graceful-failure)
+
+### 工具与库
+
+- [SparkCo - Mastering Retry Logic Agents: 2025 Best Practices](https://sparkco.ai/blog/mastering-retry-logic-agents-a-deep-dive-into-2025-best-practices)
+- [Composio - AI Agent Security: Reliability as Defense](https://composio.dev/content/ai-agent-security-reliability-data-integrity)

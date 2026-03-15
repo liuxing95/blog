@@ -1,7 +1,7 @@
 ---
 title: 'Universal Commerce Protocol (UCP)：Shopify 与 Google 联合打造的 AI 电商标准'
-date: '2026-01-21'
-excerpt: '深入解析 Shopify 和 Google 共同开发的 Universal Commerce Protocol (UCP)，探索如何通过开放协议实现 AI Agent 与商家的无缝交易，以及 UCP 的架构设计、核心能力和实现细节。'
+date: '2026-03-15'
+excerpt: '深入解析 Shopify 和 Google 共同开发的 Universal Commerce Protocol (UCP)，融合社区热议与行业对比，探索 AI Agent 与商家的无缝交易，以及 UCP 的架构设计、核心能力、实现细节和生态格局。'
 tags: ['Shopify', 'E-commerce', 'AI', 'Protocol']
 series: 'Shopify'
 ---
@@ -11,15 +11,18 @@ series: 'Shopify'
 ## 目录
 
 1. [引言](#1-引言)
-2. [UCP 核心概念](#2-ucp-核心概念)
-3. [架构设计](#3-架构设计)
-4. [能力与扩展系统](#4-能力与扩展系统)
-5. [协作机制](#5-协作机制)
-6. [支付架构](#6-支付架构)
-7. [技术实现](#7-技术实现)
-8. [Google 集成](#8-google-集成)
-9. [最佳实践](#9-最佳实践)
-10. [总结](#10-总结)
+2. [行业热议与社区声音](#2-行业热议与社区声音)
+3. [UCP 核心概念](#3-ucp-核心概念)
+4. [架构设计](#4-架构设计)
+5. [能力与扩展系统](#5-能力与扩展系统)
+6. [协作机制](#6-协作机制)
+7. [支付架构](#7-支付架构)
+8. [技术实现](#8-技术实现)
+9. [Google 集成](#9-google-集成)
+10. [最佳实践](#10-最佳实践)
+11. [UCP vs ACP：双协议格局](#11-ucp-vs-acp双协议格局)
+12. [生态与未来展望](#12-生态与未来展望)
+13. [参考资源](#13-参考资源)
 
 ---
 
@@ -93,9 +96,149 @@ UCP 得到了全球 20+ 合作伙伴的支持：
 
 ---
 
-## 2. UCP 核心概念
+## 2. 行业热议与社区声音
 
-### 2.1 协议分层架构
+:::info{title="来源说明"}
+以下内容整理自 Twitter/X 平台上的行业领袖、技术社区和开发者的公开分享，涵盖 UCP 发布后的多方观点与讨论。
+:::
+
+### 2.1 行业领袖发声
+
+**Sundar Pichai（Google CEO）**
+
+[Sundar Pichai](https://x.com/sundarpichai/status/2010382050570932299) 在 Twitter 上宣布：
+
+> "AI agents will be a big part of how we shop in the not-so-distant future. To help lay the groundwork, we partnered with Shopify, Etsy, Wayfair, Target and Walmart to create the Universal Commerce Protocol, a new open standard for agents and systems to talk to each other across every step of the shopping journey."
+
+**Tobi Lutke（Shopify CEO）**
+
+[Tobi Lutke](https://x.com/tobi/status/2010372642843599064) 同步宣告：
+
+> "Shopify is building the foundation for agentic commerce. Universal Commerce Protocol, which we co-developed with Google, is now live. UCP will make it faster for agents and retailers to integrate. It's open by default, so platforms and agents can use UCP to start transacting."
+
+两位 CEO 同时在 Twitter 上发布，表明 UCP 是 Google 和 Shopify 的**战略级合作**，而非普通的技术发布。
+
+### 2.2 技术社区深度分析
+
+**Rohan Paul (@rohanpaul\_ai) — 技术解读**
+
+[Rohan Paul](https://x.com/rohanpaul_ai/status/2010387693436563775) 对 UCP 进行了技术分析：
+
+> "UCP is open-source and vendor-agnostic, meant to let an agent move from finding items to paying and getting support, without custom integrations everywhere."
+
+他总结了 UCP 的核心技术特点：
+- 用 "**Capabilities**"（能力模块）替代传统的集成方式
+- 涵盖发现、结账、折扣、履约、身份关联、订单管理
+- 商家在 `/.well-known/ucp` 发布 JSON 清单，Agent 自动发现端点
+- 支持 REST、A2A、MCP 多种传输协议
+
+**Shubham Saboo (@Saboo\_Shubham\_) — Shopify 工程解析**
+
+[Shubham Saboo](https://x.com/Saboo_Shubham_/status/2010407346233921658) 分享了 Shopify 工程博客的技术深潜：
+
+```typescript
+// UCP 的核心理念：像 TCP/IP 一样分层
+interface UCPLayeredArchitecture \{
+    // 基础层：核心交易原语
+    shoppingService: \{
+        checkoutSession: CheckoutSession;
+        lineItems: LineItem[];
+        totals: Totals;
+        status: StatusMessage;
+    \};
+
+    // 能力层：独立版本化的功能模块
+    capabilities: \{
+        checkout: Capability;   // 结账
+        catalog: Capability;    // 产品发现/购物车
+        orders: Capability;     // 订单管理
+        identity: Capability;   // 身份关联
+    \};
+
+    // 扩展层：可选的领域特定插件
+    extensions: \{
+        loyalty: Extension;        // 积分
+        discounts: Extension;      // 折扣
+        subscriptions: Extension;  // 订阅
+    \};
+\}
+```
+
+### 2.3 协议对比讨论
+
+**c4lvin — UCP vs ACP 深度对比**
+
+[c4lvin](https://x.com/c4lvin/status/2010635334820995519) 发起了 UCP 与 ACP 的对比讨论：
+
+> "ACP & UCP: What's the Difference? Google and Shopify made headlines by announcing UCP. Since both protocols address the same commerce layer, I noticed tweets comparing UCP to the Agentic Commerce Protocol (ACP), which OpenAI and Stripe launched."
+
+他的核心观点：
+- **ACP**：先通过 ChatGPT Instant Checkout 实现具体用例，再标准化。核心是 Stripe 的 Shared Payment Token (SPT)
+- **UCP**：涵盖从产品发现到售后支持的完整商务旅程。采用"任何传输"哲学，不绑定特定 AI 平台
+- **两者不一定是竞争关系** — ACP 追求基于 ChatGPT 平台的快速商业化，UCP 追求跨平台开放生态
+
+**Ayush (@ay\_ushr) — 精辟总结**
+
+[Ayush](https://x.com/ay_ushr/status/2010697251622965714) 给出了简洁的对比：
+
+> "Stripe + OpenAI have ACP. Google + Shopify just launched UCP. Both are basically an MCP for AI agents to start a checkout session. UCP is more comprehensive — covers discovery, catalog, checkout, orders, returns, loyalty. ACP is checkout-only. But that's not really the point."
+
+**Joseph Allen — 行业关注**
+
+[Joseph Allen](https://x.com/j_g_allen/status/2010555891725058325) 强调了合作伙伴的重量级阵容：
+
+> "Big development: Google today announced a new open standard, called the Universal Commerce Protocol (UCP) for AI agent-based shopping, developed with Shopify, Etsy, Wayfair, Target, and Walmart."
+
+### 2.4 Google Cloud 官方确认
+
+[Google Cloud Tech](https://x.com/GoogleCloudTech/status/2010754721171063011) 在 Twitter 上确认了 UCP 的协议兼容性：
+
+> "We've launched the Universal Commerce Protocol (UCP), a new open standard for agentic commerce that works across the shopping journey! UCP is compatible with A2A, AP2, and MCP."
+
+```mermaid
+graph LR
+    UCP[UCP 协议] --> REST[REST/HTTPS+JSON]
+    UCP --> MCP[Model Context Protocol]
+    UCP --> A2A[Agent-to-Agent]
+    UCP --> AP2[Agent Payment Protocol]
+
+    REST --> M[商家端点]
+    MCP --> M
+    A2A --> M
+    AP2 --> PAY[支付处理]
+
+    style UCP fill:#4CAF50,color:#fff
+```
+
+### 2.5 社区共识
+
+```mermaid
+mindmap
+  root((UCP 社区评价))
+    战略意义
+      Google + Shopify CEO 同时发布
+      20+ 全球合作伙伴
+      商务领域的 HTTP 时刻
+    技术优势
+      全生命周期覆盖
+      去中心化发现
+      多传输协议支持
+      支付处理器无关
+    行业影响
+      从 search-and-click 到 ask-and-buy
+      AI 流量增长 693%（2025 假日季）
+      2026 年零售新标准
+    生态格局
+      UCP + ACP 双协议并存
+      商家应同时支持两者
+      互操作性将逐步实现
+```
+
+---
+
+## 3. UCP 核心概念
+
+### 3.1 协议分层架构
 
 UCP 采用分层设计，类似于 TCP/IP 协议栈：
 
@@ -120,7 +263,7 @@ graph TD
 | **能力层** | 定义主要功能领域 | Checkout, Orders, Catalog |
 | **扩展层** | 领域特定增强 | Fulfillment, Discount, Loyalty |
 
-### 2.2 核心原语
+### 3.2 核心原语
 
 ```typescript
 // Shopping Service 核心原语
@@ -149,7 +292,7 @@ interface ShoppingService {
 }
 ```
 
-### 2.3 能力发现与协商
+### 3.3 能力发现与协商
 
 UCP 的核心机制是**动态能力发现**和**双向协商**：
 
@@ -172,9 +315,9 @@ sequenceDiagram
 
 ---
 
-## 3. 架构设计
+## 4. 架构设计
 
-### 3.1 Profile 机制
+### 4.1 Profile 机制
 
 #### 商家 Profile
 
@@ -259,7 +402,7 @@ Agent 也声明其支持的能力：
 }
 ```
 
-### 3.2 能力协商流程
+### 4.2 能力协商流程
 
 ```typescript
 // 协商算法
@@ -296,7 +439,7 @@ Agent 支持: [checkout, discount]
 协商结果: [checkout, discount]
 ```
 
-### 3.3 命名空间管理
+### 4.3 命名空间管理
 
 UCP 使用**反向域名命名**避免中心化审批：
 
@@ -334,9 +477,9 @@ function validateCapability(capability: string): boolean {
 
 ---
 
-## 4. 能力与扩展系统
+## 5. 能力与扩展系统
 
-### 4.1 核心能力
+### 5.1 核心能力
 
 #### Checkout 能力
 
@@ -382,7 +525,7 @@ interface OrdersCapability {
 }
 ```
 
-### 4.2 扩展机制
+### 5.2 扩展机制
 
 扩展通过**组合**增强核心能力：
 
@@ -478,7 +621,7 @@ interface AppliedDiscount {
 }
 ```
 
-### 4.3 版本管理
+### 5.3 版本管理
 
 每个能力和扩展独立版本化：
 
@@ -505,9 +648,9 @@ interface AppliedDiscount {
 
 ---
 
-## 5. 协作机制
+## 6. 协作机制
 
-### 5.1 Checkout 状态机
+### 6.1 Checkout 状态机
 
 ```mermaid
 stateDiagram-v2
@@ -526,7 +669,7 @@ stateDiagram-v2
 | `requires_escalation` | 需要用户介入 | 调用 `continue_url` 移交 |
 | `ready_for_complete` | 可以完成 | 调用完成 API |
 
-### 5.2 人机协作 (Handoff)
+### 6.2 人机协作 (Handoff)
 
 当 Agent 遇到无法处理的情况时，通过 `continue_url` 移交给用户：
 
@@ -566,7 +709,7 @@ sequenceDiagram
     Agent->>Merchant: 完成支付
 ```
 
-### 5.3 Embedded Checkout Protocol (ECP)
+### 6.3 Embedded Checkout Protocol (ECP)
 
 ECP 使移交无缝衔接：
 
@@ -604,9 +747,9 @@ channel.port1.onmessage = (event) => {
 
 ---
 
-## 6. 支付架构
+## 7. 支付架构
 
-### 6.1 支付处理器 (Payment Handlers)
+### 7.1 支付处理器 (Payment Handlers)
 
 UCP 将**支付工具**（用户用什么支付）与**支付处理器**（谁处理支付）分离：
 
@@ -624,7 +767,7 @@ graph LR
     B3[Shopify Payments] --> B
 ```
 
-### 6.2 动态支付协商
+### 7.2 动态支付协商
 
 ```typescript
 // Agent Profile
@@ -668,7 +811,7 @@ const negotiated = {
 };
 ```
 
-### 6.3 支付处理器扩展
+### 7.3 支付处理器扩展
 
 任何支付提供商都可以发布自己的 Handler：
 
@@ -700,9 +843,9 @@ interface StripeHandler {
 
 ---
 
-## 7. 技术实现
+## 8. 技术实现
 
-### 7.1 完整交互示例
+### 8.1 完整交互示例
 
 #### 步骤 1: 发现商家能力
 
@@ -831,7 +974,7 @@ curl -X PUT https://merchant.example.com/checkout-sessions/checkout_abc123 \
 }
 ```
 
-### 7.2 Python SDK 示例
+### 8.2 Python SDK 示例
 
 ```python
 from ucp import UCPClient, CheckoutRequest, LineItem
@@ -872,7 +1015,7 @@ checkout = await client.update_checkout(
 print(f"最终价格: {checkout.totals.total}")
 ```
 
-### 7.3 多传输支持
+### 8.3 多传输支持
 
 UCP 支持多种传输协议：
 
@@ -922,9 +1065,9 @@ GET /checkout-sessions/{id}
 
 ---
 
-## 8. Google 集成
+## 9. Google 集成
 
-### 8.1 Google 实现
+### 9.1 Google 实现
 
 Google 构建了 UCP 的首个参考实现，支持：
 
@@ -945,7 +1088,7 @@ graph LR
     D -->|完成| C
 ```
 
-### 8.2 商家集成步骤
+### 9.2 商家集成步骤
 
 #### 1. Merchant Center 配置
 
@@ -1007,7 +1150,7 @@ app.get('/.well-known/ucp', (req, res) => {
 4. 等待审核
 ```
 
-### 8.3 用户体验
+### 9.3 用户体验
 
 **示例查询**: "Find a light-weight suitcase for an upcoming trip."
 
@@ -1037,9 +1180,9 @@ sequenceDiagram
 
 ---
 
-## 9. 最佳实践
+## 10. 最佳实践
 
-### 9.1 能力设计原则
+### 10.1 能力设计原则
 
 #### 1. 最小化核心，扩展增强
 
@@ -1095,7 +1238,7 @@ interface CheckoutV2 extends CheckoutV1 {
 }
 ```
 
-### 9.2 安全实践
+### 10.2 安全实践
 
 #### 1. 签名验证
 
@@ -1148,7 +1291,7 @@ const limiter = rateLimit({
 app.use('/checkout-sessions', limiter);
 ```
 
-### 9.3 性能优化
+### 10.3 性能优化
 
 #### 1. 缓存 Profile
 
@@ -1188,7 +1331,7 @@ app.post('/checkout-sessions', async (req, res) => {
 });
 ```
 
-### 9.4 错误处理
+### 10.4 错误处理
 
 ```typescript
 // 标准错误响应
@@ -1216,76 +1359,235 @@ app.use((err, req, res, next) => {
 
 ---
 
-## 10. 总结
+## 11. UCP vs ACP：双协议格局
 
-### 10.1 核心价值
+:::warning{title="2026 年电商协议竞争"}
+2026 年初，两大 AI 电商协议同时出现：Google + Shopify 的 **UCP** 和 OpenAI + Stripe 的 **ACP**。理解两者的差异和互补性，对商家至关重要。
+:::
 
-UCP 为 AI 驱动的电商提供了：
+### 11.1 协议背景
 
-1. **标准化**: 统一的协议语言
-2. **可扩展**: 灵活的能力和扩展系统
-3. **去中心化**: 反向域名命名，无需审批
-4. **协作**: 人机协作的无缝移交
-5. **开放**: 开源协议，社区驱动
+| 维度 | UCP | ACP |
+|------|-----|-----|
+| **全称** | Universal Commerce Protocol | Agentic Commerce Protocol |
+| **发起方** | Google + Shopify | OpenAI + Stripe |
+| **发布时间** | 2026 年 1 月（NRF 大会） | 2025 年 9 月（公开），2026 年 2 月（广泛可用） |
+| **协作方** | Etsy, Wayfair, Target, Walmart, 20+ 合作伙伴 | Microsoft Copilot, Anthropic, Perplexity, Vercel, Replit |
+| **开源协议** | Apache 2.0 | Apache 2.0 |
 
-### 10.2 技术亮点
+### 11.2 架构哲学对比
 
-```mermaid
-mindmap
-  root((UCP))
-    分层架构
-      传输层
-      服务层
-      能力层
-      扩展层
-    动态协商
-      Profile 发现
-      能力交集
-      支付协商
-    扩展机制
-      组合模式
-      独立版本
-      命名空间
-    协作模式
-      状态机
-      Handoff
-      ECP
-    支付架构
-      工具分离
-      Handler 扩展
-      双向选择
+**UCP：去中心化、全生命周期**
+
+```
+商家域名
+  └── /.well-known/ucp    ← 任何 Agent 可自主发现
+       ├── capabilities     ← 能力声明
+       ├── extensions       ← 扩展声明
+       └── payment_handlers ← 支付处理器
+
+特点：
+  • 商家自主托管 Profile
+  • 无需平台审批
+  • 支持 REST / MCP / A2A 多传输
+  • 覆盖发现 → 结账 → 订单 → 售后全链路
 ```
 
-### 10.3 未来展望
+**ACP：中心化、聚焦结账**
 
-**短期**：
-- 更多商家集成
-- 更多 AI 平台支持
-- 更丰富的扩展生态
+```
+OpenAI 平台
+  └── 商品目录（需审核入驻）
+       ├── ChatGPT 展示
+       └── Stripe SPT 支付
 
-**中期**：
-- 跨垂直领域扩展（旅游、餐饮等）
-- 更多传输协议支持
-- 增强的安全特性
+特点：
+  • OpenAI 审核商家入驻
+  • 紧耦合 ChatGPT 界面
+  • 基于 Stripe Shared Payment Token
+  • 聚焦结账/支付环节
+```
 
-**长期**：
-- 全球电商标准
-- 完整的 AI 商务生态
-- 去中心化商务网络
+### 11.3 关键差异详解
 
-### 10.4 开发资源
+```mermaid
+graph TB
+    subgraph UCP["UCP (Google + Shopify)"]
+        U1[Search-to-Buy 模式]
+        U2[去中心化发现]
+        U3[支付处理器无关]
+        U4[全商务生命周期]
+        U5[多传输协议]
+    end
 
-**官方资源**：
+    subgraph ACP["ACP (OpenAI + Stripe)"]
+        A1[Chat-to-Buy 模式]
+        A2[中心化目录]
+        A3[Stripe SPT 支付]
+        A4[聚焦结账环节]
+        A5[REST API]
+    end
+
+    style UCP fill:#4CAF50,color:#fff
+    style ACP fill:#2196F3,color:#fff
+```
+
+| 维度 | UCP | ACP |
+|------|-----|-----|
+| **购物模式** | Search-to-Buy（搜索购买） | Chat-to-Buy（对话购买） |
+| **发现机制** | 去中心化（`/.well-known/ucp`） | 中心化（OpenAI 审核） |
+| **支付** | 处理器无关（Shop Pay, Google Pay, PayPal...） | Stripe 为中心（SPT） |
+| **覆盖范围** | 发现 → 目录 → 结账 → 订单 → 退货 → 忠诚度 | 结账/交易 |
+| **费用结构** | 仅支付处理费（~$3.20/$100） | 平台费 4% + 支付处理费（~$7.20/$100） |
+| **传输协议** | REST, MCP, A2A | REST |
+| **类比** | 开放高速公路系统 | 有开放大门的围墙花园 |
+
+:::tip{title="$1M 月 GMV 的费用差异"}
+以 $1M 月 GMV 计算，UCP（仅支付处理费）与 ACP（含平台费）的月费用差异可达 **$40,000** — 这是一个不可忽视的商业考量。
+:::
+
+### 11.4 商家策略：双协议并行
+
+来自社区的共识建议：**同时支持两者**。
+
+```typescript
+// 双协议策略的商家架构
+interface DualProtocolStrategy \{
+    // UCP: 捕获搜索意图的顶部漏斗流量
+    ucp: \{
+        surface: 'Google AI Mode' | 'Gemini' | 'Any Agent';
+        discovery: 'decentralized';  // /.well-known/ucp
+        payment: 'processor-agnostic';
+        coverage: 'full-lifecycle';
+    \};
+
+    // ACP: 捕获深层对话意图的底部漏斗流量
+    acp: \{
+        surface: 'ChatGPT' | 'Copilot';
+        discovery: 'centralized';  // OpenAI 审核
+        payment: 'stripe-spt';
+        coverage: 'checkout-focused';
+    \};
+\}
+
+// 实际案例：Etsy 同时出现在 UCP 和 ACP 合作伙伴列表中
+// 双协议商家可获得多达 40% 的额外 Agent 流量
+```
+
+**实施路径：**
+- **Shopify 商家**：通过 Agentic Storefronts 同时启用两者
+- **Stripe 重度用户**：先启用 ACP（最快 1 行代码），再接入 UCP
+- **Google Merchant Center 用户**：先启用 UCP（已有产品 Feed 基础），再接入 ACP
+- **从 UCP 扩展到 ACP** 仅需额外 2-4 小时开发 + 审核等待时间
+
+---
+
+## 12. 生态与未来展望
+
+### 12.1 市场数据
+
+:::info{title="Agentic Commerce 已不再是理论"}
+根据 Adobe 数据，2025 年假日季 AI 流量对零售商网站的增长达到了 **693%**。这意味着 Agent 驱动的商务已经从概念验证阶段进入了实际增长阶段。
+:::
+
+### 12.2 关键里程碑
+
+```
+2025.09 ──── OpenAI + Stripe 发布 ACP
+    │
+2026.01.11 ─ Google + Shopify 在 NRF 大会发布 UCP
+    │         Sundar Pichai 和 Tobi Lutke 同时 Twitter 官宣
+    │         20+ 全球合作伙伴
+    │
+2026.01 ──── Google AI Mode 结账在美国上线
+    │         Shopify 商家可直接在 AI Mode 和 Gemini 中销售
+    │
+2026.02 ──── ACP 广泛可用
+    │         Microsoft Copilot Checkout 发布
+    │
+2026 H2 ──── 全球扩展：印度、印尼、拉丁美洲
+              PayPal 集成
+```
+
+### 12.3 Shopify Agentic Storefronts
+
+Shopify 推出了 **Agentic Storefronts**，通过 Shopify Admin 集中管理所有 AI 渠道集成：
+
+- **ChatGPT 集成**（通过 ACP）
+- **Google AI Mode / Gemini 集成**（通过 UCP）
+- **Microsoft Copilot 集成**
+- **Shopify Catalog** 现向所有品牌开放，通过新的 Agentic 计划
+- 品牌无需 Shopify 在线商店即可使用 Shopify 基础设施在 AI 渠道销售
+
+来自 [Shopify CEO Tobi Lutke](https://www.shopify.com/news/ai-commerce-at-scale) 的评价：
+
+> "This is one of the really exciting parts about agentic... It's really good at finding people who have specific interests and finding the product that is just perfect for them."
+
+### 12.4 未来展望
+
+**短期（2026）：**
+- Google AI Mode 全球扩展
+- 更多支付处理器接入（PayPal, BNPL 等）
+- 更丰富的 UCP 扩展生态（忠诚度、订阅、礼品卡）
+
+**中期（2026-2027）：**
+- UCP 和 ACP 互操作性成熟
+- 跨垂直领域扩展（旅游、餐饮、服务）
+- `ucp.json` 成为商家的标配文件 — "2026 年最重要的文件"
+
+**长期：**
+- 从 "search and click" 到 "ask and buy" 的范式转移完成
+- Agent 驱动的商务成为主流购物渠道
+- 去中心化商务网络形成
+
+---
+
+## 13. 参考资源
+
+**官方资源：**
 - [UCP 规范](https://ucp.dev)
-- [Shopify 文档](https://shopify.dev/docs/ucp)
-- [Google 集成指南](https://developers.google.com/merchant/ucp)
+- [Shopify UCP 工程博客 - Building the Universal Commerce Protocol](https://shopify.engineering/ucp)
+- [Google 开发者博客 - Under the Hood: UCP](https://developers.googleblog.com/under-the-hood-universal-commerce-protocol-ucp/)
+- [Shopify 新闻 - AI Commerce at Scale](https://www.shopify.com/news/ai-commerce-at-scale)
+- [Google 博客 - Agentic Commerce Tools](https://blog.google/products/ads-commerce/agentic-commerce-ai-tools-protocol-retailers-platforms/)
 - [GitHub 仓库](https://github.com/universal-commerce-protocol/ucp)
 
-**示例代码**：
+**示例代码：**
 - [Python SDK](https://github.com/Universal-Commerce-Protocol/python-sdk)
 - [示例服务器](https://github.com/Universal-Commerce-Protocol/samples)
 
-**社区**：
+**新闻报道：**
+- [TechCrunch - Google announces a new protocol to facilitate commerce using AI agents](https://techcrunch.com/2026/01/11/google-announces-a-new-protocol-to-facilitate-commerce-using-ai-agents/)
+- [InfoQ - Google and Retail Leaders Launch UCP](https://www.infoq.com/news/2026/01/google-agentic-commerce-ucp/)
+- [InfoQ - Google's UCP Powers Agentic Shopping](https://www.infoq.com/news/2026/01/google-ucp/)
+- [American Banker - Google, Shopify unveil new agentic protocol](https://www.americanbanker.com/payments/news/google-shopify-unveil-new-agentic-protocol-for-retailers)
+- [Constellation Research - Google launches agentic commerce tools](https://www.constellationr.com/blog-news/insights/google-launches-agentic-commerce-tools-universal-commerce-protocol-gemini)
+
+**UCP vs ACP 分析：**
+- [DEV Community - UCP vs ACP: A Technical Comparison](https://dev.to/ucptools/ucp-vs-acp-in-2026-a-technical-comparison-of-ai-commerce-protocols-50j7)
+- [Medium - A Deep Dive into Agentic Shopping with UCP and ACP](https://medium.com/agenticshopping/a-deep-dive-into-agentic-shopping-with-googles-ucp-and-openai-s-acp-f12243c64913)
+- [Atwix - UCP vs ACP: The Real Differences](https://www.atwix.com/ecommerce/ucp-vs-acp-differences/)
+- [Presta - UCP vs ACP: Complete Guide to Agentic Commerce Protocols](https://wearepresta.com/ucp-vs-acp-the-complete-guide-to-agentic-commerce-protocols-in-2026/)
+- [The AI Economy - The Protocol Behind Shopify and Google's AI Shopping Vision](https://theaieconomy.substack.com/p/shopify-google-ai-agents-commerce-protocol)
+
+**实施指南：**
+- [Presta - Shopify UCP Implementation Guide 2026](https://wearepresta.com/shopify-ucp-how-to-implement-2026-guide/)
+- [FixMyStore - UCP Complete 2026 Guide](https://fixmystore.com/hub/blogs/universal-commerce-protocol-ucp-the-complete-2026-guide-for-shopify-developers-and-merchants/)
+- [UCPHub - Universal Commerce Protocol for Shopify](https://ucphub.ai/universal-commerce-protocol-for-shopify-the-2026-implementation-guide/)
+- [ECommerce Partners - UCP: How Shopify, Google & AI Are Reshaping Ecommerce](https://ecommercepartners.com/2026/02/04/universal-commerce-protocol-shopify-google-ai-ecommerce-guide/)
+- [Goodie - Agentic Commerce Guide: Win Google UCP & OpenAI ACP](https://higoodie.com/blog/agentic-commerce-guide-ucp-acp)
+
+**社区分享 (Twitter/X)：**
+- [@sundarpichai - UCP 发布公告](https://x.com/sundarpichai/status/2010382050570932299)
+- [@tobi - Shopify agentic commerce 公告](https://x.com/tobi/status/2010372642843599064)
+- [@GoogleCloudTech - UCP 协议兼容性](https://x.com/GoogleCloudTech/status/2010754721171063011)
+- [@rohanpaul\_ai - UCP 技术解读](https://x.com/rohanpaul_ai/status/2010387693436563775)
+- [@c4lvin - UCP vs ACP 对比分析](https://x.com/c4lvin/status/2010635334820995519)
+- [@ay\_ushr - UCP vs ACP 精辟总结](https://x.com/ay_ushr/status/2010697251622965714)
+- [@j\_g\_allen - 行业关注](https://x.com/j_g_allen/status/2010555891725058325)
+- [@Saboo\_Shubham\_ - Shopify 工程解析](https://x.com/Saboo_Shubham_/status/2010407346233921658)
+
+**社区：**
 - [Discord](https://discord.gg/ucp)
 - [论坛](https://community.ucp.dev)
 
@@ -1293,6 +1595,4 @@ mindmap
 
 **结语**：
 
-UCP 代表了电商协议设计的新范式。通过分层架构、动态协商和开放扩展，它为 AI 时代的商务交互提供了坚实的基础。无论你是商家、AI 平台还是支付提供商，UCP 都为你提供了参与下一代电商生态的标准化路径。
-
-让我们一起构建 AI 驱动的商务未来！🚀
+UCP 代表了电商协议设计的新范式 — 被社区称为**商务领域的 "HTTP 时刻"**。通过分层架构、动态协商和开放扩展，它为 AI 时代的商务交互提供了坚实的基础。与 ACP 形成互补的双协议格局，共同推动从 "search and click" 到 "ask and buy" 的行业转型。无论你是商家、AI 平台还是支付提供商，UCP 都为你提供了参与下一代电商生态的标准化路径。

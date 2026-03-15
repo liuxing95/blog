@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 20: Agentic UX Design'
-date: '2025-12-25'
-excerpt: 'User experience is critical for agent adoption and effectiveness.'
+date: '2026-03-15'
+excerpt: 'User experience is critical for agent adoption and effectiveness. 融合社区洞察与行业前沿实践，探索智能体用户体验设计的最新趋势。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -1173,6 +1173,128 @@ demoInvestmentUX();
 
 ---
 
+## 社区热议与实践分享
+
+## Community Insights & Practitioner Perspectives
+
+随着智能体（Agent）产品在2025-2026年加速落地，业界围绕"智能体用户体验设计"展开了广泛而深入的讨论。以下汇集了来自社交媒体、技术博客和行业报告中的核心观点与实践洞察。
+
+### 从 UX 到 AX：体验设计的范式转移
+
+2025-2026年，行业最显著的共识之一是：传统的用户体验设计（UX）正在向**智能体体验设计（AX, Agentic Experience）**演进。
+
+**Greg Isenberg** 在 X（Twitter）上提出了这一概念转变：
+
+> "There's a quiet shift happening in how we design software. We're moving from UX to AX (agentic experience). Traditional UX is screen-centric: you tap a button, product reacts, job done. Every session starts from zero... The companies building AX instead of UX will own the next decade."
+>
+> -- [Greg Isenberg (@gregisenberg), X](https://x.com/gregisenberg/status/1947693459147526179)
+
+传统UX以屏幕为中心，用户点击按钮、产品响应、任务完成，每次会话都从零开始。而AX（智能体体验）是以关系为中心的：智能体跟踪持续目标、推动下一步行动、随时间改进，并规划自己的路径——感知、推理、选择设计者未预设的操作。
+
+**John Maeda**（微软工程副总裁）在2025年SXSW大会的Design in Tech报告中进一步阐述了这一趋势：
+
+> "It's not adding agents to your UX. It's about the UX for AI. It's to make it easier for AI to use software."
+>
+> -- [John Maeda, 2025 Design in Tech Report](https://johnmaeda.medium.com/autodesigners-on-autopilot-88c5b07609b9)
+
+他强调，设计者需要思考的不再仅仅是"人如何使用软件"，而是"AI智能体如何使用软件"——API优先、可编程接口、以及LLMs.txt运动都是这一转变的具体体现。
+
+### 长时任务智能体的UX挑战
+
+**Aaron Levie**（Box CEO）是智能体UX领域最活跃的讨论者之一，他在多条推文中系统阐述了设计挑战：
+
+> "AI Agent UX is one of the most interesting design questions today. It's clear that for now you need a high degree of visibility into the work the agent is doing, and need to have the ability to interact with it at a granular level."
+>
+> -- [Aaron Levie (@levie), X](https://x.com/levie/status/1921783416653271270)
+
+> "The UX for long running AI Agents is going to be one of the most interesting design questions in the coming years. The more the agent is doing complex tasks for you in the background, the more the UI of software is about the meta elements of managing their work."
+>
+> -- [Aaron Levie (@levie), X](https://x.com/levie/status/1926401273261072652)
+
+他的核心观点是：当前大多数智能体UX针对的是用户可以即时审查和控制的短暂任务；但随着模型能力、工具使用和上下文窗口的提升，智能体将能处理越来越长的后台任务——此时UI的核心将转变为"管理智能体工作"的元界面。
+
+### Jakob Nielsen 的预测与设计建议
+
+UX领域的奠基人 **Jakob Nielsen** 在其 Substack 专栏中对智能体UX做出了系统性预测：
+
+> "Artificial Intelligence will evolve from passive tools (chat UI that waits for a prompt) to active Agentic Systems (software that plans, executes, and iterates on tasks autonomously). In UX terms, this is a fundamental shift in interaction design from Conversational UI to Delegative UI."
+>
+> -- [Jakob Nielsen, "18 Predictions for 2026"](https://jakobnielsenphd.substack.com/p/2026-predictions)
+
+Nielsen 特别指出，交互设计正从**对话式UI**（Conversational UI，向AI提问）转向**委托式UI**（Delegative UI，向AI指派目标）。他建议设计者关注以下几点：
+
+- **智能体仪表盘（Agent Dashboard）**：将任务显示为卡片，展示状态、成本和"介入"操作；支持暂停、恢复和回滚
+- **对所有智能体设计进行可用性测试**：这些是全新的用户体验，不能仅凭通用可用性指南来设计
+- **保持用户最终控制权**：即使AI完成所有工作，传统界面逐渐消失，用户仍须拥有最终决策权
+
+在另一篇文章《No More User Interface?》中，Nielsen 总结道：
+
+> "UX doesn't die; it metamorphoses. We'll still craft humane experiences, but increasingly through policies, protocols, and orchestrations rather than panels and palettes."
+>
+> -- [Jakob Nielsen, "No More User Interface?"](https://jakobnielsenphd.substack.com/p/no-more-ui)
+
+### 三大核心智能体UX模式
+
+风险投资人 **Sandhya Hegde** 在其 Substack 系列文章中，基于对大量智能体产品的深度分析，提炼出三种核心UX模式：
+
+1. **协作式（Collaborative）**：用户与智能体实时协作，如对话或命令式交互（例如 Cursor 的 Chat/Cmd+K）
+2. **嵌入式（Embedded）**：智能体无缝融入现有工作流，在用户操作过程中主动提供建议（例如 Cursor 的 Tab 自动补全）
+3. **异步式（Asynchronous）**：智能体在后台独立执行复杂任务，完成后通知用户（例如 Cursor 的 Cmd+I 后台重构）
+
+> "Successful AI products will pick a persona and embrace multiple agentic UX patterns within the same GUI to achieve great results... Cursor has 3 primary features, each with a different agent UX pattern."
+>
+> -- [Sandhya Hegde, "Agentic UX & Design Patterns"](https://blog.calibrelabs.ai/p/agentic-ux-and-design-patterns)
+
+她特别强调，成功的智能体产品不会只用一种UX模式，而是在同一产品中组合使用多种模式来覆盖不同任务场景。
+
+### 信任、控制与可解释性
+
+Smashing Magazine 在2026年初发表的深度文章中，系统阐述了智能体UX的三大设计支柱：
+
+- **意图预览（Intent Preview）**：在智能体执行操作前，展示其计划摘要，建立"知情同意"机制
+- **操作审计与撤销（Action Audit & Undo）**：对于在一定时间后变为不可逆的操作，UI必须清晰传达这一时间窗口
+- **升级路径（Escalation Pathway）**：当智能体无法处理时，提供平滑的人工升级机制
+
+> "Errors are not a possibility; they are an inevitability. The long-term success of an agentic system depends less on its ability to be perfect and more on its ability to recover gracefully when it fails."
+>
+> -- [Smashing Magazine, "Designing For Agentic AI"](https://www.smashingmagazine.com/2026/02/designing-agentic-ai-practical-ux-patterns/)
+
+### 管理AI如同管理人
+
+**Julie Zhuo**（前 Facebook 设计副总裁）在 Lenny Rachitsky 的播客中提出了一个独到的观点：管理AI智能体所需的技能与管理团队成员惊人地相似。
+
+> "The skills that make you a great manager also make you great at working with AI."
+>
+> -- [Julie Zhuo on Lenny's Podcast](https://www.lennysnewsletter.com/p/from-managing-people-to-managing-ai-julie-zhuo)
+
+正如管理者需要理解团队成员的优势并提供清晰目标，有效使用AI也需要理解模型能力并提供精确指令。这一类比为智能体UX设计提供了实用的心智模型。
+
+### Google A2UI：智能体驱动界面的开放标准
+
+Google 于2025年底发布了 **A2UI（Agent to User Interface）**开源项目，旨在标准化智能体如何生成用户界面。其核心设计原则包括：
+
+- **安全优先**：A2UI是声明式数据格式而非可执行代码，智能体只能请求渲染预批准的UI组件
+- **LLM友好**：UI以平面组件列表表示，便于LLM增量生成，支持渐进式渲染
+- **框架无关**：将UI结构与UI实现分离，同一JSON载荷可在Web、Flutter、React、SwiftUI等多平台渲染
+
+这代表了智能体UX设计中的一个重要技术方向：让智能体能够根据对话上下文动态生成最适合的界面，而非仅限于文本响应。
+
+### 社区共识总结
+
+综合以上社区讨论，2025-2026年智能体UX设计的核心共识可归纳为：
+
+| 主题 | 核心观点 | 代表人物/来源 |
+|------|----------|---------------|
+| **从UX到AX** | 设计重心从人机界面转向智能体体验生态 | Greg Isenberg, John Maeda |
+| **可见性 vs 自主性** | 短任务需要高可见性，长任务需要元管理界面 | Aaron Levie |
+| **委托式UI** | 从对话式（问AI）转向委托式（给AI指派目标） | Jakob Nielsen |
+| **多模式组合** | 协作式+嵌入式+异步式在同一产品中共存 | Sandhya Hegde |
+| **信任即货币** | 透明度、可撤销性和升级路径是信任基础 | Smashing Magazine |
+| **管理即技能** | 管理AI与管理人使用相同的领导力技能 | Julie Zhuo |
+| **声明式UI标准** | A2UI等标准推动智能体生成安全可控的界面 | Google |
+
+---
+
 ## Chapter Summary | 本章小结
 
 ### Key Points | 核心要点
@@ -1240,3 +1362,56 @@ demoInvestmentUX();
 - **Accessibility Compliance**: WCAG compliance level.
 
   无障碍合规：WCAG合规级别。
+
+---
+
+## 参考资源
+
+## References & Resources
+
+以下资源按类别整理，涵盖智能体UX设计的理论框架、实践指南、社区讨论和技术标准。
+
+### 行业深度文章与设计框架
+
+- [Designing For Agentic AI: Practical UX Patterns For Control, Consent, And Accountability](https://www.smashingmagazine.com/2026/02/designing-agentic-ai-practical-ux-patterns/) -- Smashing Magazine, 2026年2月。系统阐述控制、同意和问责的实用UX模式
+- [Beyond Generative: The Rise Of Agentic AI And User-Centric Design](https://www.smashingmagazine.com/2026/01/beyond-generative-rise-agentic-ai-user-centric-design/) -- Smashing Magazine, 2026年1月。从生成式AI到智能体AI的设计范式转变
+- [Secrets of Agentic UX: Emerging Design Patterns for Human Interaction with AI Agents](https://uxmag.com/articles/secrets-of-agentic-ux-emerging-design-patterns-for-human-interaction-with-ai-agents) -- UX Magazine。基于感知、推理、记忆和能动性四大核心能力的设计框架
+- [UX Design for Agents](https://microsoft.design/articles/ux-design-for-agents/) -- Microsoft Design。微软设计师和用户研究员共创的智能体UX设计原则
+- [Agent-Based Experience Design: The Future of UX in an AI-Driven World](https://standardbeagle.com/agent-based-experience-design/) -- Standard Beagle Studio。探索智能体体验设计（AX）的定义、意义和实践路径
+- [How Agentic AI Enables a New Approach to User Experience Design](https://www.studio.ey.com/en_gl/insights/how-agentic-AI-enables-a-new-approach-to-user-experience-design) -- EY Studio。智能体AI如何重塑用户体验设计方法论
+- [State of Design 2026: When Interfaces Become Agents](https://tejjj.medium.com/state-of-design-2026-when-interfaces-become-agents-fc967be10cba) -- Medium (Tejj)。当界面成为智能体时设计的未来形态
+- [Designing User Interfaces for Agentic AI](https://codewave.com/insights/designing-agentic-ai-ui/) -- Codewave。智能体AI用户界面设计的全面指南
+
+### 社区博客与分析
+
+- [Agentic UX & Design Patterns](https://blog.calibrelabs.ai/p/agentic-ux-and-design-patterns) -- Sandhya Hegde, highCalibre Substack。三种核心智能体UX模式的深度分析
+- [Building a Mental Model for AI Agents](https://manialabs.substack.com/p/building-a-mental-model-for-ai-agents) -- Sandhya Hegde。构建AI智能体心智模型的系统方法
+- [18 Predictions for 2026](https://jakobnielsenphd.substack.com/p/2026-predictions) -- Jakob Nielsen on UX。UX领域奠基人对2026年的预测，包含委托式UI等关键趋势
+- [No More User Interface?](https://jakobnielsenphd.substack.com/p/no-more-ui) -- Jakob Nielsen on UX。探讨用户界面消失后UX设计的未来
+- [Hello AI Agents: Goodbye UI Design, RIP Accessibility](https://jakobnielsenphd.substack.com/p/ai-agents) -- Jakob Nielsen on UX。AI智能体对UI设计和无障碍设计的颠覆性影响
+- [Autodesigners on Autopilot: 2025 Design in Tech Report](https://johnmaeda.medium.com/autodesigners-on-autopilot-88c5b07609b9) -- John Maeda。从UX到AX的设计转型
+- [From Managing People to Managing AI](https://www.lennysnewsletter.com/p/from-managing-people-to-managing-ai-julie-zhuo) -- Julie Zhuo on Lenny's Podcast。管理AI与管理团队的技能迁移
+
+### 社交媒体关键讨论（X / Twitter）
+
+- [Aaron Levie: AI Agent UX 是当今最有趣的设计问题](https://x.com/levie/status/1921783416653271270) -- 关于智能体可见性和粒度交互的讨论
+- [Aaron Levie: 长时运行AI智能体的UX](https://x.com/levie/status/1926401273261072652) -- 后台复杂任务的元管理界面设计
+- [Greg Isenberg: 从UX到AX的范式转移](https://x.com/gregisenberg/status/1947693459147526179) -- 智能体体验设计的概念定义
+- [Aditya Naganath: 2026年AI展望](https://x.com/anaganath/status/2006222575081513307) -- 智能体产品落地的基础设施挑战
+
+### 技术标准与开源项目
+
+- [A2UI: An Open Project for Agent-Driven Interfaces](https://developers.googleblog.com/introducing-a2ui-an-open-project-for-agent-driven-interfaces/) -- Google Developers Blog。Google推出的智能体驱动界面开放标准
+- [A2UI 官方网站](https://a2ui.org/) -- A2UI协议规范与文档
+- [A2UI GitHub 仓库](https://github.com/google/A2UI) -- 开源代码与实现示例
+- [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) -- Anthropic。构建有效智能体的核心原则
+- [Building Agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk) -- Anthropic Engineering。使用 Claude Agent SDK 构建智能体的技术指南
+- [Agentic Design Patterns: UI/UX & Human-AI Interaction](https://agentic-design.ai/patterns/ui-ux-patterns) -- 智能体设计模式的系统化参考
+- [5 Key Trends Shaping Agentic Development in 2026](https://thenewstack.io/5-key-trends-shaping-agentic-development-in-2026/) -- The New Stack。2026年塑造智能体开发的五大趋势
+
+### 行业报告与预测
+
+- [IEEE: 2026年将是智能体AI的大年](https://x.com/IEEEorg/status/1988284386639294517) -- IEEE全球技术领袖调查
+- [Gartner: 智能体AI为2025年十大技术趋势之首](https://www.gartner.com/en/articles/top-technology-trends-2025) -- Gartner。将智能体AI命名为2025年首要技术趋势
+- [IBM 2025调查](https://standardbeagle.com/agent-based-experience-design/) -- 99%的企业开发者正在探索或已在开发AI智能体
+- [Salesforce 预测](https://standardbeagle.com/agent-based-experience-design/) -- 到2026财年末将有10亿AI智能体投入服务

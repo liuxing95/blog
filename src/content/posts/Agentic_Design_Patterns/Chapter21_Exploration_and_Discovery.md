@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 21: Exploration and Discovery'
-date: '2025-12-25'
-excerpt: 'Beyond handling specific tasks, agents can explore and discover new capabilities or information.'
+date: '2026-03-15'
+excerpt: 'Beyond handling specific tasks, agents can explore and discover new capabilities or information. 融合社区洞察与最新实践，深入探索智能体的自主发现能力。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -1066,6 +1066,92 @@ demoInvestmentExploration();
 
 ---
 
+## 社区热议与实践分享
+
+探索与发现模式作为智能体设计的核心能力之一，在 2025-2026 年间引发了 AI 社区的广泛讨论。以下是来自行业领袖、研究者和开发者社区的关键洞察。
+
+### 行业领袖观点
+
+**Andrej Karpathy — "智能体的十年"**
+
+前 OpenAI 联合创始人 Karpathy 在 2025 年初于 X (Twitter) 上发表了对智能体时代的预判：
+
+> "Personally I think 2025-2035 is the decade of agents. I feel a huge amount of work across the board to make it actually work. But it *should* work."
+>
+> — Andrej Karpathy, [X/Twitter](https://x.com/karpathy/status/1882544526033924438)
+
+Karpathy 随后发布了 [autoresearch](https://github.com/karpathy/autoresearch) 项目，让 AI 智能体在夜间自主运行数百个机器学习实验。在一次隔夜运行中，智能体完成了 126 个实验，将损失从 0.9979 降至 0.9697，发现了约 20 个可叠加的改进方案，将"GPT-2 训练时间"指标缩短了 11%。这个项目直接展示了探索与发现模式在自主研究中的巨大价值。
+
+**Andrew Ng — 智能体设计模式的奠基者**
+
+吴恩达提出的四大智能体设计模式（反思、工具使用、规划、多智能体协作）已经成为行业的基础框架。他在 [X/Twitter](https://x.com/AndrewYNg/status/1773393357022298617) 上分享道：
+
+> "Instead of having an LLM generate its final output directly, an agentic workflow prompts the LLM multiple times, giving it opportunities to build step by step toward higher-quality output."
+
+Ng 在其 [DeepLearning.AI 课程](https://www.deeplearning.ai/courses/agentic-ai/) 中强调，决定执行质量的最大预测因子是对评估（evals）和错误分析的严格流程管理——让数据引导开发者聚焦改进方向，而不是盲目猜测。
+
+**Harrison Chase — 从工具发现到深度智能体**
+
+LangChain 创始人 Harrison Chase 在 2025 年提出了"深度智能体"（Deep Agents）概念。他在 [ODSC AI West 2025](https://opendatascience.com/harrison-chase-on-deep-agents-the-next-evolution-in-autonomous-ai/) 演讲中指出：
+
+> "What makes them 'deep' is the sophistication around that loop — planning, context management, memory, subagents, and richer prompting."
+
+Chase 还推动了"环境智能体"（Ambient Agents）概念——在后台持续运行、响应事件而非等待人类提示的 AI 系统。这与探索模式高度吻合：智能体不再被动等待任务指派，而是主动在环境中发现信息和机会。
+
+### 工具发现与协议标准化
+
+2025 年最引人注目的社区趋势之一是**工具发现协议的标准化**。
+
+**MCP（模型上下文协议）的崛起**
+
+Anthropic 在 2024 年底推出的 [Model Context Protocol (MCP)](https://en.wikipedia.org/wiki/Model_Context_Protocol)，在 2025 年迅速成为连接智能体与外部工具的事实标准。关键里程碑包括：
+
+- OpenAI 的 Sam Altman 在 X 上表示："People love MCP and we are excited to add support across our products."
+- Google DeepMind 确认将在 Gemini 模型中支持 MCP
+- 截至 2025 年底，社区已构建超过 17,000 个 MCP 服务器
+- Anthropic 将 MCP 捐赠给 Linux 基金会下的 Agentic AI Foundation
+
+**动态工具发现**
+
+随着工具生态的爆发式增长，Anthropic 引入了 [Tool Search](https://tessl.io/blog/anthropic-brings-mcp-tool-search-to-claude-code/) 功能，让智能体按需发现和加载工具，而非预加载整个工具目录。这种"渐进式发现"（Progressive Discovery）方法将工具定义的 token 消耗从 150,000 降低到 2,000——节省了 98.7%。
+
+Cobus Greyling（Kore AI 首席布道师）在 [Medium 系列文章](https://cobusgreyling.medium.com/agentic-discovery-8b314b4b88e3)中将这种能力命名为"Agentic Discovery"：
+
+> "Agentic Discovery refers to an AI agent's ability to autonomously explore new strategies and solutions by self-evaluating and refining its process, leading to innovative outcomes."
+
+### 学术研究前沿
+
+**探索广度 vs. 深度的权衡**
+
+[FML-bench](https://arxiv.org/html/2510.10472v1) 基准测试揭示了一个重要发现：不同智能体展现出截然不同的探索策略。TheAIScientist 采用"广而浅"的策略，AIDE 保持中等的广度和深度，而 Claude Code 则展现"窄而深"的模式。研究结论是：**更广泛的研究探索空间在发现有前景的想法方面更加有效**。
+
+**不确定性感知探索**
+
+[SELAUR](https://arxiv.org/html/2508.12752v1)（Self Evolving LLM Agent via Uncertainty-aware Rewards）框架将 LLM 内在的不确定性信号融入奖励设计，使智能体即使从失败经验中也能提取有意义的学习线索，显著提升了探索效率。
+
+**世界模型与自主探索**
+
+Yann LeCun 创立的 [AMI Labs](https://techcrunch.com/2026/03/09/yann-lecuns-ami-labs-raises-1-03-billion-to-build-world-models/) 在 2026 年初融资超过 10 亿美元，专注于构建"世界模型"——一种能够内部模拟物理世界并预测行为后果的 AI 系统。LeCun 认为这是"让智能体系统真正可靠的关键"。与此同时，NVIDIA 的 Jim Fan 领导的 [GEAR Lab](https://research.nvidia.com/labs/gear/) 通过 Voyager 等项目，展示了智能体在开放世界中自主探索和持续学习的能力。
+
+**自主发现的强化学习算法**
+
+2025 年发表在 [Nature](https://www.nature.com/articles/s41586-025-09761-x) 上的一项突破性研究表明，机器可以通过元学习从大量复杂环境中自主发现超越人工设计的强化学习规则，在 Atari 基准测试中取得了领先性能。
+
+### 社区实践总结
+
+综合社区讨论和实践经验，探索与发现模式呈现以下关键趋势：
+
+| 趋势 | 社区共识 |
+|------|----------|
+| **协议标准化** | MCP 已成为工具发现的行业标准，17,000+ 服务器构成庞大生态 |
+| **动态发现** | 从静态工具加载转向按需、渐进式工具发现成为主流 |
+| **广度优先探索** | 研究表明广泛探索多样化方向优于深钻单一路径 |
+| **环境感知智能体** | 从被动响应指令转向主动感知环境变化，持续后台运行 |
+| **世界模型** | 内部模拟和预测能力成为可靠自主探索的关键基础设施 |
+| **从实验到生产** | 2026 年标志着智能体探索能力从原型验证进入生产部署阶段 |
+
+---
+
 ## Chapter Summary | 本章小结
 
 ### Key Points | 核心要点
@@ -1133,3 +1219,55 @@ demoInvestmentExploration();
 - **Opportunity Conversion**: Discoveries that lead to actions.
 
   机会转化：导致行动的发现。
+
+---
+
+## 参考资源
+
+### 行业领袖与社区讨论
+
+- [Andrej Karpathy — 2025 LLM Year in Review](https://karpathy.bearblog.dev/year-in-review-2025/) — Karpathy 对 2025 年 LLM 发展的深度年度总结
+- [Andrej Karpathy — autoresearch 项目](https://github.com/karpathy/autoresearch) — AI 智能体自主运行机器学习实验的开源项目
+- [Andrew Ng — Agentic AI 课程](https://www.deeplearning.ai/courses/agentic-ai/) — 四大智能体设计模式的系统课程
+- [Andrew Ng — 四大智能体设计模式推文](https://x.com/AndrewYNg/status/1773393357022298617) — 关于智能体工作流的核心推文
+- [Harrison Chase — Deep Agents 演讲](https://opendatascience.com/harrison-chase-on-deep-agents-the-next-evolution-in-autonomous-ai/) — 深度智能体的演进方向
+- [Harrison Chase — Ambient Agents 讨论](https://inferencebysequoia.substack.com/p/ambient-agents-and-the-new-agent) — 环境智能体与新型智能体收件箱
+- [Cobus Greyling — Agentic Discovery 系列](https://cobusgreyling.medium.com/agentic-discovery-8b314b4b88e3) — 智能体自主发现能力的深入分析
+
+### 协议与工具发现
+
+- [Model Context Protocol (MCP) — Wikipedia](https://en.wikipedia.org/wiki/Model_Context_Protocol) — MCP 协议概述
+- [Anthropic — Tool Search in Claude Code](https://tessl.io/blog/anthropic-brings-mcp-tool-search-to-claude-code/) — 动态工具发现功能
+- [Anthropic — Code Execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp) — 渐进式工具发现的代码优先方法
+- [A Year of MCP — 2025 Review](https://www.pento.ai/blog/a-year-of-mcp-2025-review) — MCP 生态的年度回顾
+- [Agent Skills: The Missing Piece](https://subramanya.ai/2025/12/18/agent-skills-the-missing-piece-of-the-enterprise-ai-puzzle/) — 智能体技能与 MCP 的互补关系
+
+### 学术研究
+
+- [Deep Research: A Survey of Autonomous Research Agents](https://arxiv.org/html/2508.12752v1) — 自主研究智能体的综合综述
+- [FML-bench: Importance of Exploration Breadth](https://arxiv.org/html/2510.10472v1) — 探索广度对 AI 研究智能体的重要性
+- [Agentic AI for Scientific Discovery](https://arxiv.org/html/2503.08979v1) — 智能体 AI 在科学发现中的进展与挑战
+- [Agentic Discovery: Closing the Loop with Cooperative Agents](https://arxiv.org/html/2510.13081v1) — 协作智能体的闭环发现
+- [Discovering State-of-the-Art RL Algorithms — Nature 2025](https://www.nature.com/articles/s41586-025-09761-x) — 自主发现强化学习算法的突破
+- [Rethinking Exploration-Exploitation Trade-Off via Cognitive Consistency](https://www.sciencedirect.com/science/article/abs/pii/S0893608025002217) — 通过认知一致性重新思考探索-利用权衡
+- [The 2025 AI Agent Index](https://arxiv.org/html/2602.17753v1) — 已部署智能体系统的技术与安全特征
+
+### 行业报告与趋势
+
+- [7 Agentic AI Trends to Watch in 2026 — Machine Learning Mastery](https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/) — 2026 年七大智能体趋势
+- [5 Key Trends Shaping Agentic Development in 2026 — The New Stack](https://thenewstack.io/5-key-trends-shaping-agentic-development-in-2026/) — 塑造智能体开发的五大关键趋势
+- [The State of AI Agents in 2026 — Jon Radoff](https://meditations.metavert.io/p/the-state-of-ai-agents-in-2026) — 2026 年 AI 智能体状态报告
+- [Microsoft Discovery — Transforming R&D with Agentic AI](https://azure.microsoft.com/en-us/blog/transforming-rd-with-agentic-ai-introducing-microsoft-discovery/) — 微软的智能体驱动研发平台
+- [AWS — Guidance for Agentic Data Exploration](https://aws.amazon.com/solutions/guidance/agentic-data-exploration-on-aws/) — AWS 智能体数据探索方案
+
+### 世界模型与具身智能
+
+- [Yann LeCun's AMI Labs — TechCrunch](https://techcrunch.com/2026/03/09/yann-lecuns-ami-labs-raises-1-03-billion-to-build-world-models/) — AMI Labs 融资与世界模型愿景
+- [NVIDIA GEAR Lab](https://research.nvidia.com/labs/gear/) — Jim Fan 领导的通用具身智能体研究
+- [World Models Race 2026 — Introl](https://introl.com/blog/world-models-race-agi-2026) — 2026 年世界模型竞赛格局
+
+### 开源资源
+
+- [Autonomous Agents 论文集](https://github.com/tmgthb/Autonomous-Agents) — 每日更新的自主智能体研究论文合集
+- [Awesome Exploration RL](https://github.com/opendilab/awesome-exploration-rl) — 强化学习探索方法资源合集
+- [LangChain](https://github.com/langchain-ai/langchain) — 智能体工程的核心框架（99,000+ Stars）

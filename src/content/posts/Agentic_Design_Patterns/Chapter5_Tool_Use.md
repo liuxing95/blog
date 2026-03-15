@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 5: Tool Use'
-date: '2025-12-25'
-excerpt: 'One of the most powerful capabilities of agentic systems is their ability to interact with external tools and services.'
+date: '2026-03-15'
+excerpt: 'One of the most powerful capabilities of agentic systems is their ability to interact with external tools and services. 融合社区洞察与最新实践，涵盖 MCP 标准化、可靠性研究及行业领袖观点。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -1199,5 +1199,55 @@ By properly defining, registering, and orchestrating tools, agents can access re
 通过正确定义、注册和编排工具，智能体可以获取实时信息、执行计算并跨多个系统自动化复杂工作流。
 
 This pattern, combined with other agentic design patterns like parallelization and routing, enables the construction of sophisticated, multi-functional agentic systems capable of solving real-world problems.
+
+---
+
+## 社区热议与实践分享
+
+工具使用模式在 2025-2026 年经历了从 Function Calling 到 MCP 标准化的重大变革，社区围绕工具发现、安全性和生产最佳实践展开了热烈讨论。
+
+### MCP：工具使用的新标准
+
+[Anthropic](https://www.anthropic.com/engineering/code-execution-with-mcp) 提出的 Model Context Protocol (MCP) 在 2025 年底捐赠给 Linux Foundation 后迅速成为行业标准。截至 2026 年 2 月，MCP SDK 月下载量突破 9700 万次，被 OpenAI、Google、Microsoft、AWS 全面采用。
+
+[Composio](https://composio.dev/content/ai-agent-tool-calling-guide) 发布的 2026 工具调用指南指出：现代生产环境的工具调用已演进为 6 步流程，新增了**工具发现（Step 0）** — Agent 通过 MCP 或向量存储查询工具注册表，按用户意图查找相关工具定义，防止上下文窗口饱和。
+
+### 代码执行 vs 直接工具调用
+
+Anthropic 工程团队的[实践文章](https://www.anthropic.com/engineering/code-execution-with-mcp)揭示了一个重要洞察：直接工具调用会为每个定义和结果消耗上下文。Agent 通过**编写代码来调用工具**而非直接调用，可以更高效地利用上下文，按需加载工具、在数据到达模型前过滤、在单步中执行复杂逻辑。
+
+### 生产部署的执行层缺口
+
+[DEV Community](https://dev.to/aristoaistack/mcp-explained-how-ai-agents-actually-work-2026-5p8) 指出最常见的失败点：团队实现了工具搜索（发现）和 MCP（标准化），但低估了**执行层**的复杂性。知道调用哪个工具很简单，成功调用它所需的基础设施才是真正的挑战 — 包括 OAuth 流程、Token 刷新、错误处理和多租户隔离。
+
+### MCP 网关：安全与可观测性
+
+[Maxim](https://www.getmaxim.ai/articles/top-5-mcp-gateways-in-2025-the-complete-guide-to-enterprise-ready-ai-agent-infrastructure/) 和 [Integrate.io](https://www.integrate.io/blog/best-mcp-gateways-and-ai-agent-security-tools/) 的指南强调：直接 MCP 连接提供零洞察力。当 Agent 跨 10 个服务执行 50 次工具调用时，缺乏结构化日志和分布式追踪意味着调试只能靠猜。MCP 网关通过容器化隔离、综合可观测性和集中管理解决这些问题。
+
+### 可组合 Agent 模式
+
+[mcp-agent](https://github.com/lastmile-ai/mcp-agent) 框架践行了"MCP 是构建 Agent 所需的一切"理念，以可组合方式实现了 Anthropic Building Effective Agents 中描述的每种模式，支持基于 Temporal 的暂停、恢复和恢复。
+
+---
+
+## 参考资源
+
+### 官方资源与标准
+
+- [Anthropic - Code Execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp)
+- [OpenAI for Developers 2025](https://developers.openai.com/blog/openai-for-developers-2025/)
+- [mcp-agent (GitHub)](https://github.com/lastmile-ai/mcp-agent)
+
+### 生产实践指南
+
+- [Composio - Tool Calling Explained: The Core of AI Agents (2026)](https://composio.dev/content/ai-agent-tool-calling-guide)
+- [DEV Community - MCP Explained: How AI Agents Actually Work (2026)](https://dev.to/aristoaistack/mcp-explained-how-ai-agents-actually-work-2026-5p8)
+- [DEV Community - MCP vs A2A: Complete Guide (2026)](https://dev.to/pockit_tools/mcp-vs-a2a-the-complete-guide-to-ai-agent-protocols-in-2026-30li)
+- [The New Stack - AI Engineering Trends 2025: Agents, MCP, Vibe Coding](https://thenewstack.io/ai-engineering-trends-in-2025-agents-mcp-and-vibe-coding/)
+
+### 安全与网关
+
+- [Maxim - Top 5 MCP Gateways (2025)](https://www.getmaxim.ai/articles/top-5-mcp-gateways-in-2025-the-complete-guide-to-enterprise-ready-ai-agent-infrastructure/)
+- [Integrate.io - Best MCP Gateways and AI Agent Security Tools (2026)](https://www.integrate.io/blog/best-mcp-gateways-and-ai-agent-security-tools/)
 
 此模式与其他智能体设计模式（如并行化和路由）相结合，能够构建复杂的、多功能的智能体系统来解决现实世界的问题。

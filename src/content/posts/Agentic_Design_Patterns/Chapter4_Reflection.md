@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 4: Reflection'
-date: '2025-12-25'
-excerpt: 'Reflection is a critical pattern that enables agents to evaluate their own outputs and improve their performance over time.'
+date: '2026-03-15'
+excerpt: 'Reflection is a critical pattern that enables agents to evaluate their own outputs and improve their performance over time. 融合社区洞察与最新实践分享。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -918,3 +918,50 @@ async function runReflectiveTrading() {
 
 runReflectiveTrading();
 ```
+
+---
+
+## 社区热议与实践分享
+
+反思模式被 Andrew Ng 列为四大 Agentic 设计模式之一，社区围绕其实现方式、效果提升和成本权衡展开了深入讨论。
+
+### Andrew Ng 的倡导
+
+[Andrew Ng](https://www.deeplearning.ai/the-batch/agentic-design-patterns-part-2-reflection/) 在 DeepLearning.AI 发表了关于反思模式的专题文章，指出：与其让 LLM 直接生成最终输出，不如多次提示它，给予逐步构建更高质量输出的机会。他强调反思模式"实现相对快速，但带来了令人惊讶的性能提升"。
+
+### 关键研究：Reflexion 与 CRITIC
+
+[Reflexion（arXiv:2303.11366）](https://arxiv.org/abs/2303.11366) 是反思框架的里程碑 — 不通过更新权重强化 Agent，而是通过**语言反馈**。Agent 对任务反馈信号进行语言反思，在情景记忆缓冲区中维护反思文本，以促进后续决策。
+
+CRITIC 框架使 LLM 能用外部工具验证和纠正自身输出，在多种任务上实现了 10-30% 的准确率提升。Self-Refine 则展示了自我优化在对话生成到数学推理等多样任务上约 20 个百分点的提升。
+
+### 2025 年前沿：多智能体反思（MAR）
+
+单 Agent 反思面临"思维退化"问题 — Agent 即使识别了失败仍重复相同推理。[MAR（arXiv:2512.20845）](https://arxiv.org/html/2512.20845) 用结构化辩论替代单 Agent 自我批评，多个角色化批评者生成更丰富的反思。实验表明：HotPotQA 精确匹配从 44 提升至 47，HumanEval pass@1 从 76.4 提升至 82.6。
+
+### Nature 2025：双循环反思
+
+[Nature npj AI](https://www.nature.com/articles/s44387-025-00045-3) 发表了受元认知启发的双循环反思方法：LLM 对照人类参考响应批评自身推理过程（外省），从获得的洞察中构建反思库。
+
+### 成本权衡
+
+社区共识：反思显著提升准确率，但需要多次额外 LLM 调用，增加延迟和成本。[Towards Data Science](https://towardsdatascience.com/agentic-ai-from-first-principles-reflection/) 的实践文章建议：在业务场景中，需评估质量提升是否值得额外开销。
+
+---
+
+## 参考资源
+
+### 学术论文
+
+- [Reflexion: Language Agents with Verbal Reinforcement Learning (arXiv:2303.11366)](https://arxiv.org/abs/2303.11366)
+- [MAR: Multi-Agent Reflexion (arXiv:2512.20845)](https://arxiv.org/html/2512.20845)
+- [Self-Reflection in LLM Agents: Effects on Problem-Solving (arXiv:2405.06682)](https://arxiv.org/abs/2405.06682)
+- [Self-reflection Enhances LLMs (Nature npj AI, 2025)](https://www.nature.com/articles/s44387-025-00045-3)
+
+### 博客与教程
+
+- [Andrew Ng - Agentic Design Patterns Part 2: Reflection](https://www.deeplearning.ai/the-batch/agentic-design-patterns-part-2-reflection/)
+- [Towards Data Science - Agentic AI from First Principles: Reflection](https://towardsdatascience.com/agentic-ai-from-first-principles-reflection/)
+- [Medium - The Reflection Pattern: How Self-Critique Makes AI Smarter](https://medium.com/@vishwajeetv2003/the-reflection-pattern-how-self-critique-makes-ai-smarter-035df3b36aae)
+- [Hugging Face - How Do Agents Learn from Their Own Mistakes?](https://huggingface.co/blog/Kseniase/reflection)
+- [Emergent Mind - Reflective LLM-based Agent](https://www.emergentmind.com/topics/reflective-llm-based-agent)

@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 9: Learning and Adaptation'
-date: '2025-12-25'
-excerpt: 'While memory allows agents to retain information, learning enables them to improve their performance based on that information.'
+date: '2026-03-15'
+excerpt: 'While memory allows agents to retain information, learning enables them to improve their performance based on that information. 融合社区洞察与前沿研究，探索智能体自我进化的最新实践。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -1769,6 +1769,53 @@ console.log(`描述: ${best.description}`);
 console.log(`代数: ${best.generation}`);
 ```
 
+---
+
+## 社区热议与实践分享
+
+学习与适应模式在 2025-2026 年迎来了从理论探讨到实际落地的关键转折，尤其是 Andrej Karpathy 的 AutoResearch 项目引发了社区对自我进化 Agent 的广泛关注。
+
+### Karpathy 的 AutoResearch：AI 自主改进自身训练
+
+2026 年 3 月 7 日，[Andrej Karpathy](https://github.com/karpathy/autoresearch) 发布了 AutoResearch 项目 — 仅 630 行代码，MIT 许可，但野心巨大：**将科学方法自动化应用于机器学习研究**。
+
+核心机制是一个紧凑的自主循环：Agent 编辑训练脚本 → 运行 5 分钟实验 → 检查结果是否改善 → 保留或丢弃 → 重复。每小时约 12 次实验，一夜约 100 次。
+
+[VentureBeat 报道](https://venturebeat.com/technology/andrej-karpathys-new-open-source-autoresearch-lets-you-run-hundreds-of-ai)，在两天持续运行中，Agent 完成了约 700 次自主修改，发现约 20 个累加改进，将"Time to GPT-2"指标降低了 11%。更令人震惊的是：**17 小时内，Agent 独立重新发现了 RMSNorm 和 Tied Embeddings 等里程碑** — 这些成果人类研究者（Google Brain、OpenAI）花了近 8 年才形式化。
+
+[Analytics Vidhya](https://www.analyticsvidhya.com/blog/2026/03/nanochat-gpt-2-training/) 分析指出，这不是科幻意义上的"自我改进"— AutoResearch 不会重写目标或改变评估标准，而是将真实的 LLM 预训练打包到一个受约束的框架中，实现显式且持续的优化压力。
+
+### Karpathy 的 2025 年度回顾："鬼魂智能"范式
+
+Karpathy 在 [2025 LLM 年度回顾](https://eu.36kr.com/en/p/3606454820996104) 中提出了 AI 发展的深刻洞察：
+- 2025 年标志着从"概率模仿"到"逻辑推理"的决定性跨越
+- 核心驱动力是 **RLVR（Reinforcement Learning with Verifiable Rewards）** 的成熟
+- 他用"**召唤鬼魂**"而非"培育动物"来描述当前 AI 的成长模型
+- 人类目前仅开发了这一新计算范式不到 10% 的潜力
+
+关于 Agent 学习，Karpathy 将 LLM 比作"患有顺行性遗忘症的同事 — 训练结束后不会巩固或积累长期知识，只有短期记忆（上下文窗口）"。他指出我们至少缺少一个关于 LLM 学习的主要范式。
+
+### OpenAI 自进化 Agent Cookbook
+
+[OpenAI Cookbook](https://cookbook.openai.com/examples/partners/self_evolving_agents/autonomous_agent_retraining) 在 2025 年 11 月发布了"Self-Evolving Agents: Autonomous Agent Retraining"教程，引入了可重复的再训练循环：
+
+核心学习目标：
+1. 诊断 Agent 为何未达生产就绪，并用可测量的反馈信号进行检测
+2. 对比三种提示优化策略 — 从快速手动迭代到全自动循环
+3. 组装结合人类审查、LLM-as-Judge 评估和迭代提示优化的自愈工作流
+
+该 Cookbook 还介绍了 **GEPA（Genetic-Pareto）** 优化框架，结合遗传算法和帕累托选择，通过自然语言反思迭代改进 Agent 行为。
+
+### 社区共识
+
+| 趋势 | 描述 |
+|------|------|
+| 约束下的自主优化 | AutoResearch 证明了受约束环境下的自主学习是可行的 |
+| 从提示工程到上下文工程 | 学习不仅是改进提示，更是动态组装完整上下文 |
+| RLVR 的崛起 | 可验证奖励的强化学习成为 2025 年训练范式转变的核心 |
+| 评估驱动的学习 | Andrew Ng 强调"评估驱动开发"比模型选择更重要 |
+| 记忆 + 学习的融合 | 学习必须与记忆系统结合才能实现真正的累积改进 |
+
 ### 结论
 
 The learning and adaptation pattern is crucial for creating intelligent agents that can improve their performance over time.
@@ -1782,3 +1829,26 @@ By implementing mechanisms for feedback analysis, strategy adjustment, and prefe
 This pattern, combined with memory systems, enables the creation of truly adaptive AI agents that grow and improve with each interaction.
 
 此模式与内存系统相结合，能够创建真正具有适应性的AI智能体，随着每次交互而成长和改进。
+
+---
+
+## 参考资源
+
+### 开源项目
+
+- [Karpathy AutoResearch (GitHub)](https://github.com/karpathy/autoresearch) — 自主 ML 实验 Agent，630 行代码
+- [OpenAI Self-Evolving Agents Cookbook](https://cookbook.openai.com/examples/partners/self_evolving_agents/autonomous_agent_retraining) — 自进化 Agent 再训练教程
+- [OpenAI Cookbook GitHub](https://github.com/openai/openai-cookbook/blob/main/examples/partners/self_evolving_agents/autonomous_agent_retraining.ipynb)
+
+### 深度分析
+
+- [VentureBeat - Karpathy's AutoResearch: Run Hundreds of AI Experiments a Night](https://venturebeat.com/technology/andrej-karpathys-new-open-source-autoresearch-lets-you-run-hundreds-of-ai)
+- [Analytics Vidhya - Karpathy's AutoResearch: AI That Improves Its Own Training](https://www.analyticsvidhya.com/blog/2026/03/nanochat-gpt-2-training/)
+- [LeapLytics - AutoResearch: What It Means for Enterprise AI](https://www.leaplytics.de/andrej-karpathy-just-released-autonomous-ai-agents-that-run-research-overnight-heres-what-it-means-for-enterprise-ai/)
+- [Ken Huang - Exploring AutoResearch](https://kenhuangus.substack.com/p/exploring-andrej-karpathys-autoresearch)
+- [Kingy AI - AutoResearch: Karpathy's Minimal Agent Loop](https://kingy.ai/ai/autoresearch-karpathys-minimal-agent-loop-for-autonomous-llm-experimentation/)
+
+### 行业趋势
+
+- [36Kr - Karpathy 2025 Annual Summary: "Ghost Intelligence"](https://eu.36kr.com/en/p/3606454820996104)
+- [Quantum Zeitgeist - AI's Iterative Self-Improvement Of Code](https://quantumzeitgeist.com/andrej-karpathy-autoresearch-ai-code-improvement/)

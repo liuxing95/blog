@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 6: Planning'
-date: '2025-12-25'
-excerpt: 'While individual tool uses and reflections are valuable, complex tasks often require an agent to develop a multi-step plan before execution.'
+date: '2026-03-15'
+excerpt: 'While individual tool uses and reflections are valuable, complex tasks often require an agent to develop a multi-step plan before execution. 融合社区洞察与最新实践讨论。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -900,3 +900,50 @@ async function diagnosePortfolio() {
 
 diagnosePortfolio();
 ```
+
+---
+
+## 社区热议与实践分享
+
+规划模式是 AI Agent 领域讨论最激烈的设计模式之一，社区围绕 ReAct vs Plan-and-Execute、推理模型的影响以及生产环境中的实际选择展开了广泛辩论。
+
+### ReAct vs Plan-and-Execute：社区之争
+
+[ReAct（Reason + Act）](https://letsdatascience.com/blog/building-ai-agents-react-planning-tool-use) 以 Thought → Action → Observation 循环著称，在 HotpotQA 上幻觉率仅 6%（CoT 为 14%）。但社区指出其局限：全历史传递导致长任务成本高昂，且可能陷入重复思考循环。
+
+[Plan-and-Execute](https://www.ema.ai/additional-blogs/addition-blogs/build-plan-execute-agents) 模式先生成完整计划再逐步执行，Token 消耗大幅降低。社区实践表明，现代实现通过添加**重规划检查点**实现混合方案：生成粗略计划，然后按步执行并保留偏离自由度。这种混合方案在 2026 年主导了企业级部署。
+
+成本对比：ReAct Agent 执行 8 次工具调用会产生 8 次 LLM 调用（每次携带完整上下文），单次查询可能消耗 50K-100K tokens。按 GPT-4o 定价约 $0.15-0.30/查询。
+
+### LATS：树搜索规划
+
+[Language Agent Tree Search (LATS)](https://arxiv.org/pdf/2310.04406) 受蒙特卡洛树搜索启发，将状态表示为节点、行动表示为节点间遍历。其独特之处在于引入了自我反思推理步骤，结合环境反馈和 LLM 反馈来识别推理错误。代价是 3-5 倍于 ReAct 的计算成本。
+
+### 行业采用数据
+
+据 McKinsey 2025 AI 报告，超过 40% 试点生成式 AI 的组织正在构建或测试 Agentic AI 工作流（2023 年仅 15%）。Gartner 预测到 2026 年底 40% 的企业应用将包含特定任务 AI Agent。
+
+生产环境中的实用模式：关键规划和综合步骤使用强模型（质量优先），简单重复的检索步骤使用快速便宜的模型。
+
+### 学术前沿
+
+[arXiv:2601.12560](https://arxiv.org/html/2601.12560v1) 综述指出：早期系统依赖线性规划循环（如 ReAct），近期工作采用层次化结构（如 Tree of Thoughts）和递归分解。为提高可靠性，这些规划器辅以反思机制，包括自我修正和 Reflexion 等语言反馈方法。
+
+---
+
+## 参考资源
+
+### 学术论文
+
+- [LATS: Language Agent Tree Search (arXiv:2310.04406)](https://arxiv.org/pdf/2310.04406)
+- [Emerging AI Agent Architectures Survey (arXiv:2404.11584)](https://arxiv.org/html/2404.11584v1)
+- [Agentic AI Taxonomies and Evaluation (arXiv:2601.12560)](https://arxiv.org/html/2601.12560v1)
+- [The Rise of Agentic AI Review (MDPI)](https://www.mdpi.com/1999-5903/17/9/404)
+
+### 博客与教程
+
+- [Let's Data Science - Building AI Agents: ReAct, Planning, and Tool Use](https://letsdatascience.com/blog/building-ai-agents-react-planning-tool-use)
+- [EMA - How to Build a Plan-and-Execute AI Agent](https://www.ema.ai/additional-blogs/addition-blogs/build-plan-execute-agents)
+- [LangChain - ReAct Agent Pattern Explained (2026)](https://langchain-tutorials.github.io/langchain-react-agent-pattern-2026/)
+- [Wollen Labs - Navigating Modern LLM Agent Architectures](https://www.wollenlabs.com/blog-posts/navigating-modern-llm-agent-architectures-multi-agents-plan-and-execute-rewoo-tree-of-thoughts-and-react)
+- [Global Publicist - How to Build an AI Agent: Complete Guide](https://www.globalpublicist24.com/how-to-build-ai-agent-guide/)

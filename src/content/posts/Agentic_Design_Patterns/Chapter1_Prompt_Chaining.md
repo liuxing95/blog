@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 1: Prompt Chaining'
-date: '2025-12-25'
-excerpt: 'Prompt chaining, sometimes referred to as Pipeline pattern, represents a powerful paradigm for handling intricate tasks when leveraging large langu...'
+date: '2026-03-15'
+excerpt: 'Prompt chaining, sometimes referred to as Pipeline pattern, represents a powerful paradigm for handling intricate tasks when leveraging large language models. 本文融合社区洞察，涵盖 Andrew Ng、Anthropic、Harrison Chase 等业界领袖的实践分享与最新趋势。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -289,6 +289,54 @@ This methodology asserts that the quality of a model's output is less dependent 
 
 - LangChain/LangGraph和Google ADK等框架提供了强大的工具来定义、管理和执行这些多步序列。
 
+## 社区热议与实践分享
+
+提示链作为智能体设计的基础模式，在 AI 社区中引发了广泛的讨论和实践分享。以下是来自业界领袖和社区的关键洞察。
+
+### 吴恩达（Andrew Ng）：智能体工作流的奠基性倡导
+
+2024 年 3 月，AI 先驱 [Andrew Ng](https://x.com/AndrewYNg/status/1770897666702233815) 在 X 上发布了极具影响力的帖子："我认为 AI 智能体工作流将在今年推动大规模的 AI 进步——甚至可能超过下一代基础模型。" 他指出，我们目前主要以零样本（zero-shot）模式使用 LLM，这就像要求一个人从头到尾写一篇文章而不允许修改。Ng 提出了四种关键的智能体设计模式：反思（Reflection）、工具使用（Tool Use）、规划（Planning）和多智能体协作（Multi-Agent Collaboration），其中提示链是这些模式的基础支撑。
+
+一个令人瞩目的基准测试结果表明：GPT-3.5 在零样本模式下 HumanEval 编码基准测试中得分 48.1%，GPT-4 零样本得分 67.0%，但 GPT-3.5 在智能体循环中包裹后竟达到了 95.1%——这远超模型本身的代际提升。
+
+2025 年，Ng 在 [LangChain Interrupt 2025 大会](https://www.geeky-gadgets.com/future-of-ai-collaboration-andrew-ng/)上进一步强调：焦点不再仅仅是定义 AI 智能体，而是理解智能体系统中不同程度的自治性。成功的团队擅长的是"严谨的评估和错误分析"，而不仅仅是提示工程。
+
+### Anthropic：简单可组合模式的倡导者
+
+Anthropic 在 2024 年底发布了广受引用的文章 [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents)（作者：Erik Schluntz 和 Barry Zhang），明确将提示链列为六种核心可组合模式之一。文章的核心观点是："最成功的实现使用简单的、可组合的模式，而不是复杂的框架。"
+
+Anthropic 将提示链定义为"将任务分解为一系列步骤，其中每次 LLM 调用处理前一个调用的输出"，其主要目标是"用延迟换取更高的准确性，使每次 LLM 调用成为更简单的任务"。他们还建议开发者从直接使用 LLM API 开始，因为许多模式只需几行代码即可实现。
+
+### Harrison Chase（LangChain）：从提示链库到智能体框架
+
+[LangChain](https://x.com/LangChainAI/status/1941889880256106978) 创始人 Harrison Chase 将智能体定义为"LLM 决定应用程序控制流"的系统。在 2025 年 ODSC AI West 大会上，Chase 分享了关于"深度智能体"（Deep Agents）的 [主题演讲](https://opendatascience.com/harrison-chase-on-deep-agents-the-next-evolution-in-autonomous-ai/)，指出"Claude Code 的系统提示将近 2000 行"，并强调提示工程比以往任何时候都更重要——"这是开发者向智能体传达意图的方式"。
+
+Chase 的一句名言揭示了核心挑战："当智能体失败时，是因为它们没有正确的上下文；当它们成功时，是因为它们有正确的上下文。" 他认为"在某个时刻，模型变得足够好了，这就是我们从脚手架转向工具架的时候"。
+
+### 从提示工程到上下文工程的范式转变
+
+2025 年中，"上下文工程"（Context Engineering）一词迅速流行。[Shopify CEO Tobi Lutke](https://x.com/tobi/status/1935533422589399127) 在 X 上写道："我非常喜欢'上下文工程'这个术语而非提示工程。它更好地描述了核心技能：为任务提供所有上下文的艺术，使其对 LLM 来说是合理可解的。"
+
+Andrej Karpathy 随后放大了这一概念，指出"在每个工业级 LLM 应用中，上下文工程是填充上下文窗口以获取恰当信息的精妙艺术和科学"。[Simon Willison](https://simonwillison.net/2025/jun/27/context-engineering/) 也写道："'上下文工程'捕捉了这样一个事实：模型之前的响应是过程中的关键部分，而'提示工程'暗示只有用户提示才重要。"
+
+这一演变表明：提示工程现在是上下文工程的一个子集。制作好的提示仍然重要，但它只占生产智能体系统中总上下文的一小部分。其余部分包括对话历史、检索到的文档、工具输出、智能体状态和动态组装的知识。
+
+### 社区实践：无框架构建智能体
+
+社区中一个值得关注的趋势是使用 AI 基本原语（Primitives）构建智能体，无需重型框架。[freeCodeCamp 的教程](https://www.freecodecamp.org/news/build-autonomous-agents-using-prompt-chaining-with-ai-primitives/) 展示了如何使用 TypeScript 和基础 SDK 构建可扩展的提示链智能体系统，强调"自治智能体听起来很复杂，但不必如此"。
+
+### AWS 的分布式视角：提示链作为 Saga 模式
+
+[AWS 规范性指导](https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-patterns/prompt-chaining-saga-patterns.html)提出了将 LLM 提示链重新构想为事件驱动 Saga 的方案，使工作流变得分布式、可恢复，并在自治智能体之间实现语义协调。每个提示-响应步骤被重新定义为原子任务，作为事件发出，由专用智能体消费，并用上下文元数据丰富。
+
+### Google 工程师的 424 页实践指南
+
+2025 年中，一位 Google 高级工程师发布了 424 页的《Agentic Design Patterns》实践指南，在 X 上引发了广泛传播。[Steve Nouri](https://x.com/SteveNouri/status/1976925579816714746) 和 [Hayes](https://x.com/neatprompts/status/1988652030639198554) 等博主纷纷推荐，该指南以代码为支撑，涵盖了提示链、路由、内存、MCP 与多智能体协调、护栏、推理和规划等前沿主题。
+
+### 学术前沿：超越传统提示链
+
+2025 年的学术研究正在推动提示链的边界。ACM 发表的一项[研究](https://dl.acm.org/doi/10.1145/3708359.3712117)引入了用于智能助手的提示链框架，改进了上下文保留和多步推理。MDPI 发表的 [TB-CSPN 架构](https://www.mdpi.com/1999-5903/17/8/363)论文则指出当前框架（如 LangGraph 和 AutoGen）"通过顺序提示链模拟自治，但缺乏真正的多智能体协调架构"，其案例研究展示了 62.5% 的处理速度提升和 66.7% 的 LLM 调用次数减少。
+
 ### Conclusion
 
 ### 结论
@@ -306,4 +354,52 @@ As a foundational pattern, it enables the development of sophisticated AI agents
 作为基础模式，它能够开发具有多步推理、工具集成和状态管理能力的复杂AI智能体。
 
 ---
+
+## 参考资源
+
+### 官方资源
+
+- [Anthropic - Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) — Anthropic 关于构建有效智能体的权威指南，详述提示链等六种核心可组合模式
+- [AWS Prescriptive Guidance - Prompt Chaining Saga Patterns](https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-patterns/prompt-chaining-saga-patterns.html) — AWS 将提示链重新构想为分布式 Saga 模式的规范性指南
+- [AWS Prescriptive Guidance - Workflow for Prompt Chaining](https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-patterns/workflow-for-prompt-chaining.html) — AWS 提示链工作流的详细实现指南
+- [Google Developers Blog - Multi-Agent Patterns in ADK](https://developers.googleblog.com/developers-guide-to-multi-agent-patterns-in-adk/) — Google ADK 中的多智能体模式开发者指南
+- [Prompt Engineering Guide - Prompt Chaining](https://www.promptingguide.ai/techniques/prompt_chaining) — DAIR.AI 提示工程指南中的提示链技术详解
+
+### 社区分享（Twitter/X）
+
+- [Andrew Ng - AI 智能体工作流](https://x.com/AndrewYNg/status/1770897666702233815) — Ng 关于智能体工作流将驱动 AI 大规模进步的开创性帖子
+- [Andrew Ng - 反思模式](https://x.com/AndrewYNg/status/1773393357022298617) — Ng 详述反思设计模式及其在智能体工作流中的应用
+- [Andrew Ng - 规划模式](https://x.com/AndrewYNg/status/1779606380665803144) — Ng 关于规划作为关键智能体 AI 设计模式的讨论
+- [Andrew Ng - Agentic AI 课程发布](https://x.com/AndrewYNg/status/1975614372799283423) — Ng 宣布其全新 Agentic AI 课程
+- [Tobi Lutke - 上下文工程](https://x.com/tobi/status/1935533422589399127) — Shopify CEO 倡导"上下文工程"替代"提示工程"
+- [LangChain - 上下文工程指南](https://x.com/LangChainAI/status/1941889880256106978) — LangChain 发布从提示工程到上下文工程的演进指南
+- [Steve Nouri - Agentic Design Patterns 推荐](https://x.com/SteveNouri/status/1976925579816714746) — 推荐 Google 工程师 424 页智能体设计模式实践指南
+- [Hayes - Agentic Design Patterns 推荐](https://x.com/neatprompts/status/1988652030639198554) — 推荐同一实践指南，强调其代码支撑的特点
+- [Tech with Mak - LLM 提示技术分类](https://x.com/techNmak/status/1995726428177137924) — 全面的 LLM 提示技术分类整理，包含提示链
+- [Han Zhou - MASS 多智能体优化框架](https://x.com/hanzhou032/status/1929586125955322081) — 介绍用于优化提示和拓扑结构的多智能体框架
+
+### 博客与教程
+
+- [freeCodeCamp - 使用 AI 基本原语构建自治智能体](https://www.freecodecamp.org/news/build-autonomous-agents-using-prompt-chaining-with-ai-primitives/) — 无框架构建提示链智能体系统的实践教程
+- [Simon Willison - Context Engineering](https://simonwillison.net/2025/jun/27/context-engineering/) — Simon Willison 对上下文工程概念的深度分析
+- [LangChain Blog - The Rise of Context Engineering](https://blog.langchain.com/the-rise-of-context-engineering/) — LangChain 官方博客关于上下文工程兴起的分析
+- [NivaLabs AI - Prompt Chaining for AI Agents](https://medium.com/@nivalabs.ai/prompt-chaining-for-the-ai-agents-modular-reliable-and-scalable-workflows-a22d15fd5d33) — 提示链在智能体中实现模块化、可靠和可扩展工作流
+- [Voiceflow - What is Prompt Chaining in AI](https://www.voiceflow.com/blog/prompt-chaining) — 2026 年提示链入门教程
+- [Getmaxim - Prompt Chaining for AI Engineers](https://www.getmaxim.ai/articles/prompt-chaining-for-ai-engineers-a-practical-guide-to-improving-llm-output-quality/) — AI 工程师的提示链实用指南
+- [Udemy Blog - Prompt Chaining: How to Build Smarter AI Workflows](https://blog.udemy.com/prompt-chaining/) — 使用提示链构建更智能 AI 工作流的教程
+- [Braintrust - Evaluating a Prompt Chaining Agent](https://www.braintrust.dev/docs/cookbook/recipes/PromptChaining) — 评估提示链智能体的实践方法
+- [Hugging Face - Building Effective Agents with Anthropic's Best Practices](https://huggingface.co/blog/Sri-Vigneshwar-DJ/building-effective-agents-with-anthropics-best-pra) — 结合 Anthropic 最佳实践和 smolagents 构建有效智能体
+
+### 学术研究
+
+- [ACM IUI 2025 - A Prompt Chaining Framework for Long-Term Recall in LLM-Powered Intelligent Assistant](https://dl.acm.org/doi/10.1145/3708359.3712117) — 用于 LLM 智能助手长期记忆的提示链框架
+- [MDPI Future Internet - Beyond Prompt Chaining: The TB-CSPN Architecture for Agentic AI](https://www.mdpi.com/1999-5903/17/8/363) — 超越传统提示链的混合形式化架构
+
+### 行业报告与趋势
+
+- [SitePoint - Agentic Design Patterns: The 2026 Guide](https://www.sitepoint.com/the-definitive-guide-to-agentic-design-patterns-in-2026/) — 2026 年智能体设计模式权威指南
+- [Prompt Engineering Org - Agents At Work: The 2026 Playbook](https://promptengineering.org/agents-at-work-the-2026-playbook-for-building-reliable-agentic-workflows/) — 2026 年构建可靠智能体工作流的实战手册
+- [Hailey Quach - Agentic AI: One Year After Andrew Ng's Design Patterns](https://medium.com/@haileyq/agentic-ai-one-year-after-andrew-ngs-design-patterns-hype-or-reality-6fbd87dbe870) — 吴恩达设计模式提出一年后的回顾：炒作还是现实
+- [Harrison Chase on Deep Agents (ODSC AI West 2025)](https://opendatascience.com/harrison-chase-on-deep-agents-the-next-evolution-in-autonomous-ai/) — Harrison Chase 关于深度智能体的主题演讲
+- [Sequoia Capital - Harrison Chase on Context Engineering](https://sequoiacap.com/podcast/context-engineering-our-way-to-long-horizon-agents-langchains-harrison-chase/) — 红杉资本播客：通过上下文工程实现长周期智能体
 

@@ -1,7 +1,7 @@
 ---
 title: 'Chapter 2: Routing'
-date: '2025-12-25'
-excerpt: 'While sequential processing via prompt chaining is a foundational technique for executing deterministic, linear workflows with language models, its...'
+date: '2026-03-15'
+excerpt: 'While sequential processing via prompt chaining is a foundational technique for executing deterministic, linear workflows with language models, its applicability is limited. 本章融合社区洞察，深入探讨路由模式在智能体系统中的核心作用。'
 tags: ['Agentic AI', 'Design Patterns']
 series: 'Agentic AI'
 ---
@@ -419,3 +419,53 @@ const router = RunnableBranch.from([
 
 // 使用: await router.invoke({ query: "市价买入 100股 AAPL" });
 ```
+
+---
+
+## 社区热议与实践分享
+
+路由模式作为智能体系统的核心调度机制，在 2025-2026 年经历了从简单规则匹配到智能语义路由的重大演变。
+
+### 语义路由的崛起
+
+[Aurelio Labs](https://github.com/aurelio-labs/semantic-router) 开源的 Semantic Router 成为社区热门项目，其核心理念是利用语义向量空间进行超快速决策，而非等待 LLM 生成响应。[Red Hat](https://developers.redhat.com/articles/2025/05/20/llm-semantic-router-intelligent-request-routing) 在 2025 年 5 月也发布了企业级 LLM 语义路由方案，结合语义理解和缓存来提升性能、降低成本。
+
+2026 年 1 月，[vLLM 发布了 Semantic Router v0.1（代号 Iris）](https://blog.vllm.ai/2026/01/05/vllm-sr-iris.html)，标志着智能 LLM 路由的重大里程碑。自 2025 年 9 月实验性发布以来，社区贡献了 600+ PR、300+ Issues 修复，超过 50 位工程师参与。亮点包括 HaluGate 三阶段幻觉检测管道和交互式路由策略管理面板。
+
+### 学术前沿：MasRouter 与 RouteLLM
+
+[MasRouter（arXiv:2502.11133）](https://arxiv.org/abs/2502.11133) 提出了首个针对多智能体系统的路由解决方案，通过级联控制网络实现协作模式确定、角色分配和 LLM 路由。实验表明：在 MBPP 上比 SOTA 提升 1.8%-8.2%，在 HumanEval 上减少 52.07% 开销，且即插即用地集成到主流 MAS 框架中。
+
+[RouteLLM（OpenReview）](https://openreview.net/forum?id=8sSqNntaMr) 引入了利用人类偏好数据训练路由模型的框架，可在推理时动态选择强弱模型，成本降低 2 倍以上而不牺牲响应质量。
+
+### 成本优化路由
+
+[AnyLLM](https://useanyllm.com/) 利用上下文多臂赌博机（Contextual Multi-Armed Bandit）学习最优请求分发，自动在廉价模型、高性能 Agent 或人工流程之间做出路由决策。[The New Stack](https://thenewstack.io/how-to-build-an-ai-agent-with-semantic-router-and-llm-tools/) 发表了系列文章，展示语义路由如何让 AI Agent 为正确的任务选择正确的 LLM，同时减少 LLM 依赖。
+
+### 社区共识
+
+社区普遍认为 2026 年路由模式的最佳实践是**多层级联**：规则路由处理确定性高的请求（最快、零延迟），嵌入路由处理语义模糊的查询，LLM 路由作为兜底处理复杂推理。正如 [LangChain 文档](https://docs.langchain.com/oss/python/langchain/multi-agent/router-knowledge-base)所推荐：当你有多个独立知识源、需要低延迟并行查询且希望显式控制路由逻辑时，使用 Router 模式。
+
+---
+
+## 参考资源
+
+### 学术论文
+
+- [MasRouter: Learning to Route LLMs for Multi-Agent Systems (arXiv:2502.11133)](https://arxiv.org/abs/2502.11133)
+- [RouteLLM: Learning to Route LLMs from Preference Data (OpenReview)](https://openreview.net/forum?id=8sSqNntaMr)
+- [The Landscape of Emerging AI Agent Architectures (arXiv:2404.11584)](https://arxiv.org/html/2404.11584v1)
+
+### 框架与工具
+
+- [Aurelio Labs Semantic Router (GitHub)](https://github.com/aurelio-labs/semantic-router)
+- [vLLM Semantic Router v0.1 Iris (Jan 2026)](https://blog.vllm.ai/2026/01/05/vllm-sr-iris.html)
+- [AnyLLM - Intelligent LLM Routing](https://useanyllm.com/)
+- [LangChain Router Knowledge Base](https://docs.langchain.com/oss/python/langchain/multi-agent/router-knowledge-base)
+- [Awesome AI Model Routing (GitHub)](https://github.com/Not-Diamond/awesome-ai-model-routing)
+
+### 博客与教程
+
+- [Red Hat - LLM Semantic Router (May 2025)](https://developers.redhat.com/articles/2025/05/20/llm-semantic-router-intelligent-request-routing)
+- [The New Stack - Build an AI Agent with Semantic Router](https://thenewstack.io/how-to-build-an-ai-agent-with-semantic-router-and-llm-tools/)
+- [Latitude - Dynamic LLM Routing: Tools and Frameworks](https://latitude.so/blog/dynamic-llm-routing-tools-and-frameworks)
